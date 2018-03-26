@@ -46,7 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.column_n = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_xi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -290,7 +289,6 @@
         private System.Windows.Forms.Button btn_reestablecer_panel_multiplicativo;
         private System.Windows.Forms.Button btn_generar_aleatorios;
         private System.Windows.Forms.DataGridView grilla_multiplicativo;
-        private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_n;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_xi;
         private System.Windows.Forms.DataGridViewTextBoxColumn column;

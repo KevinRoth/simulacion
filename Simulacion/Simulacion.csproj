@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Servicios\GeneradorMultiplicativo.cs" />
     <Compile Include="Servicios\GeneradosMultiplicativo.cs" />
+    <Compile Include="Servicios\HistogramChartHelper.cs" />
+    <Compile Include="Servicios\Intervalo.cs" />
     <Compile Include="TP_1.cs">
       <SubType>Form</SubType>
     </Compile>
