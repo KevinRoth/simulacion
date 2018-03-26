@@ -32,7 +32,10 @@
             this.d = new System.Windows.Forms.TabPage();
             this.btn_reestablecer_panel_multiplicativo = new System.Windows.Forms.Button();
             this.btn_generar_aleatorios = new System.Windows.Forms.Button();
-            this.grilla_multiplicativo = new System.Windows.Forms.DataGridView();
+            this.grilla_mixto = new System.Windows.Forms.DataGridView();
+            this.column_n = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_xi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_g = new System.Windows.Forms.TextBox();
             this.txt_k = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,11 +49,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.column_n = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_xi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_reestablecer_multiplicativo = new System.Windows.Forms.Button();
+            this.btn_generar_aleatorios_multiplicativo = new System.Windows.Forms.Button();
+            this.grilla_multiplicativo = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_g_multiplicativo = new System.Windows.Forms.TextBox();
+            this.txt_k_multiplicativo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_m_multiplicativo = new System.Windows.Forms.TextBox();
+            this.txt_a_multiplicativo = new System.Windows.Forms.TextBox();
+            this.txt_semilla_multiplicativo = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.d.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).BeginInit();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +86,7 @@
             // 
             this.d.Controls.Add(this.btn_reestablecer_panel_multiplicativo);
             this.d.Controls.Add(this.btn_generar_aleatorios);
-            this.d.Controls.Add(this.grilla_multiplicativo);
+            this.d.Controls.Add(this.grilla_mixto);
             this.d.Controls.Add(this.txt_g);
             this.d.Controls.Add(this.txt_k);
             this.d.Controls.Add(this.label6);
@@ -86,7 +104,7 @@
             this.d.Padding = new System.Windows.Forms.Padding(3);
             this.d.Size = new System.Drawing.Size(1014, 517);
             this.d.TabIndex = 0;
-            this.d.Text = "Congruencial Multiplicativo";
+            this.d.Text = "Congruencial Mixto";
             this.d.UseVisualStyleBackColor = true;
             // 
             // btn_reestablecer_panel_multiplicativo
@@ -109,17 +127,35 @@
             this.btn_generar_aleatorios.UseVisualStyleBackColor = true;
             this.btn_generar_aleatorios.Click += new System.EventHandler(this.btn_generar_aleatorios_Click);
             // 
-            // grilla_multiplicativo
+            // grilla_mixto
             // 
-            this.grilla_multiplicativo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grilla_multiplicativo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grilla_mixto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grilla_mixto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.column_n,
             this.column_xi,
             this.column});
-            this.grilla_multiplicativo.Location = new System.Drawing.Point(17, 135);
-            this.grilla_multiplicativo.Name = "grilla_multiplicativo";
-            this.grilla_multiplicativo.Size = new System.Drawing.Size(451, 352);
-            this.grilla_multiplicativo.TabIndex = 12;
+            this.grilla_mixto.Location = new System.Drawing.Point(17, 135);
+            this.grilla_mixto.Name = "grilla_mixto";
+            this.grilla_mixto.Size = new System.Drawing.Size(451, 352);
+            this.grilla_mixto.TabIndex = 12;
+            // 
+            // column_n
+            // 
+            this.column_n.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_n.HeaderText = "n";
+            this.column_n.Name = "column_n";
+            // 
+            // column_xi
+            // 
+            this.column_xi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column_xi.HeaderText = "Xi";
+            this.column_xi.Name = "column_xi";
+            // 
+            // column
+            // 
+            this.column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.column.HeaderText = "ri";
+            this.column.Name = "column";
             // 
             // txt_g
             // 
@@ -227,31 +263,163 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_reestablecer_multiplicativo);
+            this.tabPage2.Controls.Add(this.btn_generar_aleatorios_multiplicativo);
+            this.tabPage2.Controls.Add(this.grilla_multiplicativo);
+            this.tabPage2.Controls.Add(this.txt_g_multiplicativo);
+            this.tabPage2.Controls.Add(this.txt_k_multiplicativo);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.txt_m_multiplicativo);
+            this.tabPage2.Controls.Add(this.txt_a_multiplicativo);
+            this.tabPage2.Controls.Add(this.txt_semilla_multiplicativo);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1014, 517);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Congruencial Aditivo";
+            this.tabPage2.Text = "Congruencial Multiplicativo";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // column_n
+            // btn_reestablecer_multiplicativo
             // 
-            this.column_n.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_n.HeaderText = "n";
-            this.column_n.Name = "column_n";
+            this.btn_reestablecer_multiplicativo.Location = new System.Drawing.Point(669, 71);
+            this.btn_reestablecer_multiplicativo.Name = "btn_reestablecer_multiplicativo";
+            this.btn_reestablecer_multiplicativo.Size = new System.Drawing.Size(212, 40);
+            this.btn_reestablecer_multiplicativo.TabIndex = 29;
+            this.btn_reestablecer_multiplicativo.Text = "Reestablecer";
+            this.btn_reestablecer_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_reestablecer_multiplicativo.Click += new System.EventHandler(this.btn_reestablecer_multiplicativo_Click);
             // 
-            // column_xi
+            // btn_generar_aleatorios_multiplicativo
             // 
-            this.column_xi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column_xi.HeaderText = "Xi";
-            this.column_xi.Name = "column_xi";
+            this.btn_generar_aleatorios_multiplicativo.Location = new System.Drawing.Point(669, 20);
+            this.btn_generar_aleatorios_multiplicativo.Name = "btn_generar_aleatorios_multiplicativo";
+            this.btn_generar_aleatorios_multiplicativo.Size = new System.Drawing.Size(212, 40);
+            this.btn_generar_aleatorios_multiplicativo.TabIndex = 28;
+            this.btn_generar_aleatorios_multiplicativo.Text = "Generar números aleatorios";
+            this.btn_generar_aleatorios_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorios_multiplicativo.Click += new System.EventHandler(this.btn_generar_aleatorios_multiplicativo_Click);
             // 
-            // column
+            // grilla_multiplicativo
             // 
-            this.column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.column.HeaderText = "ri";
-            this.column.Name = "column";
+            this.grilla_multiplicativo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grilla_multiplicativo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3});
+            this.grilla_multiplicativo.Location = new System.Drawing.Point(36, 139);
+            this.grilla_multiplicativo.Name = "grilla_multiplicativo";
+            this.grilla_multiplicativo.Size = new System.Drawing.Size(451, 352);
+            this.grilla_multiplicativo.TabIndex = 27;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "n";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Xi";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.HeaderText = "ri";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // txt_g_multiplicativo
+            // 
+            this.txt_g_multiplicativo.Location = new System.Drawing.Point(511, 88);
+            this.txt_g_multiplicativo.Name = "txt_g_multiplicativo";
+            this.txt_g_multiplicativo.Size = new System.Drawing.Size(100, 20);
+            this.txt_g_multiplicativo.TabIndex = 26;
+            this.txt_g_multiplicativo.TextChanged += new System.EventHandler(this.txt_g_multiplicativo_TextChanged);
+            // 
+            // txt_k_multiplicativo
+            // 
+            this.txt_k_multiplicativo.Location = new System.Drawing.Point(511, 55);
+            this.txt_k_multiplicativo.Name = "txt_k_multiplicativo";
+            this.txt_k_multiplicativo.Size = new System.Drawing.Size(100, 20);
+            this.txt_k_multiplicativo.TabIndex = 25;
+            this.txt_k_multiplicativo.TextChanged += new System.EventHandler(this.txt_k_multiplicativo_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(429, 88);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(16, 16);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "g";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(430, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(15, 16);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "k";
+            // 
+            // txt_m_multiplicativo
+            // 
+            this.txt_m_multiplicativo.Location = new System.Drawing.Point(511, 24);
+            this.txt_m_multiplicativo.Name = "txt_m_multiplicativo";
+            this.txt_m_multiplicativo.Size = new System.Drawing.Size(100, 20);
+            this.txt_m_multiplicativo.TabIndex = 22;
+            // 
+            // txt_a_multiplicativo
+            // 
+            this.txt_a_multiplicativo.Location = new System.Drawing.Point(128, 59);
+            this.txt_a_multiplicativo.Name = "txt_a_multiplicativo";
+            this.txt_a_multiplicativo.Size = new System.Drawing.Size(100, 20);
+            this.txt_a_multiplicativo.TabIndex = 20;
+            // 
+            // txt_semilla_multiplicativo
+            // 
+            this.txt_semilla_multiplicativo.Location = new System.Drawing.Point(128, 31);
+            this.txt_semilla_multiplicativo.Name = "txt_semilla_multiplicativo";
+            this.txt_semilla_multiplicativo.Size = new System.Drawing.Size(100, 20);
+            this.txt_semilla_multiplicativo.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(430, 24);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(19, 16);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "m";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(47, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 16);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "a";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(47, 31);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 16);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Semilla";
             // 
             // TP_1
             // 
@@ -264,6 +432,9 @@
             this.tabControl1.ResumeLayout(false);
             this.d.ResumeLayout(false);
             this.d.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).EndInit();
             this.ResumeLayout(false);
 
@@ -288,10 +459,26 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_reestablecer_panel_multiplicativo;
         private System.Windows.Forms.Button btn_generar_aleatorios;
-        private System.Windows.Forms.DataGridView grilla_multiplicativo;
+        private System.Windows.Forms.DataGridView grilla_mixto;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_n;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_xi;
         private System.Windows.Forms.DataGridViewTextBoxColumn column;
+        private System.Windows.Forms.Button btn_reestablecer_multiplicativo;
+        private System.Windows.Forms.Button btn_generar_aleatorios_multiplicativo;
+        private System.Windows.Forms.DataGridView grilla_multiplicativo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.TextBox txt_g_multiplicativo;
+        private System.Windows.Forms.TextBox txt_k_multiplicativo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_m_multiplicativo;
+        private System.Windows.Forms.TextBox txt_a_multiplicativo;
+        private System.Windows.Forms.TextBox txt_semilla_multiplicativo;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
 

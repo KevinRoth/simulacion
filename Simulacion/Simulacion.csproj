@@ -46,10 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Servicios\GeneradorMultiplicativo.cs" />
-    <Compile Include="Servicios\GeneradosMultiplicativo.cs" />
+    <Compile Include="Histograma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Histograma.Designer.cs">
+      <DependentUpon>Histograma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelos\GeneradorMixto.cs" />
+    <Compile Include="Modelos\GeneradorMultiplicativo.cs" />
+    <Compile Include="Modelos\Generados.cs" />
     <Compile Include="Servicios\HistogramChartHelper.cs" />
-    <Compile Include="Servicios\Intervalo.cs" />
+    <Compile Include="Modelos\Intervalo.cs" />
     <Compile Include="TP_1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Histograma.resx">
+      <DependentUpon>Histograma.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TP_1.resx">
       <DependentUpon>TP_1.cs</DependentUpon>
     </EmbeddedResource>

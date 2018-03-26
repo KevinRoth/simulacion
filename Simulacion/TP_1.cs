@@ -1,54 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Simulacion.Servicios;
+using Simulacion.Modelos;
 
 namespace Simulacion
 {
     public partial class TP_1 : Form
     {
+        private GeneradorMixto aleatorioMixtos { get; set; }
         private GeneradorMultiplicativo aleatorioMultiplicativo { get; set; }
-        private List<GeneradosMultiplicativo> listaAleatoriosMultiplicativos { get; set; }
+        private List<Generados> listaAleatoriosMultiplicativos { get; set; }
+        private List<Generados> listaAleatoriosMixtos{ get; set; }
 
         public TP_1()
         {
             InitializeComponent();
-            this.aleatorioMultiplicativo = new GeneradorMultiplicativo();
+            aleatorioMixtos= new GeneradorMixto();
+            aleatorioMultiplicativo = new GeneradorMultiplicativo();
         }
 
         public void inicializarGrilla()
         {
-            this.listaAleatoriosMultiplicativos = new List<GeneradosMultiplicativo>();
-            this.grilla_multiplicativo.Rows.Clear();
+            listaAleatoriosMixtos = new List<Generados>();
+            listaAleatoriosMultiplicativos = new List<Generados>();
+            grilla_multiplicativo.Rows.Clear();
+            grilla_mixto.Rows.Clear();
         }
 
         private void btn_generar_aleatorios_Click(object sender, EventArgs e)
         {
-            this.inicializarGrilla();
+            inicializarGrilla();
 
             try
             {
-                aleatorioMultiplicativo.Generado.Semilla = double.Parse(this.txt_semilla.Text);
-                aleatorioMultiplicativo.C = double.Parse(this.txt_c.Text);
-                aleatorioMultiplicativo.A = double.Parse(this.txt_a.Text);
-                aleatorioMultiplicativo.M = double.Parse(this.txt_m.Text);
+                aleatorioMixtos.Generado.Semilla = double.Parse(txt_semilla.Text);
+                aleatorioMixtos.C = double.Parse(txt_c.Text);
+                aleatorioMixtos.A = double.Parse(txt_a.Text);
+                aleatorioMixtos.M = double.Parse(txt_m.Text);
 
-                this.grilla_multiplicativo.Rows.Add(0,
-                                                    this.aleatorioMultiplicativo.Generado.Semilla,
-                                                    0);
+                grilla_mixto.Rows.Add(0,
+                                           aleatorioMixtos.Generado.Semilla,
+                                           0);
 
                 for (int i = 0; i < 20; i++)
                 {
-                    this.listaAleatoriosMultiplicativos.Add(this.aleatorioMultiplicativo.generarAleatorio());
-                    this.grilla_multiplicativo.Rows.Add(i + 1,
-                                                        this.aleatorioMultiplicativo.Generado.Semilla,
-                                                        this.TruncateFunction(this.aleatorioMultiplicativo.Generado.NumAleatorio,4));
+                    listaAleatoriosMixtos.Add(aleatorioMixtos.generarAleatorio());
+
+                    grilla_mixto.Rows.Add(i + 1,
+                                         aleatorioMixtos.Generado.Semilla,
+                                         TruncateFunction(aleatorioMixtos.Generado.NumAleatorio,4));
                 }
 
                 
@@ -74,15 +74,15 @@ namespace Simulacion
             try
             {
                 var k = double.Parse(this.txt_k.Text);
-                this.aleatorioMultiplicativo.CalcularA(k);
+                aleatorioMixtos.CalcularA(k);
 
-                this.txt_a.Text = aleatorioMultiplicativo.A.ToString();
-                this.txt_a.Enabled = false;
+                txt_a.Text = aleatorioMixtos.A.ToString();
+                txt_a.Enabled = false;
 
             }
             catch (Exception)
             {
-                this.txt_a.Text = "";
+                txt_a.Text = "";
                 Console.Write(e.ToString());
             }
 
@@ -93,14 +93,14 @@ namespace Simulacion
             try
             {
                 var g = double.Parse(this.txt_g.Text);
-                this.aleatorioMultiplicativo.CalcularM(g);
+                aleatorioMixtos.CalcularM(g);
 
-                this.txt_m.Text = aleatorioMultiplicativo.M.ToString();
-                this.txt_m.Enabled = false;
+                txt_m.Text = aleatorioMixtos.M.ToString();
+                txt_m.Enabled = false;
             }
             catch (Exception)
             {
-                this.txt_m.Text = "";
+                txt_m.Text = "";
                 Console.Write(e.ToString());
             }
             
@@ -108,17 +108,99 @@ namespace Simulacion
 
         private void btn_reestablecer_panel_multiplicativo_Click(object sender, EventArgs e)
         {
-            this.txt_a.Text = "";
-            this.txt_c.Text = "";
-            this.txt_g.Text = "";
-            this.txt_k.Text = "";
-            this.txt_m.Text = "";
-            this.txt_semilla.Text = "";
+            txt_a.Text = "";
+            txt_c.Text = "";
+            txt_g.Text = "";
+            txt_k.Text = "";
+            txt_m.Text = "";
+            txt_semilla.Text = "";
 
-            this.txt_a.Enabled = true;
-            this.txt_m.Enabled = true;
+            txt_a.Enabled = true;
+            txt_m.Enabled = true;
 
-            this.inicializarGrilla();
+            inicializarGrilla();
+        }
+
+        private void txt_k_multiplicativo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var k = double.Parse(this.txt_k_multiplicativo.Text);
+                aleatorioMultiplicativo.CalcularA(k);
+
+                txt_a_multiplicativo.Text = aleatorioMultiplicativo.A.ToString();
+                txt_a_multiplicativo.Enabled = false;
+
+            }
+            catch (Exception)
+            {
+                txt_a_multiplicativo.Text = "";
+                Console.Write(e.ToString());
+            }
+        }
+
+        private void txt_g_multiplicativo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var g = double.Parse(this.txt_g_multiplicativo.Text);
+                aleatorioMultiplicativo.CalcularM(g);
+
+                txt_m_multiplicativo.Text = aleatorioMultiplicativo.M.ToString();
+                txt_m_multiplicativo.Enabled = false;
+            }
+            catch (Exception)
+            {
+                txt_m_multiplicativo.Text = "";
+                Console.Write(e.ToString());
+            }
+        }
+
+        private void btn_reestablecer_multiplicativo_Click(object sender, EventArgs e)
+        {
+            txt_a_multiplicativo.Text = "";
+            txt_g_multiplicativo.Text = "";
+            txt_k_multiplicativo.Text = "";
+            txt_m_multiplicativo.Text = "";
+            txt_semilla_multiplicativo.Text = "";
+
+            txt_a_multiplicativo.Enabled = true;
+            txt_m_multiplicativo.Enabled = true;
+
+            inicializarGrilla();
+        }
+
+        private void btn_generar_aleatorios_multiplicativo_Click(object sender, EventArgs e)
+        {
+            inicializarGrilla();
+
+            try
+            {
+                aleatorioMultiplicativo.Generado.Semilla = double.Parse(txt_semilla_multiplicativo.Text);
+                aleatorioMultiplicativo.A = double.Parse(txt_a_multiplicativo.Text);
+                aleatorioMultiplicativo.M = double.Parse(txt_m_multiplicativo.Text);
+
+                grilla_multiplicativo.Rows.Add(0,
+                                           aleatorioMultiplicativo.Generado.Semilla,
+                                           0);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    listaAleatoriosMixtos.Add(aleatorioMultiplicativo.generarAleatorio());
+
+                    grilla_multiplicativo.Rows.Add(i + 1,
+                                         aleatorioMultiplicativo.Generado.Semilla,
+                                         TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Ingrese los valores obligatorios!!");
+            }
+
         }
     }
 }

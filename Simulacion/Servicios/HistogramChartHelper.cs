@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections;
+using Simulacion.Modelos;
 
 namespace Simulacion.Servicios
 {

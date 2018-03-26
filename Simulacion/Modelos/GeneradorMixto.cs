@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulacion.Servicios
+namespace Simulacion.Modelos
 {
-    public class GeneradorMultiplicativo
+    public class GeneradorMixto
     {
         public double A { set; get; }
         public double C { set; get; }
         public double M { set; get; }
-        public GeneradosMultiplicativo Generado { get; set; }
+        public Generados Generado { get; set; }
 
-        public GeneradorMultiplicativo()
+        public GeneradorMixto()
         {
-            Generado = new GeneradosMultiplicativo();
+            Generado = new Generados();
         }
         
         public void CalcularA(double k)
@@ -28,7 +28,7 @@ namespace Simulacion.Servicios
             M = Math.Pow(2, g);
         }
 
-        public GeneradosMultiplicativo generarAleatorio()
+        public Generados generarAleatorio()
         {
             Generado.ProximaSemilla = (((A * Generado.Semilla) + C) % M);   // = [(a.xi + c) mod m]
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulacion.Servicios
+namespace Simulacion.Modelos
 {
     public class Intervalo
     {
