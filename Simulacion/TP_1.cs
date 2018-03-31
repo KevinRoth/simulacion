@@ -262,6 +262,12 @@ namespace Simulacion
 
         }
 
+
+        /// <summary>
+        /// Evento que permite obtener un aleatorio mixto a la vez
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_generar_aleatorio_1_Click(object sender, EventArgs e)
         {
             listaAleatoriosMixtos.Add(aleatorioMixtos.generarAleatorio());
@@ -273,6 +279,11 @@ namespace Simulacion
                 TruncateFunction(aleatorioMixtos.Generado.NumAleatorio, 4));
         }
 
+        /// <summary>
+        /// Evento que permite obtener un aleatorio multiplicativo a la vez
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_generar_aleatorio_multiplicativo_Click(object sender, EventArgs e)
         {
             listaAleatoriosMixtos.Add(aleatorioMultiplicativo.generarAleatorio());
