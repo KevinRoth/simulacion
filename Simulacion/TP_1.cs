@@ -17,16 +17,28 @@ namespace Simulacion
             InitializeComponent();
             aleatorioMixtos= new GeneradorMixto();
             aleatorioMultiplicativo = new GeneradorMultiplicativo();
+
+            btn_generar_aleatorio_mixto.Enabled = false;
         }
 
+        /// <summary>
+        /// Metodo que inicializa las dos listas y las dos grillas
+        /// </summary>
         public void inicializarGrilla()
         {
             listaAleatoriosMixtos = new List<Generados>();
             listaAleatoriosMultiplicativos = new List<Generados>();
             grilla_multiplicativo.Rows.Clear();
             grilla_mixto.Rows.Clear();
+            aleatorioMixtos = new GeneradorMixto();
+            aleatorioMultiplicativo = new GeneradorMultiplicativo();
         }
 
+        /// <summary>
+        /// Evento que genera 20 nros aleatorios por el metodo congruencial mixto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_generar_aleatorios_Click(object sender, EventArgs e)
         {
             inicializarGrilla();
@@ -51,7 +63,7 @@ namespace Simulacion
                                          TruncateFunction(aleatorioMixtos.Generado.NumAleatorio,4));
                 }
 
-                
+                btn_generar_aleatorio_mixto.Enabled = true;
             }
             catch (Exception)
             {
@@ -62,6 +74,12 @@ namespace Simulacion
 
         }
 
+        /// <summary>
+        /// Retorna el numero con la cantidad de digitos despues de la coma indicados por parametro
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="digits"></param>
+        /// <returns></returns>
         public double TruncateFunction(double number, int digits)
         {
             double stepper = (double)(Math.Pow(10.0, (double)digits));
@@ -69,6 +87,11 @@ namespace Simulacion
             return (double)temp / stepper;
         }
 
+        /// <summary>
+        /// A partir del campo g, genera el valor m para el metodo congruencial mixto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txt_k_TextChanged(object sender, EventArgs e)
         {
             try
@@ -88,6 +111,11 @@ namespace Simulacion
 
         }
 
+        /// <summary>
+        /// A partir del campo g, genera el valor m para el metodo congruencial mixto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txt_g_TextChanged(object sender, EventArgs e)
         {
             try
@@ -106,6 +134,11 @@ namespace Simulacion
             
         }
 
+        /// <summary>
+        /// Reestablece los campos y la grilla del apartado del congruencial mixto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_reestablecer_panel_multiplicativo_Click(object sender, EventArgs e)
         {
             txt_a.Text = "";
@@ -118,9 +151,16 @@ namespace Simulacion
             txt_a.Enabled = true;
             txt_m.Enabled = true;
 
+            btn_generar_aleatorio_mixto.Enabled = false;
+
             inicializarGrilla();
         }
 
+        /// <summary>
+        /// A partir de k genera el valor a para el metodo congruencial multiplicativo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txt_k_multiplicativo_TextChanged(object sender, EventArgs e)
         {
             try
@@ -139,6 +179,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// A partir del campo g, genera el valor m para el metodo congruencial multiplicativo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txt_g_multiplicativo_TextChanged(object sender, EventArgs e)
         {
             try
@@ -156,6 +201,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Reestablece los campos y la grilla del apartado del congruencial multiplicativo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_reestablecer_multiplicativo_Click(object sender, EventArgs e)
         {
             txt_a_multiplicativo.Text = "";
@@ -167,9 +217,17 @@ namespace Simulacion
             txt_a_multiplicativo.Enabled = true;
             txt_m_multiplicativo.Enabled = true;
 
+            btn_generar_aleatorio_multiplicativo.Enabled = false;
+
             inicializarGrilla();
         }
 
+
+        /// <summary>
+        /// Evento que genera 20 nros aleatorios por el metodo congruencial multiplicativo 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_generar_aleatorios_multiplicativo_Click(object sender, EventArgs e)
         {
             inicializarGrilla();
@@ -193,6 +251,7 @@ namespace Simulacion
                                          TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
                 }
 
+                btn_generar_aleatorio_multiplicativo.Enabled = true;
 
             }
             catch (Exception)
@@ -201,6 +260,28 @@ namespace Simulacion
                 MessageBox.Show("Ingrese los valores obligatorios!!");
             }
 
+        }
+
+        private void btn_generar_aleatorio_1_Click(object sender, EventArgs e)
+        {
+            listaAleatoriosMixtos.Add(aleatorioMixtos.generarAleatorio());
+
+            var ultimo = grilla_mixto.Rows.Count;
+
+            grilla_mixto.Rows.Add(ultimo - 1, 
+                                  aleatorioMixtos.Generado.Semilla,
+                TruncateFunction(aleatorioMixtos.Generado.NumAleatorio, 4));
+        }
+
+        private void btn_generar_aleatorio_multiplicativo_Click(object sender, EventArgs e)
+        {
+            listaAleatoriosMixtos.Add(aleatorioMultiplicativo.generarAleatorio());
+
+            var ultimo = grilla_multiplicativo.Rows.Count;
+
+            grilla_multiplicativo.Rows.Add(ultimo - 1,
+                aleatorioMultiplicativo.Generado.Semilla,
+                TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
         }
     }
 }

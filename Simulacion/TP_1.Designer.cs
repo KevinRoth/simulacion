@@ -30,7 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.d = new System.Windows.Forms.TabPage();
-            this.btn_reestablecer_panel_multiplicativo = new System.Windows.Forms.Button();
+            this.btn_reestablecer_mixto = new System.Windows.Forms.Button();
             this.btn_generar_aleatorios = new System.Windows.Forms.Button();
             this.grilla_mixto = new System.Windows.Forms.DataGridView();
             this.column_n = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +65,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.btn_generar_aleatorio_mixto = new System.Windows.Forms.Button();
+            this.btn_generar_aleatorio_multiplicativo = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.d.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).BeginInit();
@@ -84,7 +86,8 @@
             // 
             // d
             // 
-            this.d.Controls.Add(this.btn_reestablecer_panel_multiplicativo);
+            this.d.Controls.Add(this.btn_generar_aleatorio_mixto);
+            this.d.Controls.Add(this.btn_reestablecer_mixto);
             this.d.Controls.Add(this.btn_generar_aleatorios);
             this.d.Controls.Add(this.grilla_mixto);
             this.d.Controls.Add(this.txt_g);
@@ -107,19 +110,19 @@
             this.d.Text = "Congruencial Mixto";
             this.d.UseVisualStyleBackColor = true;
             // 
-            // btn_reestablecer_panel_multiplicativo
+            // btn_reestablecer_mixto
             // 
-            this.btn_reestablecer_panel_multiplicativo.Location = new System.Drawing.Point(650, 67);
-            this.btn_reestablecer_panel_multiplicativo.Name = "btn_reestablecer_panel_multiplicativo";
-            this.btn_reestablecer_panel_multiplicativo.Size = new System.Drawing.Size(212, 40);
-            this.btn_reestablecer_panel_multiplicativo.TabIndex = 14;
-            this.btn_reestablecer_panel_multiplicativo.Text = "Reestablecer";
-            this.btn_reestablecer_panel_multiplicativo.UseVisualStyleBackColor = true;
-            this.btn_reestablecer_panel_multiplicativo.Click += new System.EventHandler(this.btn_reestablecer_panel_multiplicativo_Click);
+            this.btn_reestablecer_mixto.Location = new System.Drawing.Point(612, 72);
+            this.btn_reestablecer_mixto.Name = "btn_reestablecer_mixto";
+            this.btn_reestablecer_mixto.Size = new System.Drawing.Size(212, 40);
+            this.btn_reestablecer_mixto.TabIndex = 14;
+            this.btn_reestablecer_mixto.Text = "Reestablecer";
+            this.btn_reestablecer_mixto.UseVisualStyleBackColor = true;
+            this.btn_reestablecer_mixto.Click += new System.EventHandler(this.btn_reestablecer_panel_multiplicativo_Click);
             // 
             // btn_generar_aleatorios
             // 
-            this.btn_generar_aleatorios.Location = new System.Drawing.Point(650, 16);
+            this.btn_generar_aleatorios.Location = new System.Drawing.Point(612, 16);
             this.btn_generar_aleatorios.Name = "btn_generar_aleatorios";
             this.btn_generar_aleatorios.Size = new System.Drawing.Size(212, 40);
             this.btn_generar_aleatorios.TabIndex = 13;
@@ -263,6 +266,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_generar_aleatorio_multiplicativo);
             this.tabPage2.Controls.Add(this.btn_reestablecer_multiplicativo);
             this.tabPage2.Controls.Add(this.btn_generar_aleatorios_multiplicativo);
             this.tabPage2.Controls.Add(this.grilla_multiplicativo);
@@ -286,7 +290,7 @@
             // 
             // btn_reestablecer_multiplicativo
             // 
-            this.btn_reestablecer_multiplicativo.Location = new System.Drawing.Point(669, 71);
+            this.btn_reestablecer_multiplicativo.Location = new System.Drawing.Point(635, 71);
             this.btn_reestablecer_multiplicativo.Name = "btn_reestablecer_multiplicativo";
             this.btn_reestablecer_multiplicativo.Size = new System.Drawing.Size(212, 40);
             this.btn_reestablecer_multiplicativo.TabIndex = 29;
@@ -296,7 +300,7 @@
             // 
             // btn_generar_aleatorios_multiplicativo
             // 
-            this.btn_generar_aleatorios_multiplicativo.Location = new System.Drawing.Point(669, 20);
+            this.btn_generar_aleatorios_multiplicativo.Location = new System.Drawing.Point(635, 20);
             this.btn_generar_aleatorios_multiplicativo.Name = "btn_generar_aleatorios_multiplicativo";
             this.btn_generar_aleatorios_multiplicativo.Size = new System.Drawing.Size(212, 40);
             this.btn_generar_aleatorios_multiplicativo.TabIndex = 28;
@@ -421,6 +425,26 @@
             this.label12.TabIndex = 15;
             this.label12.Text = "Semilla";
             // 
+            // btn_generar_aleatorio_mixto
+            // 
+            this.btn_generar_aleatorio_mixto.Location = new System.Drawing.Point(830, 15);
+            this.btn_generar_aleatorio_mixto.Name = "btn_generar_aleatorio_mixto";
+            this.btn_generar_aleatorio_mixto.Size = new System.Drawing.Size(51, 40);
+            this.btn_generar_aleatorio_mixto.TabIndex = 15;
+            this.btn_generar_aleatorio_mixto.Text = "+1";
+            this.btn_generar_aleatorio_mixto.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorio_mixto.Click += new System.EventHandler(this.btn_generar_aleatorio_1_Click);
+            // 
+            // btn_generar_aleatorio_multiplicativo
+            // 
+            this.btn_generar_aleatorio_multiplicativo.Location = new System.Drawing.Point(853, 20);
+            this.btn_generar_aleatorio_multiplicativo.Name = "btn_generar_aleatorio_multiplicativo";
+            this.btn_generar_aleatorio_multiplicativo.Size = new System.Drawing.Size(43, 40);
+            this.btn_generar_aleatorio_multiplicativo.TabIndex = 30;
+            this.btn_generar_aleatorio_multiplicativo.Text = "+1";
+            this.btn_generar_aleatorio_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorio_multiplicativo.Click += new System.EventHandler(this.btn_generar_aleatorio_multiplicativo_Click);
+            // 
             // TP_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,7 +481,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_reestablecer_panel_multiplicativo;
+        private System.Windows.Forms.Button btn_reestablecer_mixto;
         private System.Windows.Forms.Button btn_generar_aleatorios;
         private System.Windows.Forms.DataGridView grilla_mixto;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_n;
@@ -479,6 +503,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btn_generar_aleatorio_mixto;
+        private System.Windows.Forms.Button btn_generar_aleatorio_multiplicativo;
     }
 }
 
