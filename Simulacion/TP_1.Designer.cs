@@ -67,11 +67,21 @@
             this.label12 = new System.Windows.Forms.Label();
             this.btn_generar_aleatorio_mixto = new System.Windows.Forms.Button();
             this.btn_generar_aleatorio_multiplicativo = new System.Windows.Forms.Button();
+            this.btn_graficar_mixto = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_cantidad_intervalos_mixto = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btn_graficar_multiplicativo = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txt_cantidad_intervalos_multiplicativo = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.d.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -86,6 +96,8 @@
             // 
             // d
             // 
+            this.d.Controls.Add(this.btn_graficar_mixto);
+            this.d.Controls.Add(this.groupBox3);
             this.d.Controls.Add(this.btn_generar_aleatorio_mixto);
             this.d.Controls.Add(this.btn_reestablecer_mixto);
             this.d.Controls.Add(this.btn_generar_aleatorios);
@@ -266,6 +278,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_graficar_multiplicativo);
+            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btn_generar_aleatorio_multiplicativo);
             this.tabPage2.Controls.Add(this.btn_reestablecer_multiplicativo);
             this.tabPage2.Controls.Add(this.btn_generar_aleatorios_multiplicativo);
@@ -445,6 +459,94 @@
             this.btn_generar_aleatorio_multiplicativo.UseVisualStyleBackColor = true;
             this.btn_generar_aleatorio_multiplicativo.Click += new System.EventHandler(this.btn_generar_aleatorio_multiplicativo_Click);
             // 
+            // btn_graficar_mixto
+            // 
+            this.btn_graficar_mixto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_graficar_mixto.Location = new System.Drawing.Point(535, 218);
+            this.btn_graficar_mixto.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_graficar_mixto.Name = "btn_graficar_mixto";
+            this.btn_graficar_mixto.Size = new System.Drawing.Size(68, 36);
+            this.btn_graficar_mixto.TabIndex = 17;
+            this.btn_graficar_mixto.Text = "Graficar";
+            this.btn_graficar_mixto.UseVisualStyleBackColor = true;
+            this.btn_graficar_mixto.Click += new System.EventHandler(this.btn_graficar_mixto_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_cantidad_intervalos_mixto);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(535, 161);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(158, 52);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Histograma";
+            // 
+            // txt_cantidad_intervalos_mixto
+            // 
+            this.txt_cantidad_intervalos_mixto.Location = new System.Drawing.Point(77, 24);
+            this.txt_cantidad_intervalos_mixto.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_intervalos_mixto.Name = "txt_cantidad_intervalos_mixto";
+            this.txt_cantidad_intervalos_mixto.Size = new System.Drawing.Size(59, 19);
+            this.txt_cantidad_intervalos_mixto.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 26);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Intervalos";
+            // 
+            // btn_graficar_multiplicativo
+            // 
+            this.btn_graficar_multiplicativo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_graficar_multiplicativo.Location = new System.Drawing.Point(604, 216);
+            this.btn_graficar_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_graficar_multiplicativo.Name = "btn_graficar_multiplicativo";
+            this.btn_graficar_multiplicativo.Size = new System.Drawing.Size(68, 36);
+            this.btn_graficar_multiplicativo.TabIndex = 32;
+            this.btn_graficar_multiplicativo.Text = "Graficar";
+            this.btn_graficar_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_graficar_multiplicativo.Click += new System.EventHandler(this.btn_graficar_multiplicativo_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txt_cantidad_intervalos_multiplicativo);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(604, 159);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(158, 52);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Histograma";
+            // 
+            // txt_cantidad_intervalos_multiplicativo
+            // 
+            this.txt_cantidad_intervalos_multiplicativo.Location = new System.Drawing.Point(77, 24);
+            this.txt_cantidad_intervalos_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_intervalos_multiplicativo.Name = "txt_cantidad_intervalos_multiplicativo";
+            this.txt_cantidad_intervalos_multiplicativo.Size = new System.Drawing.Size(59, 19);
+            this.txt_cantidad_intervalos_multiplicativo.TabIndex = 1;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(14, 26);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Intervalos";
+            // 
             // TP_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -460,6 +562,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -505,6 +611,14 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btn_generar_aleatorio_mixto;
         private System.Windows.Forms.Button btn_generar_aleatorio_multiplicativo;
+        private System.Windows.Forms.Button btn_graficar_mixto;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txt_cantidad_intervalos_mixto;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btn_graficar_multiplicativo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txt_cantidad_intervalos_multiplicativo;
+        private System.Windows.Forms.Label label13;
     }
 }
 

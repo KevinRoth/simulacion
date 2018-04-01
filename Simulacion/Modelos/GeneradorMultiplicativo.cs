@@ -7,7 +7,7 @@ using Simulacion.Modelos;
 
 namespace Simulacion.Modelos
 {
-    public class GeneradorMultiplicativo
+    public class GeneradorMultiplicativo 
     {
         public double A { set; get; }
         public double M { set; get; }

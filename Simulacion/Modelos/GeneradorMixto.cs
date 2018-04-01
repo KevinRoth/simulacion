@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulacion.Modelos
 {
-    public class GeneradorMixto
+    public class GeneradorMixto 
     {
         public double A { set; get; }
         public double C { set; get; }

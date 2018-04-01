@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinqStatistics, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqStatistics.2.2.0\lib\net40\LinqStatistics.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -46,17 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Histograma.cs">
+    <Compile Include="Grafica1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Histograma.Designer.cs">
-      <DependentUpon>Histograma.cs</DependentUpon>
+    <Compile Include="Grafica1.Designer.cs">
+      <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelos\GeneradorMixto.cs" />
     <Compile Include="Modelos\GeneradorMultiplicativo.cs" />
     <Compile Include="Modelos\Generados.cs" />
-    <Compile Include="Servicios\HistogramChartHelper.cs" />
-    <Compile Include="Modelos\Intervalo.cs" />
+    <Compile Include="Modelos\Subintervalos.cs" />
     <Compile Include="TP_1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,8 +70,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Histograma.resx">
-      <DependentUpon>Histograma.cs</DependentUpon>
+    <EmbeddedResource Include="Grafica1.resx">
+      <DependentUpon>Grafica1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TP_1.resx">
       <DependentUpon>TP_1.cs</DependentUpon>
@@ -80,6 +85,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Servicios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
