@@ -73,26 +73,21 @@ namespace Simulacion
                     ? int.Parse(txt_cantidad_aleatorios_mixto.Text)
                     : 20;
 
-                
-
                 for (int i = 0; i < contador; i++)
                 {
                     aleatorioMixtos.generarAleatorio();
 
-                    var aleatorio = new Generado()
+
+                    listaAleatoriosMixtos.Add(new Generado()
                     {
                         NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
                         Semilla = aleatorioMixtos.Generado.Semilla,
                         ProximaSemilla = aleatorioMixtos.Generado.ProximaSemilla
-                    };
-
-                    listaAleatoriosMixtos.Add(aleatorio);
+                    });
 
                     grilla_mixto.Rows.Add(i + 1,
-                                          aleatorio.Semilla,
-                                         TruncateFunction(aleatorio.NumAleatorio,4));
-
-                    aleatorio = null;
+                                         aleatorioMixtos.Generado.Semilla,
+                                         TruncateFunction(aleatorioMixtos.Generado.NumAleatorio,4));
                 }
 
                 btn_generar_aleatorio_mixto.Enabled = true;
