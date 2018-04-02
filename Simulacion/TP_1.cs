@@ -10,16 +10,20 @@ namespace Simulacion
     {
         private GeneradorMixto aleatorioMixtos { get; set; }
         private GeneradorMultiplicativo aleatorioMultiplicativo { get; set; }
-        private List<Generados> listaAleatoriosMultiplicativos { get; set; }
-        private List<Generados> listaAleatoriosMixtos{ get; set; }
+        private GeneradorLenguaje aleatorioLenguaje { get; set; }
+        private List<Generado> listaAleatoriosMultiplicativos { get; set; }
+        private List<Generado> listaAleatoriosMixtos{ get; set; }
+        private List<Generado> listaAleatoriosLenguaje { get; set; }
 
         public TP_1()
         {
             InitializeComponent();
             aleatorioMixtos= new GeneradorMixto();
             aleatorioMultiplicativo = new GeneradorMultiplicativo();
+            aleatorioLenguaje = new GeneradorLenguaje();
 
             btn_generar_aleatorio_mixto.Enabled = false;
+            btn_generar_aleatorio_multiplicativo.Enabled = false;
         }
 
         /// <summary>
@@ -27,12 +31,17 @@ namespace Simulacion
         /// </summary>
         public void inicializarGrilla()
         {
-            listaAleatoriosMixtos = new List<Generados>();
-            listaAleatoriosMultiplicativos = new List<Generados>();
+            listaAleatoriosMixtos = new List<Generado>();
+            listaAleatoriosMultiplicativos = new List<Generado>();
+            listaAleatoriosLenguaje = new List<Generado>();
+
             grilla_multiplicativo.Rows.Clear();
             grilla_mixto.Rows.Clear();
+            grilla_aleatorios_lenguaje.Rows.Clear();
+
             aleatorioMixtos = new GeneradorMixto();
             aleatorioMultiplicativo = new GeneradorMultiplicativo();
+            aleatorioLenguaje = new GeneradorLenguaje();
         }
 
         /// <summary>
@@ -51,25 +60,39 @@ namespace Simulacion
                 aleatorioMixtos.A = double.Parse(txt_a.Text);
                 aleatorioMixtos.M = double.Parse(txt_m.Text);
 
-                grilla_mixto.Rows.Add(0,
-                                           aleatorioMixtos.Generado.Semilla,
-                                           0);
 
-                for (int i = 0; i < 20; i++)
+                //Agrego a la grilla la semilla
+                grilla_mixto.Rows.Add(0,
+                                     aleatorioMixtos.Generado.Semilla,
+                                     0);
+
+
+                //Pregunto si el textbox de cantidad de aleatorios mixtos tiene una cantidad, si es asi establesco la cantidad
+                //sino por defecto establezco que es 20
+                var contador = txt_cantidad_aleatorios_mixto.Text != string.Empty
+                    ? int.Parse(txt_cantidad_aleatorios_mixto.Text)
+                    : 20;
+
+                
+
+                for (int i = 0; i < contador; i++)
                 {
                     aleatorioMixtos.generarAleatorio();
 
-
-                    listaAleatoriosMixtos.Add(new Generados()
+                    var aleatorio = new Generado()
                     {
                         NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
                         Semilla = aleatorioMixtos.Generado.Semilla,
                         ProximaSemilla = aleatorioMixtos.Generado.ProximaSemilla
-                    });
+                    };
+
+                    listaAleatoriosMixtos.Add(aleatorio);
 
                     grilla_mixto.Rows.Add(i + 1,
-                                         aleatorioMixtos.Generado.Semilla,
-                                         TruncateFunction(aleatorioMixtos.Generado.NumAleatorio,4));
+                                          aleatorio.Semilla,
+                                         TruncateFunction(aleatorio.NumAleatorio,4));
+
+                    aleatorio = null;
                 }
 
                 btn_generar_aleatorio_mixto.Enabled = true;
@@ -156,6 +179,7 @@ namespace Simulacion
             txt_k.Text = "";
             txt_m.Text = "";
             txt_semilla.Text = "";
+            txt_cantidad_aleatorios_mixto.Text = "";
 
             txt_a.Enabled = true;
             txt_m.Enabled = true;
@@ -222,6 +246,7 @@ namespace Simulacion
             txt_k_multiplicativo.Text = "";
             txt_m_multiplicativo.Text = "";
             txt_semilla_multiplicativo.Text = "";
+            txt_cantidad_aleatorios_multiplicativo.Text = "";
 
             txt_a_multiplicativo.Enabled = true;
             txt_m_multiplicativo.Enabled = true;
@@ -247,14 +272,21 @@ namespace Simulacion
                 aleatorioMultiplicativo.A = double.Parse(txt_a_multiplicativo.Text);
                 aleatorioMultiplicativo.M = double.Parse(txt_m_multiplicativo.Text);
 
+                //Agrego a la grilla la semilla
                 grilla_multiplicativo.Rows.Add(0,
                                            aleatorioMultiplicativo.Generado.Semilla,
                                            0);
 
-                for (int i = 0; i < 20; i++)
+                //Pregunto si el textbox de cantidad de aleatorios multiplicativos tiene una cantidad, si es asi establesco la cantidad
+                //sino por defecto establezco que es 20
+                var contador = txt_cantidad_aleatorios_multiplicativo.Text != string.Empty
+                    ? int.Parse(txt_cantidad_aleatorios_multiplicativo.Text)
+                    : 20;
+
+                for (int i = 0; i < contador; i++)
                 {
 
-                    listaAleatoriosMultiplicativos.Add(new Generados()
+                    listaAleatoriosMultiplicativos.Add(new Generado()
                     {
                         NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
                         Semilla = aleatorioMultiplicativo.Generado.Semilla,
@@ -287,7 +319,7 @@ namespace Simulacion
         {
             aleatorioMixtos.generarAleatorio();
 
-            listaAleatoriosMixtos.Add(new Generados()
+            listaAleatoriosMixtos.Add(new Generado()
             {
                 NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
                 Semilla = aleatorioMixtos.Generado.Semilla,
@@ -309,7 +341,7 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorio_multiplicativo_Click(object sender, EventArgs e)
         {
-            listaAleatoriosMultiplicativos.Add(new Generados()
+            listaAleatoriosMultiplicativos.Add(new Generado()
             {
                 NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
                 Semilla = aleatorioMultiplicativo.Generado.Semilla,
@@ -333,6 +365,40 @@ namespace Simulacion
             try
             {
                 var lista = listaAleatoriosMixtos;
+
+              /*  var lista = new List<Generado>();
+
+                lista.Add(new Generado(0.15));
+                lista.Add(new Generado(0.22));
+                lista.Add(new Generado(0.41));
+                lista.Add(new Generado(0.65));
+                lista.Add(new Generado(0.84));
+                lista.Add(new Generado(0.81));
+                lista.Add(new Generado(0.62));
+                lista.Add(new Generado(0.45));
+                lista.Add(new Generado(0.32));
+                lista.Add(new Generado(0.07));
+                lista.Add(new Generado(0.11));
+                lista.Add(new Generado(0.29));
+                lista.Add(new Generado(0.58));
+                lista.Add(new Generado(0.73));
+                lista.Add(new Generado(0.93));
+                lista.Add(new Generado(0.97));
+                lista.Add(new Generado(0.79));
+                lista.Add(new Generado(0.55));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.09));
+                lista.Add(new Generado(0.99));
+                lista.Add(new Generado(0.51));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.02));
+                lista.Add(new Generado(0.19));
+                lista.Add(new Generado(0.24));
+                lista.Add(new Generado(0.98));
+                lista.Add(new Generado(0.10));
+                lista.Add(new Generado(0.31));
+                lista.Add(new Generado(0.17));
+                */
 
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_mixto.Text));
                 ventana.Show();
@@ -362,6 +428,76 @@ namespace Simulacion
             {
                 MessageBox.Show("Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
             }
+        }
+
+        /// <summary>
+        /// Evento que genera x cantidad de aleatorios, de acuerdo a la cantidad que ingrese el usuario
+        /// por el metodo provisto por el lenguaje
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_generar_aleatorios_lenguaje_Click(object sender, EventArgs e)
+        {
+            inicializarGrilla();
+
+            try
+            {
+               //Pregunto si el textbox de cantidad de aleatorios multiplicativos tiene una cantidad, si es asi establesco la cantidad
+                //sino por defecto establezco que es 20
+                var contador = int.Parse(txt_cantidad_aleatorios_lenguaje.Text);
+
+                for (int i = 0; i < contador; i++)
+                {
+
+                    aleatorioLenguaje.generarAleatorio();
+
+                    listaAleatoriosLenguaje.Add(new Generado()
+                    {
+                        NumAleatorio = aleatorioLenguaje.Generado.NumAleatorio
+                    });
+
+                    grilla_aleatorios_lenguaje.Rows.Add(i + 1,
+                        TruncateFunction(aleatorioLenguaje.Generado.NumAleatorio, 4));
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Ingrese la cantidad de aleatorios a generar!!");
+            }
+        }
+
+        /// <summary>
+        /// Evento que llama al form Grafica1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_generar_grafica_lenguaje_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lista = listaAleatoriosLenguaje;
+
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_lenguaje.Text));
+                ventana.Show();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
+            }
+        }
+
+        /// <summary>
+        /// Reestablece los campos y la grilla del apartado del generador propio del lenguaje
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_reestablecer_lenguaje_Click(object sender, EventArgs e)
+        { 
+            txt_cantidad_aleatorios_lenguaje.Text = "";
+            txt_cantidad_intervalos_lenguaje.Text = "";
+
+            inicializarGrilla();
         }
     }
 }

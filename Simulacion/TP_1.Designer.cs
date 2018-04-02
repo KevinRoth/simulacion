@@ -30,6 +30,11 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.d = new System.Windows.Forms.TabPage();
+            this.btn_graficar_mixto = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_cantidad_intervalos_mixto = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btn_generar_aleatorio_mixto = new System.Windows.Forms.Button();
             this.btn_reestablecer_mixto = new System.Windows.Forms.Button();
             this.btn_generar_aleatorios = new System.Windows.Forms.Button();
             this.grilla_mixto = new System.Windows.Forms.DataGridView();
@@ -49,6 +54,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_graficar_multiplicativo = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txt_cantidad_intervalos_multiplicativo = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_generar_aleatorio_multiplicativo = new System.Windows.Forms.Button();
             this.btn_reestablecer_multiplicativo = new System.Windows.Forms.Button();
             this.btn_generar_aleatorios_multiplicativo = new System.Windows.Forms.Button();
             this.grilla_multiplicativo = new System.Windows.Forms.DataGridView();
@@ -65,29 +75,39 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.btn_generar_aleatorio_mixto = new System.Windows.Forms.Button();
-            this.btn_generar_aleatorio_multiplicativo = new System.Windows.Forms.Button();
-            this.btn_graficar_mixto = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txt_cantidad_intervalos_mixto = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btn_graficar_multiplicativo = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txt_cantidad_intervalos_multiplicativo = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.txt_cantidad_aleatorios_mixto = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_cantidad_aleatorios_multiplicativo = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt_cantidad_aleatorios_lenguaje = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btn_generar_grafica_lenguaje = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txt_cantidad_intervalos_lenguaje = new System.Windows.Forms.TextBox();
+            this.btn_generar_aleatorios_lenguaje = new System.Windows.Forms.Button();
+            this.grilla_aleatorios_lenguaje = new System.Windows.Forms.DataGridView();
+            this.btn_reestablecer_lenguaje = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.d.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_aleatorios_lenguaje)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.d);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -96,6 +116,8 @@
             // 
             // d
             // 
+            this.d.Controls.Add(this.txt_cantidad_aleatorios_mixto);
+            this.d.Controls.Add(this.label14);
             this.d.Controls.Add(this.btn_graficar_mixto);
             this.d.Controls.Add(this.groupBox3);
             this.d.Controls.Add(this.btn_generar_aleatorio_mixto);
@@ -122,9 +144,63 @@
             this.d.Text = "Congruencial Mixto";
             this.d.UseVisualStyleBackColor = true;
             // 
+            // btn_graficar_mixto
+            // 
+            this.btn_graficar_mixto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_graficar_mixto.Location = new System.Drawing.Point(501, 436);
+            this.btn_graficar_mixto.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_graficar_mixto.Name = "btn_graficar_mixto";
+            this.btn_graficar_mixto.Size = new System.Drawing.Size(68, 36);
+            this.btn_graficar_mixto.TabIndex = 17;
+            this.btn_graficar_mixto.Text = "Graficar";
+            this.btn_graficar_mixto.UseVisualStyleBackColor = true;
+            this.btn_graficar_mixto.Click += new System.EventHandler(this.btn_graficar_mixto_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_cantidad_intervalos_mixto);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(501, 379);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(158, 52);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Histograma";
+            // 
+            // txt_cantidad_intervalos_mixto
+            // 
+            this.txt_cantidad_intervalos_mixto.Location = new System.Drawing.Point(77, 24);
+            this.txt_cantidad_intervalos_mixto.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_intervalos_mixto.Name = "txt_cantidad_intervalos_mixto";
+            this.txt_cantidad_intervalos_mixto.Size = new System.Drawing.Size(59, 19);
+            this.txt_cantidad_intervalos_mixto.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 26);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Intervalos";
+            // 
+            // btn_generar_aleatorio_mixto
+            // 
+            this.btn_generar_aleatorio_mixto.Location = new System.Drawing.Point(738, 267);
+            this.btn_generar_aleatorio_mixto.Name = "btn_generar_aleatorio_mixto";
+            this.btn_generar_aleatorio_mixto.Size = new System.Drawing.Size(51, 40);
+            this.btn_generar_aleatorio_mixto.TabIndex = 15;
+            this.btn_generar_aleatorio_mixto.Text = "+1";
+            this.btn_generar_aleatorio_mixto.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorio_mixto.Click += new System.EventHandler(this.btn_generar_aleatorio_1_Click);
+            // 
             // btn_reestablecer_mixto
             // 
-            this.btn_reestablecer_mixto.Location = new System.Drawing.Point(612, 72);
+            this.btn_reestablecer_mixto.Location = new System.Drawing.Point(679, 51);
             this.btn_reestablecer_mixto.Name = "btn_reestablecer_mixto";
             this.btn_reestablecer_mixto.Size = new System.Drawing.Size(212, 40);
             this.btn_reestablecer_mixto.TabIndex = 14;
@@ -134,7 +210,7 @@
             // 
             // btn_generar_aleatorios
             // 
-            this.btn_generar_aleatorios.Location = new System.Drawing.Point(612, 16);
+            this.btn_generar_aleatorios.Location = new System.Drawing.Point(510, 267);
             this.btn_generar_aleatorios.Name = "btn_generar_aleatorios";
             this.btn_generar_aleatorios.Size = new System.Drawing.Size(212, 40);
             this.btn_generar_aleatorios.TabIndex = 13;
@@ -278,6 +354,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.txt_cantidad_aleatorios_multiplicativo);
+            this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.btn_graficar_multiplicativo);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btn_generar_aleatorio_multiplicativo);
@@ -302,9 +380,63 @@
             this.tabPage2.Text = "Congruencial Multiplicativo";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btn_graficar_multiplicativo
+            // 
+            this.btn_graficar_multiplicativo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_graficar_multiplicativo.Location = new System.Drawing.Point(533, 390);
+            this.btn_graficar_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_graficar_multiplicativo.Name = "btn_graficar_multiplicativo";
+            this.btn_graficar_multiplicativo.Size = new System.Drawing.Size(68, 36);
+            this.btn_graficar_multiplicativo.TabIndex = 32;
+            this.btn_graficar_multiplicativo.Text = "Graficar";
+            this.btn_graficar_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_graficar_multiplicativo.Click += new System.EventHandler(this.btn_graficar_multiplicativo_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txt_cantidad_intervalos_multiplicativo);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(533, 333);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(158, 52);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Histograma";
+            // 
+            // txt_cantidad_intervalos_multiplicativo
+            // 
+            this.txt_cantidad_intervalos_multiplicativo.Location = new System.Drawing.Point(77, 24);
+            this.txt_cantidad_intervalos_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_intervalos_multiplicativo.Name = "txt_cantidad_intervalos_multiplicativo";
+            this.txt_cantidad_intervalos_multiplicativo.Size = new System.Drawing.Size(59, 19);
+            this.txt_cantidad_intervalos_multiplicativo.TabIndex = 1;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(14, 26);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Intervalos";
+            // 
+            // btn_generar_aleatorio_multiplicativo
+            // 
+            this.btn_generar_aleatorio_multiplicativo.Location = new System.Drawing.Point(751, 261);
+            this.btn_generar_aleatorio_multiplicativo.Name = "btn_generar_aleatorio_multiplicativo";
+            this.btn_generar_aleatorio_multiplicativo.Size = new System.Drawing.Size(43, 40);
+            this.btn_generar_aleatorio_multiplicativo.TabIndex = 30;
+            this.btn_generar_aleatorio_multiplicativo.Text = "+1";
+            this.btn_generar_aleatorio_multiplicativo.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorio_multiplicativo.Click += new System.EventHandler(this.btn_generar_aleatorio_multiplicativo_Click);
+            // 
             // btn_reestablecer_multiplicativo
             // 
-            this.btn_reestablecer_multiplicativo.Location = new System.Drawing.Point(635, 71);
+            this.btn_reestablecer_multiplicativo.Location = new System.Drawing.Point(672, 48);
             this.btn_reestablecer_multiplicativo.Name = "btn_reestablecer_multiplicativo";
             this.btn_reestablecer_multiplicativo.Size = new System.Drawing.Size(212, 40);
             this.btn_reestablecer_multiplicativo.TabIndex = 29;
@@ -314,7 +446,7 @@
             // 
             // btn_generar_aleatorios_multiplicativo
             // 
-            this.btn_generar_aleatorios_multiplicativo.Location = new System.Drawing.Point(635, 20);
+            this.btn_generar_aleatorios_multiplicativo.Location = new System.Drawing.Point(533, 261);
             this.btn_generar_aleatorios_multiplicativo.Name = "btn_generar_aleatorios_multiplicativo";
             this.btn_generar_aleatorios_multiplicativo.Size = new System.Drawing.Size(212, 40);
             this.btn_generar_aleatorios_multiplicativo.TabIndex = 28;
@@ -439,113 +571,163 @@
             this.label12.TabIndex = 15;
             this.label12.Text = "Semilla";
             // 
-            // btn_generar_aleatorio_mixto
+            // txt_cantidad_aleatorios_mixto
             // 
-            this.btn_generar_aleatorio_mixto.Location = new System.Drawing.Point(830, 15);
-            this.btn_generar_aleatorio_mixto.Name = "btn_generar_aleatorio_mixto";
-            this.btn_generar_aleatorio_mixto.Size = new System.Drawing.Size(51, 40);
-            this.btn_generar_aleatorio_mixto.TabIndex = 15;
-            this.btn_generar_aleatorio_mixto.Text = "+1";
-            this.btn_generar_aleatorio_mixto.UseVisualStyleBackColor = true;
-            this.btn_generar_aleatorio_mixto.Click += new System.EventHandler(this.btn_generar_aleatorio_1_Click);
+            this.txt_cantidad_aleatorios_mixto.Location = new System.Drawing.Point(614, 226);
+            this.txt_cantidad_aleatorios_mixto.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_aleatorios_mixto.Name = "txt_cantidad_aleatorios_mixto";
+            this.txt_cantidad_aleatorios_mixto.Size = new System.Drawing.Size(59, 20);
+            this.txt_cantidad_aleatorios_mixto.TabIndex = 19;
             // 
-            // btn_generar_aleatorio_multiplicativo
+            // label14
             // 
-            this.btn_generar_aleatorio_multiplicativo.Location = new System.Drawing.Point(853, 20);
-            this.btn_generar_aleatorio_multiplicativo.Name = "btn_generar_aleatorio_multiplicativo";
-            this.btn_generar_aleatorio_multiplicativo.Size = new System.Drawing.Size(43, 40);
-            this.btn_generar_aleatorio_multiplicativo.TabIndex = 30;
-            this.btn_generar_aleatorio_multiplicativo.Text = "+1";
-            this.btn_generar_aleatorio_multiplicativo.UseVisualStyleBackColor = true;
-            this.btn_generar_aleatorio_multiplicativo.Click += new System.EventHandler(this.btn_generar_aleatorio_multiplicativo_Click);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(498, 229);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(112, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Cantidad de aleatorios";
             // 
-            // btn_graficar_mixto
+            // txt_cantidad_aleatorios_multiplicativo
             // 
-            this.btn_graficar_mixto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_graficar_mixto.Location = new System.Drawing.Point(535, 218);
-            this.btn_graficar_mixto.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_graficar_mixto.Name = "btn_graficar_mixto";
-            this.btn_graficar_mixto.Size = new System.Drawing.Size(68, 36);
-            this.btn_graficar_mixto.TabIndex = 17;
-            this.btn_graficar_mixto.Text = "Graficar";
-            this.btn_graficar_mixto.UseVisualStyleBackColor = true;
-            this.btn_graficar_mixto.Click += new System.EventHandler(this.btn_graficar_mixto_Click);
+            this.txt_cantidad_aleatorios_multiplicativo.Location = new System.Drawing.Point(646, 212);
+            this.txt_cantidad_aleatorios_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_aleatorios_multiplicativo.Name = "txt_cantidad_aleatorios_multiplicativo";
+            this.txt_cantidad_aleatorios_multiplicativo.Size = new System.Drawing.Size(59, 20);
+            this.txt_cantidad_aleatorios_multiplicativo.TabIndex = 34;
             // 
-            // groupBox3
+            // label15
             // 
-            this.groupBox3.Controls.Add(this.txt_cantidad_intervalos_mixto);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(535, 161);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(158, 52);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Histograma";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(530, 215);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(112, 13);
+            this.label15.TabIndex = 33;
+            this.label15.Text = "Cantidad de aleatorios";
             // 
-            // txt_cantidad_intervalos_mixto
+            // tabPage1
             // 
-            this.txt_cantidad_intervalos_mixto.Location = new System.Drawing.Point(77, 24);
-            this.txt_cantidad_intervalos_mixto.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_cantidad_intervalos_mixto.Name = "txt_cantidad_intervalos_mixto";
-            this.txt_cantidad_intervalos_mixto.Size = new System.Drawing.Size(59, 19);
-            this.txt_cantidad_intervalos_mixto.TabIndex = 1;
+            this.tabPage1.Controls.Add(this.btn_reestablecer_lenguaje);
+            this.tabPage1.Controls.Add(this.txt_cantidad_aleatorios_lenguaje);
+            this.tabPage1.Controls.Add(this.label16);
+            this.tabPage1.Controls.Add(this.btn_generar_grafica_lenguaje);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.btn_generar_aleatorios_lenguaje);
+            this.tabPage1.Controls.Add(this.grilla_aleatorios_lenguaje);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1014, 517);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Propio del lenguaje";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // txt_cantidad_aleatorios_lenguaje
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 26);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Intervalos";
+            this.txt_cantidad_aleatorios_lenguaje.Location = new System.Drawing.Point(609, 143);
+            this.txt_cantidad_aleatorios_lenguaje.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_aleatorios_lenguaje.Name = "txt_cantidad_aleatorios_lenguaje";
+            this.txt_cantidad_aleatorios_lenguaje.Size = new System.Drawing.Size(59, 20);
+            this.txt_cantidad_aleatorios_lenguaje.TabIndex = 41;
             // 
-            // btn_graficar_multiplicativo
+            // label16
             // 
-            this.btn_graficar_multiplicativo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_graficar_multiplicativo.Location = new System.Drawing.Point(604, 216);
-            this.btn_graficar_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_graficar_multiplicativo.Name = "btn_graficar_multiplicativo";
-            this.btn_graficar_multiplicativo.Size = new System.Drawing.Size(68, 36);
-            this.btn_graficar_multiplicativo.TabIndex = 32;
-            this.btn_graficar_multiplicativo.Text = "Graficar";
-            this.btn_graficar_multiplicativo.UseVisualStyleBackColor = true;
-            this.btn_graficar_multiplicativo.Click += new System.EventHandler(this.btn_graficar_multiplicativo_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(493, 146);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(112, 13);
+            this.label16.TabIndex = 40;
+            this.label16.Text = "Cantidad de aleatorios";
             // 
-            // groupBox1
+            // btn_generar_grafica_lenguaje
             // 
-            this.groupBox1.Controls.Add(this.txt_cantidad_intervalos_multiplicativo);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(604, 159);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(158, 52);
-            this.groupBox1.TabIndex = 31;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Histograma";
+            this.btn_generar_grafica_lenguaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_generar_grafica_lenguaje.Location = new System.Drawing.Point(510, 363);
+            this.btn_generar_grafica_lenguaje.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_generar_grafica_lenguaje.Name = "btn_generar_grafica_lenguaje";
+            this.btn_generar_grafica_lenguaje.Size = new System.Drawing.Size(68, 36);
+            this.btn_generar_grafica_lenguaje.TabIndex = 39;
+            this.btn_generar_grafica_lenguaje.Text = "Graficar";
+            this.btn_generar_grafica_lenguaje.UseVisualStyleBackColor = true;
+            this.btn_generar_grafica_lenguaje.Click += new System.EventHandler(this.btn_generar_grafica_lenguaje_Click);
             // 
-            // txt_cantidad_intervalos_multiplicativo
+            // groupBox2
             // 
-            this.txt_cantidad_intervalos_multiplicativo.Location = new System.Drawing.Point(77, 24);
-            this.txt_cantidad_intervalos_multiplicativo.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_cantidad_intervalos_multiplicativo.Name = "txt_cantidad_intervalos_multiplicativo";
-            this.txt_cantidad_intervalos_multiplicativo.Size = new System.Drawing.Size(59, 19);
-            this.txt_cantidad_intervalos_multiplicativo.TabIndex = 1;
+            this.groupBox2.Controls.Add(this.txt_cantidad_intervalos_lenguaje);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(510, 306);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(158, 52);
+            this.groupBox2.TabIndex = 38;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Histograma";
             // 
-            // label13
+            // txt_cantidad_intervalos_lenguaje
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(14, 26);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Intervalos";
+            this.txt_cantidad_intervalos_lenguaje.Location = new System.Drawing.Point(77, 24);
+            this.txt_cantidad_intervalos_lenguaje.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_cantidad_intervalos_lenguaje.Name = "txt_cantidad_intervalos_lenguaje";
+            this.txt_cantidad_intervalos_lenguaje.Size = new System.Drawing.Size(59, 19);
+            this.txt_cantidad_intervalos_lenguaje.TabIndex = 1;
+            // 
+            // btn_generar_aleatorios_lenguaje
+            // 
+            this.btn_generar_aleatorios_lenguaje.Location = new System.Drawing.Point(496, 181);
+            this.btn_generar_aleatorios_lenguaje.Name = "btn_generar_aleatorios_lenguaje";
+            this.btn_generar_aleatorios_lenguaje.Size = new System.Drawing.Size(212, 40);
+            this.btn_generar_aleatorios_lenguaje.TabIndex = 36;
+            this.btn_generar_aleatorios_lenguaje.Text = "Generar números aleatorios";
+            this.btn_generar_aleatorios_lenguaje.UseVisualStyleBackColor = true;
+            this.btn_generar_aleatorios_lenguaje.Click += new System.EventHandler(this.btn_generar_aleatorios_lenguaje_Click);
+            // 
+            // grilla_aleatorios_lenguaje
+            // 
+            this.grilla_aleatorios_lenguaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grilla_aleatorios_lenguaje.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn6});
+            this.grilla_aleatorios_lenguaje.Location = new System.Drawing.Point(16, 21);
+            this.grilla_aleatorios_lenguaje.Name = "grilla_aleatorios_lenguaje";
+            this.grilla_aleatorios_lenguaje.Size = new System.Drawing.Size(451, 473);
+            this.grilla_aleatorios_lenguaje.TabIndex = 35;
+            // 
+            // btn_reestablecer_lenguaje
+            // 
+            this.btn_reestablecer_lenguaje.Location = new System.Drawing.Point(496, 30);
+            this.btn_reestablecer_lenguaje.Name = "btn_reestablecer_lenguaje";
+            this.btn_reestablecer_lenguaje.Size = new System.Drawing.Size(212, 40);
+            this.btn_reestablecer_lenguaje.TabIndex = 42;
+            this.btn_reestablecer_lenguaje.Text = "Reestablecer";
+            this.btn_reestablecer_lenguaje.UseVisualStyleBackColor = true;
+            this.btn_reestablecer_lenguaje.Click += new System.EventHandler(this.btn_reestablecer_lenguaje_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(14, 26);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Intervalos";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.HeaderText = "n";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn6.HeaderText = "ri";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // TP_1
             // 
@@ -558,14 +740,19 @@
             this.tabControl1.ResumeLayout(false);
             this.d.ResumeLayout(false);
             this.d.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla_mixto)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_multiplicativo)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grilla_aleatorios_lenguaje)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -619,6 +806,22 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txt_cantidad_intervalos_multiplicativo;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txt_cantidad_aleatorios_mixto;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txt_cantidad_aleatorios_multiplicativo;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox txt_cantidad_aleatorios_lenguaje;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btn_generar_grafica_lenguaje;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txt_cantidad_intervalos_lenguaje;
+        private System.Windows.Forms.Button btn_generar_aleatorios_lenguaje;
+        private System.Windows.Forms.DataGridView grilla_aleatorios_lenguaje;
+        private System.Windows.Forms.Button btn_reestablecer_lenguaje;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }
 

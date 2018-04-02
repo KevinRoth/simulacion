@@ -58,9 +58,10 @@
     <Compile Include="Grafica1.Designer.cs">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\GeneradorLenguaje.cs" />
     <Compile Include="Modelos\GeneradorMixto.cs" />
     <Compile Include="Modelos\GeneradorMultiplicativo.cs" />
-    <Compile Include="Modelos\Generados.cs" />
+    <Compile Include="Modelos\Generado.cs" />
     <Compile Include="Modelos\Subintervalos.cs" />
     <Compile Include="TP_1.cs">
       <SubType>Form</SubType>

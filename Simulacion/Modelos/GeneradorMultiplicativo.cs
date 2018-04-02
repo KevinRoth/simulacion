@@ -11,11 +11,11 @@ namespace Simulacion.Modelos
     {
         public double A { set; get; }
         public double M { set; get; }
-        public Generados Generado { get; set; }
+        public Generado Generado { get; set; }
 
         public GeneradorMultiplicativo()
         {
-            Generado = new Generados();
+            Generado = new Generado();
         }
 
         public void CalcularA(double k)
@@ -28,7 +28,7 @@ namespace Simulacion.Modelos
             M = Math.Pow(2, g);
         }
 
-        public Generados generarAleatorio()
+        public Generado generarAleatorio()
         {
             Generado.ProximaSemilla = (((A * Generado.Semilla)) % M);   // = [(a.xi + c) mod m]
 
