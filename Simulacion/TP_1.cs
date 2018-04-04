@@ -280,6 +280,7 @@ namespace Simulacion
 
                 for (int i = 0; i < contador; i++)
                 {
+                    aleatorioMultiplicativo.generarAleatorio();
 
                     listaAleatoriosMultiplicativos.Add(new Generado()
                     {

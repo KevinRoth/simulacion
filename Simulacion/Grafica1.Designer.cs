@@ -38,13 +38,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblFrecuenciaEsperada = new System.Windows.Forms.Label();
-            this.histogramaGenerado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.intervalo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.frecuencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.frecuenciaEsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.calculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblFrecuenciaEsperada = new System.Windows.Forms.Label();
+            this.histogramaGenerado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -58,7 +58,7 @@
             this.groupBox3.Controls.Add(this.txt_chicierto);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(728, 520);
+            this.groupBox3.Location = new System.Drawing.Point(919, 622);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -101,7 +101,7 @@
             // 
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(728, 431);
+            this.groupBox2.Location = new System.Drawing.Point(919, 533);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -128,18 +128,42 @@
             this.frecuencia,
             this.frecuenciaEsp,
             this.calculo});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 352);
+            this.dataGridView1.Location = new System.Drawing.Point(203, 454);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(700, 275);
             this.dataGridView1.TabIndex = 37;
             // 
+            // intervalo
+            // 
+            this.intervalo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intervalo.HeaderText = "Intervalo";
+            this.intervalo.Name = "intervalo";
+            // 
+            // frecuencia
+            // 
+            this.frecuencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.frecuencia.HeaderText = "Frecuencia Observada";
+            this.frecuencia.Name = "frecuencia";
+            // 
+            // frecuenciaEsp
+            // 
+            this.frecuenciaEsp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.frecuenciaEsp.HeaderText = "Frecuencia Esperada";
+            this.frecuenciaEsp.Name = "frecuenciaEsp";
+            // 
+            // calculo
+            // 
+            this.calculo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.calculo.HeaderText = "Calculo";
+            this.calculo.Name = "calculo";
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblFrecuenciaEsperada);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(728, 362);
+            this.groupBox1.Location = new System.Drawing.Point(919, 464);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -178,7 +202,7 @@
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.histogramaGenerado.Legends.Add(legend1);
-            this.histogramaGenerado.Location = new System.Drawing.Point(12, 12);
+            this.histogramaGenerado.Location = new System.Drawing.Point(12, 24);
             this.histogramaGenerado.Name = "histogramaGenerado";
             this.histogramaGenerado.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
@@ -188,39 +212,15 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.histogramaGenerado.Series.Add(series1);
-            this.histogramaGenerado.Size = new System.Drawing.Size(1014, 335);
+            this.histogramaGenerado.Size = new System.Drawing.Size(1245, 425);
             this.histogramaGenerado.TabIndex = 35;
             this.histogramaGenerado.Text = "chart1";
-            // 
-            // intervalo
-            // 
-            this.intervalo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.intervalo.HeaderText = "Intervalo";
-            this.intervalo.Name = "intervalo";
-            // 
-            // frecuencia
-            // 
-            this.frecuencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.frecuencia.HeaderText = "Frecuencia Observada";
-            this.frecuencia.Name = "frecuencia";
-            // 
-            // frecuenciaEsp
-            // 
-            this.frecuenciaEsp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.frecuenciaEsp.HeaderText = "Frecuencia Esperada";
-            this.frecuenciaEsp.Name = "frecuenciaEsp";
-            // 
-            // calculo
-            // 
-            this.calculo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.calculo.HeaderText = "Calculo";
-            this.calculo.Name = "calculo";
             // 
             // Grafica1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 703);
+            this.ClientSize = new System.Drawing.Size(1278, 749);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dataGridView1);
@@ -228,6 +228,7 @@
             this.Controls.Add(this.histogramaGenerado);
             this.Name = "Grafica1";
             this.Text = "Grafica1";
+            this.Load += new System.EventHandler(this.Grafica1_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

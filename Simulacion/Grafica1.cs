@@ -131,6 +131,11 @@ namespace Simulacion
                 MessageBox.Show("Se rechaza la hipotesis nula");
             }
         }
+
+        private void Grafica1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
