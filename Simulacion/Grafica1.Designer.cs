@@ -228,7 +228,6 @@
             this.Controls.Add(this.histogramaGenerado);
             this.Name = "Grafica1";
             this.Text = "Grafica1";
-            this.Load += new System.EventHandler(this.Grafica1_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

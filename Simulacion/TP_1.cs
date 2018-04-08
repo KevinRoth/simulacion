@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Simulacion.Modelos;
 
@@ -8,19 +7,19 @@ namespace Simulacion
 {
     public partial class TP_1 : Form
     {
-        private GeneradorMixto aleatorioMixtos { get; set; }
-        private GeneradorMultiplicativo aleatorioMultiplicativo { get; set; }
-        private GeneradorLenguaje aleatorioLenguaje { get; set; }
-        private List<Generado> listaAleatoriosMultiplicativos { get; set; }
-        private List<Generado> listaAleatoriosMixtos{ get; set; }
-        private List<Generado> listaAleatoriosLenguaje { get; set; }
+        private GeneradorMixto AleatorioMixtos { get; set; }
+        private GeneradorMultiplicativo AleatorioMultiplicativo { get; set; }
+        private GeneradorLenguaje AleatorioLenguaje { get; set; }
+        private List<Generado> ListaAleatoriosMultiplicativos { get; set; }
+        private List<Generado> ListaAleatoriosMixtos{ get; set; }
+        private List<Generado> ListaAleatoriosLenguaje { get; set; }
 
         public TP_1()
         {
             InitializeComponent();
-            aleatorioMixtos= new GeneradorMixto();
-            aleatorioMultiplicativo = new GeneradorMultiplicativo();
-            aleatorioLenguaje = new GeneradorLenguaje();
+            AleatorioMixtos= new GeneradorMixto();
+            AleatorioMultiplicativo = new GeneradorMultiplicativo();
+            AleatorioLenguaje = new GeneradorLenguaje();
 
             btn_generar_aleatorio_mixto.Enabled = false;
             btn_generar_aleatorio_multiplicativo.Enabled = false;
@@ -29,19 +28,19 @@ namespace Simulacion
         /// <summary>
         /// Metodo que inicializa las dos listas y las dos grillas
         /// </summary>
-        public void inicializarGrilla()
+        public void InicializarGrilla()
         {
-            listaAleatoriosMixtos = new List<Generado>();
-            listaAleatoriosMultiplicativos = new List<Generado>();
-            listaAleatoriosLenguaje = new List<Generado>();
+            ListaAleatoriosMixtos = new List<Generado>();
+            ListaAleatoriosMultiplicativos = new List<Generado>();
+            ListaAleatoriosLenguaje = new List<Generado>();
 
-            grilla_multiplicativo.Rows.Clear();
+            grilla_multiplicativo.DataSource = null;
             grilla_mixto.DataSource = null;
-            grilla_aleatorios_lenguaje.Rows.Clear();
+            grilla_aleatorios_lenguaje.DataSource = null;
 
-            aleatorioMixtos = new GeneradorMixto();
-            aleatorioMultiplicativo = new GeneradorMultiplicativo();
-            aleatorioLenguaje = new GeneradorLenguaje();
+            AleatorioMixtos = new GeneradorMixto();
+            AleatorioMultiplicativo = new GeneradorMultiplicativo();
+            AleatorioLenguaje = new GeneradorLenguaje();
         }
 
         /// <summary>
@@ -51,14 +50,14 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorios_Click(object sender, EventArgs e)
         {
-            inicializarGrilla();
+            InicializarGrilla();
 
             try
             {
-                aleatorioMixtos.Semilla = double.Parse(txt_semilla.Text);
-                aleatorioMixtos.C = double.Parse(txt_c.Text);
-                aleatorioMixtos.A = double.Parse(txt_a.Text);
-                aleatorioMixtos.M = double.Parse(txt_m.Text);
+                AleatorioMixtos.Semilla = double.Parse(txt_semilla.Text);
+                AleatorioMixtos.C = double.Parse(txt_c.Text);
+                AleatorioMixtos.A = double.Parse(txt_a.Text);
+                AleatorioMixtos.M = double.Parse(txt_m.Text);
 
                 //Pregunto si el textbox de cantidad de aleatorios mixtos tiene una cantidad, si es asi establesco la cantidad
                 //sino por defecto establezco que es 20
@@ -67,23 +66,21 @@ namespace Simulacion
                     : 20;
 
 
-                for (int i = 0; i < contador; i++)
+                for (var i = 0; i < contador; i++)
                 {
-                    aleatorioMixtos.GenerarAleatorio(i);
+                    AleatorioMixtos.GenerarAleatorio(i);
 
-                    listaAleatoriosMixtos.Add(new Generado()
+                    ListaAleatoriosMixtos.Add(new Generado()
                     {
-                        NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
-                        Iteracion = aleatorioMixtos.Generado.Iteracion
+                        NumAleatorio = TruncateFunction(AleatorioMixtos.Generado.NumAleatorio, 4),
+                        Iteracion = AleatorioMixtos.Generado.Iteracion
                     });
 
                 }
 
                 //Bindeo la lista
-                grilla_mixto.DataSource = listaAleatoriosMixtos;
-
+                grilla_mixto.DataSource = ListaAleatoriosMixtos;
                 
-
                 btn_generar_aleatorio_mixto.Enabled = true;
             }
             catch (Exception)
@@ -118,9 +115,9 @@ namespace Simulacion
             try
             {
                 var k = double.Parse(this.txt_k.Text);
-                aleatorioMixtos.CalcularA(k);
+                AleatorioMixtos.CalcularA(k);
 
-                txt_a.Text = aleatorioMixtos.A.ToString();
+                txt_a.Text = AleatorioMixtos.A.ToString();
                 txt_a.Enabled = false;
 
             }
@@ -142,9 +139,9 @@ namespace Simulacion
             try
             {
                 var g = double.Parse(this.txt_g.Text);
-                aleatorioMixtos.CalcularM(g);
+                AleatorioMixtos.CalcularM(g);
 
-                txt_m.Text = aleatorioMixtos.M.ToString();
+                txt_m.Text = AleatorioMixtos.M.ToString();
                 txt_m.Enabled = false;
             }
             catch (Exception)
@@ -175,7 +172,7 @@ namespace Simulacion
 
             btn_generar_aleatorio_mixto.Enabled = false;
 
-            inicializarGrilla();
+            InicializarGrilla();
         }
 
         /// <summary>
@@ -188,9 +185,9 @@ namespace Simulacion
             try
             {
                 var k = double.Parse(this.txt_k_multiplicativo.Text);
-                aleatorioMultiplicativo.CalcularA(k);
+                AleatorioMultiplicativo.CalcularA(k);
 
-                txt_a_multiplicativo.Text = aleatorioMultiplicativo.A.ToString();
+                txt_a_multiplicativo.Text = AleatorioMultiplicativo.A.ToString();
                 txt_a_multiplicativo.Enabled = false;
 
             }
@@ -211,9 +208,9 @@ namespace Simulacion
             try
             {
                 var g = double.Parse(this.txt_g_multiplicativo.Text);
-                aleatorioMultiplicativo.CalcularM(g);
+                AleatorioMultiplicativo.CalcularM(g);
 
-                txt_m_multiplicativo.Text = aleatorioMultiplicativo.M.ToString();
+                txt_m_multiplicativo.Text = AleatorioMultiplicativo.M.ToString();
                 txt_m_multiplicativo.Enabled = false;
             }
             catch (Exception)
@@ -242,7 +239,7 @@ namespace Simulacion
 
             btn_generar_aleatorio_multiplicativo.Enabled = false;
 
-            inicializarGrilla();
+            InicializarGrilla();
         }
 
 
@@ -253,18 +250,13 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorios_multiplicativo_Click(object sender, EventArgs e)
         {
-            inicializarGrilla();
+            InicializarGrilla();
 
             try
             {
-                aleatorioMultiplicativo.Semilla = double.Parse(txt_semilla_multiplicativo.Text);
-                aleatorioMultiplicativo.A = double.Parse(txt_a_multiplicativo.Text);
-                aleatorioMultiplicativo.M = double.Parse(txt_m_multiplicativo.Text);
-
-                //Agrego a la grilla la semilla
-                grilla_multiplicativo.Rows.Add(0,
-                                           aleatorioMultiplicativo.Semilla,
-                                           0);
+                AleatorioMultiplicativo.Semilla = double.Parse(txt_semilla_multiplicativo.Text);
+                AleatorioMultiplicativo.A = double.Parse(txt_a_multiplicativo.Text);
+                AleatorioMultiplicativo.M = double.Parse(txt_m_multiplicativo.Text);
 
                 //Pregunto si el textbox de cantidad de aleatorios multiplicativos tiene una cantidad, si es asi establesco la cantidad
                 //sino por defecto establezco que es 20
@@ -272,22 +264,19 @@ namespace Simulacion
                     ? int.Parse(txt_cantidad_aleatorios_multiplicativo.Text)
                     : 20;
 
-                for (int i = 0; i < contador; i++)
+                for (var i = 0; i < contador; i++)
                 {
-                    aleatorioMultiplicativo.generarAleatorio();
+                    AleatorioMultiplicativo.GenerarAleatorio(i);
 
-                    listaAleatoriosMultiplicativos.Add(new Generado()
+                    ListaAleatoriosMultiplicativos.Add(new Generado()
                     {
-                        NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
-                        Iteracion = aleatorioMultiplicativo.Generado.Iteracion
+                        NumAleatorio = TruncateFunction(AleatorioMultiplicativo.Generado.NumAleatorio, 4),
+                        Iteracion = AleatorioMultiplicativo.Generado.Iteracion
                     });
-
-                    grilla_multiplicativo.Rows.Add(1,
-                        aleatorioMultiplicativo.Semilla,
-                        TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
                 }
 
-               
+                //bindeo la grilla con la lista
+                grilla_multiplicativo.DataSource = ListaAleatoriosMultiplicativos;
 
                 btn_generar_aleatorio_multiplicativo.Enabled = true;
 
@@ -308,20 +297,17 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorio_1_Click(object sender, EventArgs e)
         {
-            var aleatorio = aleatorioMixtos.GenerarAleatorio(1);
+            var aleatorio = AleatorioMixtos.GenerarAleatorio(ListaAleatoriosMixtos.Count);
 
-            listaAleatoriosMixtos.Add(new Generado()
+            ListaAleatoriosMixtos.Add(new Generado()
             {
-                NumAleatorio = aleatorio.NumAleatorio,
-                Iteracion = listaAleatoriosMixtos.Count -1
+                NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
+                Iteracion = aleatorio.Iteracion
             });
 
-
-            var ultimo = grilla_mixto.Rows.Count;
-
-            grilla_mixto.Rows.Add(ultimo - 1, 
-                                  aleatorioMixtos.Semilla,
-                TruncateFunction(aleatorioMixtos.Generado.NumAleatorio, 4));
+            //Limpio el bindeo y luego bindeo nuevamente la grilla con la lista
+            grilla_mixto.DataSource = null;
+            grilla_mixto.DataSource = ListaAleatoriosMixtos;
         }
 
         /// <summary>
@@ -331,17 +317,16 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorio_multiplicativo_Click(object sender, EventArgs e)
         {
-            listaAleatoriosMultiplicativos.Add(new Generado()
+            var aleatorio = AleatorioMultiplicativo.GenerarAleatorio(ListaAleatoriosMultiplicativos.Count);
+
+            ListaAleatoriosMultiplicativos.Add(new Generado()
             {
-                NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
-                Iteracion=  aleatorioMultiplicativo.Generado.Iteracion
+                NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
+                Iteracion= aleatorio.Iteracion
             });
-
-            var ultimo = grilla_multiplicativo.Rows.Count;
-
-            grilla_multiplicativo.Rows.Add(ultimo - 1,
-                aleatorioMultiplicativo.Semilla,
-                TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
+            
+            grilla_multiplicativo.DataSource = null;
+            grilla_multiplicativo.DataSource = ListaAleatoriosMultiplicativos;
         }
 
         /// <summary>
@@ -353,103 +338,7 @@ namespace Simulacion
         {
             try
             {
-              //  var lista = listaAleatoriosMixtos;
-
-                var lista = new List<Generado>();
-
-                lista.Add(new Generado(0.15));
-                lista.Add(new Generado(0.22));
-                lista.Add(new Generado(0.41));
-                lista.Add(new Generado(0.65));
-                lista.Add(new Generado(0.84));
-                lista.Add(new Generado(0.81));
-                lista.Add(new Generado(0.62));
-                lista.Add(new Generado(0.45));
-                lista.Add(new Generado(0.32));
-                lista.Add(new Generado(0.07));
-                lista.Add(new Generado(0.11));
-                lista.Add(new Generado(0.29));
-                lista.Add(new Generado(0.58));
-                lista.Add(new Generado(0.73));
-                lista.Add(new Generado(0.93));
-                lista.Add(new Generado(0.97));
-                lista.Add(new Generado(0.79));
-                lista.Add(new Generado(0.55));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.09));
-                lista.Add(new Generado(0.99));
-                lista.Add(new Generado(0.51));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.02));
-                lista.Add(new Generado(0.19));
-                lista.Add(new Generado(0.24));
-                lista.Add(new Generado(0.98));
-                lista.Add(new Generado(0.10));
-                lista.Add(new Generado(0.31));
-                lista.Add(new Generado(0.17));
-
-                lista.Add(new Generado(0.15));
-                lista.Add(new Generado(0.22));
-                lista.Add(new Generado(0.41));
-                lista.Add(new Generado(0.65));
-                lista.Add(new Generado(0.84));
-                lista.Add(new Generado(0.81));
-                lista.Add(new Generado(0.62));
-                lista.Add(new Generado(0.45));
-                lista.Add(new Generado(0.32));
-                lista.Add(new Generado(0.07));
-                lista.Add(new Generado(0.11));
-                lista.Add(new Generado(0.29));
-                lista.Add(new Generado(0.58));
-                lista.Add(new Generado(0.73));
-                lista.Add(new Generado(0.93));
-                lista.Add(new Generado(0.97));
-                lista.Add(new Generado(0.79));
-                lista.Add(new Generado(0.55));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.09));
-                lista.Add(new Generado(0.99));
-                lista.Add(new Generado(0.51));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.02));
-                lista.Add(new Generado(0.19));
-                lista.Add(new Generado(0.24));
-                lista.Add(new Generado(0.98));
-                lista.Add(new Generado(0.10));
-                lista.Add(new Generado(0.31));
-                lista.Add(new Generado(0.17));
-
-                lista.Add(new Generado(0.15));
-                lista.Add(new Generado(0.22));
-                lista.Add(new Generado(0.41));
-                lista.Add(new Generado(0.65));
-                lista.Add(new Generado(0.84));
-                lista.Add(new Generado(0.81));
-                lista.Add(new Generado(0.62));
-                lista.Add(new Generado(0.45));
-                lista.Add(new Generado(0.32));
-                lista.Add(new Generado(0.07));
-                lista.Add(new Generado(0.11));
-                lista.Add(new Generado(0.29));
-                lista.Add(new Generado(0.58));
-                lista.Add(new Generado(0.73));
-                lista.Add(new Generado(0.93));
-                lista.Add(new Generado(0.97));
-                lista.Add(new Generado(0.79));
-                lista.Add(new Generado(0.55));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.09));
-                lista.Add(new Generado(0.99));
-                lista.Add(new Generado(0.51));
-                lista.Add(new Generado(0.35));
-                lista.Add(new Generado(0.02));
-                lista.Add(new Generado(0.19));
-                lista.Add(new Generado(0.24));
-                lista.Add(new Generado(0.98));
-                lista.Add(new Generado(0.10));
-                lista.Add(new Generado(0.31));
-                lista.Add(new Generado(0.17));
-
+               var lista = ListaAleatoriosMixtos;
 
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_mixto.Text));
                 ventana.Show();
@@ -470,7 +359,7 @@ namespace Simulacion
         {
             try
             {
-                var lista = listaAleatoriosMultiplicativos;
+                var lista = ListaAleatoriosMultiplicativos;
 
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_multiplicativo.Text));
                 ventana.Show();
@@ -489,7 +378,7 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorios_lenguaje_Click(object sender, EventArgs e)
         {
-            inicializarGrilla();
+            InicializarGrilla();
 
             try
             {
@@ -500,18 +389,16 @@ namespace Simulacion
                 for (int i = 0; i < contador; i++)
                 {
 
-                    aleatorioLenguaje.generarAleatorio();
+                    AleatorioLenguaje.GenerarAleatorio(i + 1);
 
-                    listaAleatoriosLenguaje.Add(new Generado()
+                    ListaAleatoriosLenguaje.Add(new Generado()
                     {
-                        NumAleatorio = aleatorioLenguaje.Generado.NumAleatorio
+                        NumAleatorio = TruncateFunction(AleatorioLenguaje.Generado.NumAleatorio, 4),
+                        Iteracion = AleatorioLenguaje.Generado.Iteracion
                     });
-
-                   /* grilla_aleatorios_lenguaje.Rows.Add(i + 1,
-                        TruncateFunction(aleatorioLenguaje.Generado.NumAleatorio, 4));*/
                 }
 
-                grilla_aleatorios_lenguaje.DataSource = listaAleatoriosLenguaje;
+                grilla_aleatorios_lenguaje.DataSource = ListaAleatoriosLenguaje;
             }
             catch (Exception)
             {
@@ -529,7 +416,7 @@ namespace Simulacion
         {
             try
             {
-                var lista = listaAleatoriosLenguaje;
+                var lista = ListaAleatoriosLenguaje;
 
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_lenguaje.Text));
                 ventana.Show();
@@ -550,7 +437,7 @@ namespace Simulacion
             txt_cantidad_aleatorios_lenguaje.Text = "";
             txt_cantidad_intervalos_lenguaje.Text = "";
 
-            inicializarGrilla();
+            InicializarGrilla();
         }
     }
 }

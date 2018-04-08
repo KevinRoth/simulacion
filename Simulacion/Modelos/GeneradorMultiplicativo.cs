@@ -20,23 +20,38 @@ namespace Simulacion.Modelos
             Generado = new Generado();
         }
 
+        /// <summary>
+        /// Metodo que permite calcular a
+        /// </summary>
+        /// <param name="k"></param>
         public void CalcularA(double k)
         {
             A = 3 + 8 * k;
         }
 
+        /// <summary>
+        /// Metodo que permite calcular m
+        /// </summary>
+        /// <param name="g"></param>
         public void CalcularM(double g)
         {
             M = Math.Pow(2, g);
         }
 
-        public Generado generarAleatorio()
+        /// <summary>
+        /// Metodo que genera un aleatorio y la semilla para la iteracion siguiente
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public Generado GenerarAleatorio(int i)
         {
-            ProximaSemilla = (((A * Semilla)) % M);   // = [(a.xi + c) mod m]
+            ProximaSemilla = (((A * Semilla)) % M);   // = [(a.xi) mod m]
+
+            Semilla = ProximaSemilla;
 
             Generado.NumAleatorio = ProximaSemilla / M;
 
-            Semilla = ProximaSemilla;
+            Generado.Iteracion = i;
 
             return Generado;
         }

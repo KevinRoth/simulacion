@@ -63,9 +63,6 @@
             this.btn_reestablecer_multiplicativo = new System.Windows.Forms.Button();
             this.btn_generar_aleatorios_multiplicativo = new System.Windows.Forms.Button();
             this.grilla_multiplicativo = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_g_multiplicativo = new System.Windows.Forms.TextBox();
             this.txt_k_multiplicativo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -86,8 +83,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.btn_generar_aleatorios_lenguaje = new System.Windows.Forms.Button();
             this.grilla_aleatorios_lenguaje = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.d.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -468,33 +463,12 @@
             // 
             // grilla_multiplicativo
             // 
+            this.grilla_multiplicativo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grilla_multiplicativo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grilla_multiplicativo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
             this.grilla_multiplicativo.Location = new System.Drawing.Point(36, 139);
             this.grilla_multiplicativo.Name = "grilla_multiplicativo";
             this.grilla_multiplicativo.Size = new System.Drawing.Size(451, 352);
             this.grilla_multiplicativo.TabIndex = 27;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "n";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Xi";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.HeaderText = "ri";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // txt_g_multiplicativo
             // 
@@ -684,26 +658,12 @@
             // 
             // grilla_aleatorios_lenguaje
             // 
+            this.grilla_aleatorios_lenguaje.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grilla_aleatorios_lenguaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grilla_aleatorios_lenguaje.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn6});
             this.grilla_aleatorios_lenguaje.Location = new System.Drawing.Point(16, 21);
             this.grilla_aleatorios_lenguaje.Name = "grilla_aleatorios_lenguaje";
             this.grilla_aleatorios_lenguaje.Size = new System.Drawing.Size(451, 473);
             this.grilla_aleatorios_lenguaje.TabIndex = 35;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.HeaderText = "n";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn6.HeaderText = "ri";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // TP_1
             // 
@@ -756,9 +716,6 @@
         private System.Windows.Forms.Button btn_reestablecer_multiplicativo;
         private System.Windows.Forms.Button btn_generar_aleatorios_multiplicativo;
         private System.Windows.Forms.DataGridView grilla_multiplicativo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.TextBox txt_g_multiplicativo;
         private System.Windows.Forms.TextBox txt_k_multiplicativo;
         private System.Windows.Forms.Label label7;
@@ -793,8 +750,6 @@
         private System.Windows.Forms.DataGridView grilla_aleatorios_lenguaje;
         private System.Windows.Forms.Button btn_reestablecer_lenguaje;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }
 

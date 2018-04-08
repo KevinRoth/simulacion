@@ -1,64 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Simulacion.Modelos;
-using LinqStatistics;
-using LinqStatistics.NaN;
 
 namespace Simulacion
 {
     public partial class Grafica1 : Form
     {
-        List<Generado> lista;
+        private readonly List<Generado> lista;
         double chi;
-        int intervalos;
-        Subintervalos[] sub_intervalos; //vector de subintervalos
+        private readonly int cantidadIntervalos;
+        Intervalo[] intervalos; //vector de subintervalos
 
-        public Grafica1(List<Generado> lista, int intervalos)
+        public Grafica1(List<Generado> lista, int cantidadIntervalos)
         {
             InitializeComponent();
             this.lista = lista;
-            this.intervalos = intervalos;
-            cargarHistograma();
+            this.cantidadIntervalos = cantidadIntervalos;
+            CargarHistograma();
         }
 
         /// <summary>
         /// Metodo que permite cargar el histograma
         /// </summary>
-        private void cargarHistograma()
+        private void CargarHistograma()
         {
-            //creo los subintervalos del histograma
-            sub_intervalos = new Subintervalos[intervalos];
+            //creo los intervalos del histograma
+            intervalos = new Intervalo[cantidadIntervalos];
 
-            //A partir de la cantidad de intervalos, calculamos sus limites
-            for (int i = 0; i < intervalos; i++)
+            //A partir de la cantidad de cantidadIntervalos, calculamos sus limites
+            //Intervalo [a,b)
+            for (var i = 0; i < cantidadIntervalos; i++)
             {
                 if (i == 0)
-                    sub_intervalos[i] = new Subintervalos(0, ((double) 1 / intervalos) * (i + 1));
+                    intervalos[i] = new Intervalo(0, ((double) 1 / cantidadIntervalos) * (i + 1));
                 else
                 {
-                    sub_intervalos[i] = new Subintervalos(sub_intervalos[i - 1].LimiteSuperior,
-                        ((double) 1 / intervalos) * (i + 1));
+                    intervalos[i] = new Intervalo(intervalos[i - 1].LimiteSuperior,
+                        ((double) 1 / cantidadIntervalos) * (i + 1));
                 }
             }
 
             //ahora recorremos la lista para calcular las frecuencias.
-            for (int i = 0; i < lista.Count; i++)
+            foreach (var t1 in lista)
             {
-                for (int j = 0; j < sub_intervalos.Length; j++)
+                foreach (var t in intervalos)
                 {
-                    if (lista[i].NumAleatorio >= sub_intervalos[j].LimiteInferior &&
-                        lista[i].NumAleatorio < sub_intervalos[j].LimiteSuperior)
+                    if (t1.NumAleatorio >= t.LimiteInferior &&
+                        t1.NumAleatorio < t.LimiteSuperior)
                     {
-                        sub_intervalos[j].CantidadObservaciones++;
+                        t.CantidadObservaciones++;
                     }
-
                 }
             }
 
@@ -68,12 +62,12 @@ namespace Simulacion
             histogramaGenerado.Series.Add("Frecuecias Observadas");
 
             //cargamos el histograma con la cantidad de observaciones de cada intervalo
-            for (int i = 0; i < intervalos; i++)
+            for (int i = 0; i < cantidadIntervalos; i++)
             {
-                listaEnteros.Add(sub_intervalos[i].CantidadObservaciones);
-                histogramaGenerado.Series[0].Points.Add(sub_intervalos[i].CantidadObservaciones);
+                listaEnteros.Add(intervalos[i].CantidadObservaciones);
+                histogramaGenerado.Series[0].Points.Add(intervalos[i].CantidadObservaciones);
                 histogramaGenerado.Series[0].Points[i].AxisLabel =
-                    "[" + sub_intervalos[i].LimiteInferior + " - " + sub_intervalos[i].LimiteSuperior + "]";
+                    "[" + intervalos[i].LimiteInferior + " - " + intervalos[i].LimiteSuperior + "]";
                 histogramaGenerado.Series[0].IsValueShownAsLabel = true;
             }
 
@@ -82,37 +76,36 @@ namespace Simulacion
             histogramaGenerado.ChartAreas[0].AxisY.Maximum = listaEnteros.Max();
 
             //Obtenemos la frecuencia esperada de la serie
-            double freEsperada = (double) cantidadObservaciones / (double) intervalos;
+            double freEsperada = (double) cantidadObservaciones / (double) cantidadIntervalos;
             lblFrecuenciaEsperada.Text = freEsperada.ToString();
             histogramaGenerado.Series["Frecuecias Observadas"].Color = Color.DarkGray;
 
             //llamada al metodo para cargar la tabla de frecuencias
-            cargarTabla();
+            CargarTabla();
 
         }
 
-        private void cargarTabla()
+        /// <summary>
+        /// Metodo que permite cargar la tabla de frecuencias
+        /// </summary>
+        private void CargarTabla()
         {
-            List<double> list = new List<double>();
-            List<double> esp = new List<double>();
-
-
-            for (int i = 0; i < sub_intervalos.Length; i++)
+           foreach (var t in intervalos)
             {
-                string subint = sub_intervalos[i].LimiteInferior + " - " + sub_intervalos[i].LimiteSuperior;
-                double freEsp = lista.Count / intervalos;
-                var suma = Math.Pow((sub_intervalos[i].CantidadObservaciones - freEsp), 2) / freEsp;
+                string subint = t.LimiteInferior + " - " + t.LimiteSuperior;
+                double freEsp = lista.Count / cantidadIntervalos;
+                var suma = Math.Pow((t.CantidadObservaciones - freEsp), 2) / freEsp;
 
                 dataGridView1.Rows.Add(subint, 
-                                       sub_intervalos[i].CantidadObservaciones, 
-                                       freEsp, 
-                                       suma );
+                    t.CantidadObservaciones, 
+                    freEsp, 
+                    suma);
 
-                chi += Math.Pow(sub_intervalos[i].CantidadObservaciones - freEsp, 2) / freEsp;
-
+                //Vamos acumulando chi observado
+                chi += suma;
             }
 
-            label1.Text = Convert.ToString(chi);
+            label1.Text = chi.ToString();
         }
 
         /// <summary>
@@ -130,11 +123,6 @@ namespace Simulacion
             {
                 MessageBox.Show("Se rechaza la hipotesis nula");
             }
-        }
-
-        private void Grafica1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Simulacion.Modelos
+﻿namespace Simulacion.Modelos
 {
-    public class Subintervalos
+    public class Intervalo
     {
-        public Subintervalos(double limiteInferior, double limiteSuperior)
+        public Intervalo(double limiteInferior, double limiteSuperior)
         {
             this.LimiteInferior = limiteInferior;
             this.LimiteSuperior = limiteSuperior;

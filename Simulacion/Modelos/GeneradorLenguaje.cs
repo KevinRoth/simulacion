@@ -17,8 +17,9 @@ namespace Simulacion.Modelos
             Random = new Random();
         }
 
-        public Generado generarAleatorio()
+        public Generado GenerarAleatorio(int i)
         {
+            Generado.Iteracion = i;
             Generado.NumAleatorio = Random.NextDouble();
 
             return Generado;
