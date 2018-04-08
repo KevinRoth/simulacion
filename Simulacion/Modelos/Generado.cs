@@ -8,8 +8,7 @@ namespace Simulacion.Modelos
 {
     public class Generado
     {
-        public double Semilla { set; get; }
-        public double ProximaSemilla { set; get; }
+        public int Iteracion { get; set; }
         public double NumAleatorio { set; get; }
 
         public Generado(double a)

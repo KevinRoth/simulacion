@@ -36,7 +36,7 @@ namespace Simulacion
             listaAleatoriosLenguaje = new List<Generado>();
 
             grilla_multiplicativo.Rows.Clear();
-            grilla_mixto.Rows.Clear();
+            grilla_mixto.DataSource = null;
             grilla_aleatorios_lenguaje.Rows.Clear();
 
             aleatorioMixtos = new GeneradorMixto();
@@ -55,17 +55,10 @@ namespace Simulacion
 
             try
             {
-                aleatorioMixtos.Generado.Semilla = double.Parse(txt_semilla.Text);
+                aleatorioMixtos.Semilla = double.Parse(txt_semilla.Text);
                 aleatorioMixtos.C = double.Parse(txt_c.Text);
                 aleatorioMixtos.A = double.Parse(txt_a.Text);
                 aleatorioMixtos.M = double.Parse(txt_m.Text);
-
-
-                //Agrego a la grilla la semilla
-                grilla_mixto.Rows.Add(0,
-                                     aleatorioMixtos.Generado.Semilla,
-                                     0);
-
 
                 //Pregunto si el textbox de cantidad de aleatorios mixtos tiene una cantidad, si es asi establesco la cantidad
                 //sino por defecto establezco que es 20
@@ -73,22 +66,23 @@ namespace Simulacion
                     ? int.Parse(txt_cantidad_aleatorios_mixto.Text)
                     : 20;
 
+
                 for (int i = 0; i < contador; i++)
                 {
-                    aleatorioMixtos.generarAleatorio();
-
+                    aleatorioMixtos.GenerarAleatorio(i);
 
                     listaAleatoriosMixtos.Add(new Generado()
                     {
                         NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
-                        Semilla = aleatorioMixtos.Generado.Semilla,
-                        ProximaSemilla = aleatorioMixtos.Generado.ProximaSemilla
+                        Iteracion = aleatorioMixtos.Generado.Iteracion
                     });
 
-                    grilla_mixto.Rows.Add(i + 1,
-                                         aleatorioMixtos.Generado.Semilla,
-                                         TruncateFunction(aleatorioMixtos.Generado.NumAleatorio,4));
                 }
+
+                //Bindeo la lista
+                grilla_mixto.DataSource = listaAleatoriosMixtos;
+
+                
 
                 btn_generar_aleatorio_mixto.Enabled = true;
             }
@@ -263,13 +257,13 @@ namespace Simulacion
 
             try
             {
-                aleatorioMultiplicativo.Generado.Semilla = double.Parse(txt_semilla_multiplicativo.Text);
+                aleatorioMultiplicativo.Semilla = double.Parse(txt_semilla_multiplicativo.Text);
                 aleatorioMultiplicativo.A = double.Parse(txt_a_multiplicativo.Text);
                 aleatorioMultiplicativo.M = double.Parse(txt_m_multiplicativo.Text);
 
                 //Agrego a la grilla la semilla
                 grilla_multiplicativo.Rows.Add(0,
-                                           aleatorioMultiplicativo.Generado.Semilla,
+                                           aleatorioMultiplicativo.Semilla,
                                            0);
 
                 //Pregunto si el textbox de cantidad de aleatorios multiplicativos tiene una cantidad, si es asi establesco la cantidad
@@ -285,14 +279,15 @@ namespace Simulacion
                     listaAleatoriosMultiplicativos.Add(new Generado()
                     {
                         NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
-                        Semilla = aleatorioMultiplicativo.Generado.Semilla,
-                        ProximaSemilla = aleatorioMultiplicativo.Generado.ProximaSemilla
+                        Iteracion = aleatorioMultiplicativo.Generado.Iteracion
                     });
 
-                    grilla_multiplicativo.Rows.Add(i + 1,
-                                         aleatorioMultiplicativo.Generado.Semilla,
-                                         TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
+                    grilla_multiplicativo.Rows.Add(1,
+                        aleatorioMultiplicativo.Semilla,
+                        TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
                 }
+
+               
 
                 btn_generar_aleatorio_multiplicativo.Enabled = true;
 
@@ -313,20 +308,19 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_generar_aleatorio_1_Click(object sender, EventArgs e)
         {
-            aleatorioMixtos.generarAleatorio();
+            var aleatorio = aleatorioMixtos.GenerarAleatorio(1);
 
             listaAleatoriosMixtos.Add(new Generado()
             {
-                NumAleatorio = aleatorioMixtos.Generado.NumAleatorio,
-                Semilla = aleatorioMixtos.Generado.Semilla,
-                ProximaSemilla = aleatorioMixtos.Generado.ProximaSemilla
+                NumAleatorio = aleatorio.NumAleatorio,
+                Iteracion = listaAleatoriosMixtos.Count -1
             });
 
 
             var ultimo = grilla_mixto.Rows.Count;
 
             grilla_mixto.Rows.Add(ultimo - 1, 
-                                  aleatorioMixtos.Generado.Semilla,
+                                  aleatorioMixtos.Semilla,
                 TruncateFunction(aleatorioMixtos.Generado.NumAleatorio, 4));
         }
 
@@ -340,14 +334,13 @@ namespace Simulacion
             listaAleatoriosMultiplicativos.Add(new Generado()
             {
                 NumAleatorio = aleatorioMultiplicativo.Generado.NumAleatorio,
-                Semilla = aleatorioMultiplicativo.Generado.Semilla,
-                ProximaSemilla = aleatorioMultiplicativo.Generado.ProximaSemilla
+                Iteracion=  aleatorioMultiplicativo.Generado.Iteracion
             });
 
             var ultimo = grilla_multiplicativo.Rows.Count;
 
             grilla_multiplicativo.Rows.Add(ultimo - 1,
-                aleatorioMultiplicativo.Generado.Semilla,
+                aleatorioMultiplicativo.Semilla,
                 TruncateFunction(aleatorioMultiplicativo.Generado.NumAleatorio, 4));
         }
 
@@ -452,9 +445,11 @@ namespace Simulacion
                         NumAleatorio = aleatorioLenguaje.Generado.NumAleatorio
                     });
 
-                    grilla_aleatorios_lenguaje.Rows.Add(i + 1,
-                        TruncateFunction(aleatorioLenguaje.Generado.NumAleatorio, 4));
+                   /* grilla_aleatorios_lenguaje.Rows.Add(i + 1,
+                        TruncateFunction(aleatorioLenguaje.Generado.NumAleatorio, 4));*/
                 }
+
+                grilla_aleatorios_lenguaje.DataSource = listaAleatoriosLenguaje;
             }
             catch (Exception)
             {

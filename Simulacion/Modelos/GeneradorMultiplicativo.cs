@@ -12,6 +12,8 @@ namespace Simulacion.Modelos
         public double A { set; get; }
         public double M { set; get; }
         public Generado Generado { get; set; }
+        public double Semilla { get; set; }
+        public double ProximaSemilla { get; set; }
 
         public GeneradorMultiplicativo()
         {
@@ -30,11 +32,11 @@ namespace Simulacion.Modelos
 
         public Generado generarAleatorio()
         {
-            Generado.ProximaSemilla = (((A * Generado.Semilla)) % M);   // = [(a.xi + c) mod m]
+            ProximaSemilla = (((A * Semilla)) % M);   // = [(a.xi + c) mod m]
 
-            Generado.NumAleatorio = Generado.ProximaSemilla / M;
+            Generado.NumAleatorio = ProximaSemilla / M;
 
-            Generado.Semilla = Generado.ProximaSemilla;
+            Semilla = ProximaSemilla;
 
             return Generado;
         }

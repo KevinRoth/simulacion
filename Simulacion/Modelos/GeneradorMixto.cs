@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Simulacion.Modelos
 {
@@ -12,6 +13,8 @@ namespace Simulacion.Modelos
         public double C { set; get; }
         public double M { set; get; }
         public Generado Generado { get; set; }
+        public double ProximaSemilla { get; set; }
+        public double Semilla { get; set; }
 
         public GeneradorMixto()
         {
@@ -28,15 +31,35 @@ namespace Simulacion.Modelos
             M = Math.Pow(2, g);
         }
 
-        public Generado generarAleatorio()
+        public Generado GenerarAleatorio(int i)
         {
-            Generado.ProximaSemilla = (((A * Generado.Semilla) + C) % M);   // = [(a.xi + c) mod m]
+            ProximaSemilla = (((A * Semilla) + C) % M);   // = [(a.xi + c) mod m]
 
-            Generado.NumAleatorio = Generado.ProximaSemilla / M;
+            Semilla = ProximaSemilla;
 
-            Generado.Semilla = Generado.ProximaSemilla;
+            Generado.NumAleatorio = ProximaSemilla / M;
+
+            Generado.Iteracion = i;
 
             return Generado;
         }
+
+        public List<Generado> GenerarAleatorios(int cantidad)
+        {
+         var lista = new List<Generado>();
+
+            for (int i = 0; i < cantidad; i++)
+            {
+                var generado = GenerarAleatorio(i);
+
+                lista.Add(generado);
+
+                generado = null;
+            }
+
+            return lista;
+        }
+
+
     }
 }
