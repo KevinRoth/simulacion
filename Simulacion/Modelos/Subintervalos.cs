@@ -8,7 +8,7 @@ namespace Simulacion.Modelos
 {
     public class Subintervalos
     {
-        public Subintervalos(float limiteInferior, float limiteSuperior)
+        public Subintervalos(double limiteInferior, double limiteSuperior)
         {
             this.LimiteInferior = limiteInferior;
             this.LimiteSuperior = limiteSuperior;
@@ -16,9 +16,9 @@ namespace Simulacion.Modelos
 
         public int CantidadObservaciones { get; set; }
 
-        public float LimiteSuperior { get; set; }
+        public double LimiteSuperior { get; set; }
 
-        public float LimiteInferior { get; set; }
+        public double LimiteInferior { get; set; }
     }
 }
 

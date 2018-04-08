@@ -40,11 +40,11 @@ namespace Simulacion
             for (int i = 0; i < intervalos; i++)
             {
                 if (i == 0)
-                    sub_intervalos[i] = new Subintervalos(0, ((float) 1 / intervalos) * (i + 1));
+                    sub_intervalos[i] = new Subintervalos(0, ((double) 1 / intervalos) * (i + 1));
                 else
                 {
                     sub_intervalos[i] = new Subintervalos(sub_intervalos[i - 1].LimiteSuperior,
-                        ((float) 1 / intervalos) * (i + 1));
+                        ((double) 1 / intervalos) * (i + 1));
                 }
             }
 
@@ -54,7 +54,7 @@ namespace Simulacion
                 for (int j = 0; j < sub_intervalos.Length; j++)
                 {
                     if (lista[i].NumAleatorio >= sub_intervalos[j].LimiteInferior &&
-                        lista[i].NumAleatorio <= sub_intervalos[j].LimiteSuperior)
+                        lista[i].NumAleatorio < sub_intervalos[j].LimiteSuperior)
                     {
                         sub_intervalos[j].CantidadObservaciones++;
                     }

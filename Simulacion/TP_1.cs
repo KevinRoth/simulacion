@@ -353,9 +353,9 @@ namespace Simulacion
         {
             try
             {
-                var lista = listaAleatoriosMixtos;
+              //  var lista = listaAleatoriosMixtos;
 
-              /*  var lista = new List<Generado>();
+                var lista = new List<Generado>();
 
                 lista.Add(new Generado(0.15));
                 lista.Add(new Generado(0.22));
@@ -387,7 +387,69 @@ namespace Simulacion
                 lista.Add(new Generado(0.10));
                 lista.Add(new Generado(0.31));
                 lista.Add(new Generado(0.17));
-                */
+
+                lista.Add(new Generado(0.15));
+                lista.Add(new Generado(0.22));
+                lista.Add(new Generado(0.41));
+                lista.Add(new Generado(0.65));
+                lista.Add(new Generado(0.84));
+                lista.Add(new Generado(0.81));
+                lista.Add(new Generado(0.62));
+                lista.Add(new Generado(0.45));
+                lista.Add(new Generado(0.32));
+                lista.Add(new Generado(0.07));
+                lista.Add(new Generado(0.11));
+                lista.Add(new Generado(0.29));
+                lista.Add(new Generado(0.58));
+                lista.Add(new Generado(0.73));
+                lista.Add(new Generado(0.93));
+                lista.Add(new Generado(0.97));
+                lista.Add(new Generado(0.79));
+                lista.Add(new Generado(0.55));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.09));
+                lista.Add(new Generado(0.99));
+                lista.Add(new Generado(0.51));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.02));
+                lista.Add(new Generado(0.19));
+                lista.Add(new Generado(0.24));
+                lista.Add(new Generado(0.98));
+                lista.Add(new Generado(0.10));
+                lista.Add(new Generado(0.31));
+                lista.Add(new Generado(0.17));
+
+                lista.Add(new Generado(0.15));
+                lista.Add(new Generado(0.22));
+                lista.Add(new Generado(0.41));
+                lista.Add(new Generado(0.65));
+                lista.Add(new Generado(0.84));
+                lista.Add(new Generado(0.81));
+                lista.Add(new Generado(0.62));
+                lista.Add(new Generado(0.45));
+                lista.Add(new Generado(0.32));
+                lista.Add(new Generado(0.07));
+                lista.Add(new Generado(0.11));
+                lista.Add(new Generado(0.29));
+                lista.Add(new Generado(0.58));
+                lista.Add(new Generado(0.73));
+                lista.Add(new Generado(0.93));
+                lista.Add(new Generado(0.97));
+                lista.Add(new Generado(0.79));
+                lista.Add(new Generado(0.55));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.09));
+                lista.Add(new Generado(0.99));
+                lista.Add(new Generado(0.51));
+                lista.Add(new Generado(0.35));
+                lista.Add(new Generado(0.02));
+                lista.Add(new Generado(0.19));
+                lista.Add(new Generado(0.24));
+                lista.Add(new Generado(0.98));
+                lista.Add(new Generado(0.10));
+                lista.Add(new Generado(0.31));
+                lista.Add(new Generado(0.17));
+
 
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_mixto.Text));
                 ventana.Show();
