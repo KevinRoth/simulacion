@@ -58,7 +58,7 @@
             this.groupBox3.Controls.Add(this.txt_chicierto);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(919, 622);
+            this.groupBox3.Location = new System.Drawing.Point(1019, 647);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -101,7 +101,7 @@
             // 
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(919, 533);
+            this.groupBox2.Location = new System.Drawing.Point(1019, 561);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -128,11 +128,11 @@
             this.frecuencia,
             this.frecuenciaEsp,
             this.calculo});
-            this.dataGridView1.Location = new System.Drawing.Point(203, 454);
+            this.dataGridView1.Location = new System.Drawing.Point(-5, 473);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(700, 275);
+            this.dataGridView1.Size = new System.Drawing.Size(1007, 275);
             this.dataGridView1.TabIndex = 37;
             // 
             // intervalo
@@ -163,7 +163,7 @@
             // 
             this.groupBox1.Controls.Add(this.lblFrecuenciaEsperada);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(919, 464);
+            this.groupBox1.Location = new System.Drawing.Point(1019, 473);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -183,6 +183,8 @@
             // 
             // histogramaGenerado
             // 
+            this.histogramaGenerado.BorderlineColor = System.Drawing.Color.Black;
+            this.histogramaGenerado.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             chartArea1.AxisX.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
             chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
@@ -197,22 +199,27 @@
             chartArea1.AxisY.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
             chartArea1.AxisY.Title = "Frecuencia";
             chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea1.CursorX.AxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            chartArea1.CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
             chartArea1.Name = "ChartArea1";
             this.histogramaGenerado.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.histogramaGenerado.Legends.Add(legend1);
-            this.histogramaGenerado.Location = new System.Drawing.Point(12, 24);
+            this.histogramaGenerado.Location = new System.Drawing.Point(-5, 9);
+            this.histogramaGenerado.Margin = new System.Windows.Forms.Padding(0);
             this.histogramaGenerado.Name = "histogramaGenerado";
             this.histogramaGenerado.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
             series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series1.IsValueShownAsLabel = true;
             series1.IsXValueIndexed = true;
+            series1.LabelAngle = -90;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             this.histogramaGenerado.Series.Add(series1);
-            this.histogramaGenerado.Size = new System.Drawing.Size(1245, 425);
+            this.histogramaGenerado.Size = new System.Drawing.Size(1284, 462);
             this.histogramaGenerado.TabIndex = 35;
             this.histogramaGenerado.Text = "chart1";
             // 

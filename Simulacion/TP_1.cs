@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Simulacion.Modelos;
 
@@ -421,8 +422,10 @@ namespace Simulacion
                 Grafica1 ventana = new Grafica1(lista, int.Parse(txt_cantidad_intervalos_lenguaje.Text));
                 ventana.Show();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Write(exception.ToString());
+
                 MessageBox.Show("Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
             }
         }

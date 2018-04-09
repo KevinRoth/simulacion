@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Simulacion.Modelos;
 
 namespace Simulacion
@@ -58,17 +61,34 @@ namespace Simulacion
 
             //limpiamos el chart y preparamos el nuevo histograma
             List<int> listaEnteros = new List<int>(); //lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
+            
+
+            //creo la serie y la seteo
             histogramaGenerado.Series.Clear();
             histogramaGenerado.Series.Add("Frecuecias Observadas");
+            histogramaGenerado.Series["Frecuecias Observadas"].ChartType = SeriesChartType.Column;
+            histogramaGenerado.Series["Frecuecias Observadas"].Color = Color.DarkGray;
 
             //cargamos el histograma con la cantidad de observaciones de cada intervalo
             for (int i = 0; i < cantidadIntervalos; i++)
             {
                 listaEnteros.Add(intervalos[i].CantidadObservaciones);
+
+                //Agrego el punto a la serie
                 histogramaGenerado.Series[0].Points.Add(intervalos[i].CantidadObservaciones);
+
+                //Agrego los labels de de los intervalos
                 histogramaGenerado.Series[0].Points[i].AxisLabel =
-                    "[" + intervalos[i].LimiteInferior + " - " + intervalos[i].LimiteSuperior + "]";
+                    "[" + TruncateFunction(intervalos[i].LimiteInferior,4)
+                        + " - " + 
+                          TruncateFunction(intervalos[i].LimiteSuperior,4) + "]";
+                //Pongo vertical los label 
+                histogramaGenerado.ChartAreas[0].AxisX.LabelStyle.Angle = 90;   
+
                 histogramaGenerado.Series[0].IsValueShownAsLabel = true;
+                histogramaGenerado.Series[0].LegendText = intervalos[i].CantidadObservaciones.ToString();
+                histogramaGenerado.Series[0].LabelAngle = 90;
+                histogramaGenerado.Series[0].Points[i].LabelAngle = 90;
             }
 
             //Obtenemos la cantidad total de observaciones
@@ -78,7 +98,7 @@ namespace Simulacion
             //Obtenemos la frecuencia esperada de la serie
             double freEsperada = (double) cantidadObservaciones / (double) cantidadIntervalos;
             lblFrecuenciaEsperada.Text = freEsperada.ToString();
-            histogramaGenerado.Series["Frecuecias Observadas"].Color = Color.DarkGray;
+            
 
             //llamada al metodo para cargar la tabla de frecuencias
             CargarTabla();
@@ -106,6 +126,19 @@ namespace Simulacion
             }
 
             label1.Text = chi.ToString();
+        }
+
+        /// <summary>
+        /// Retorna el numero con la cantidad de digitos despues de la coma indicados por parametro
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public double TruncateFunction(double number, int digits)
+        {
+            double stepper = (double)(Math.Pow(10.0, (double)digits));
+            int temp = (int)(stepper * number);
+            return (double)temp / stepper;
         }
 
         /// <summary>
