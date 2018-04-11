@@ -60,8 +60,10 @@ namespace Simulacion
             }
 
             //limpiamos el chart y preparamos el nuevo histograma
-            List<int> listaEnteros = new List<int>(); //lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
-            
+            List<int>
+                listaEnteros =
+                    new List<int>(); //lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
+
 
             //creo la serie y la seteo
             histogramaGenerado.Series.Clear();
@@ -79,11 +81,11 @@ namespace Simulacion
 
                 //Agrego los labels de de los intervalos
                 histogramaGenerado.Series[0].Points[i].AxisLabel =
-                    "[" + TruncateFunction(intervalos[i].LimiteInferior,4)
-                        + " - " + 
-                          TruncateFunction(intervalos[i].LimiteSuperior,4) + "]";
+                    "[" + TruncateFunction(intervalos[i].LimiteInferior, 4)
+                        + " - " +
+                        TruncateFunction(intervalos[i].LimiteSuperior, 4) + "]";
                 //Pongo vertical los label 
-                histogramaGenerado.ChartAreas[0].AxisX.LabelStyle.Angle = 90;   
+                histogramaGenerado.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
 
                 histogramaGenerado.Series[0].IsValueShownAsLabel = true;
                 histogramaGenerado.Series[0].LegendText = intervalos[i].CantidadObservaciones.ToString();
@@ -98,11 +100,10 @@ namespace Simulacion
             //Obtenemos la frecuencia esperada de la serie
             double freEsperada = (double) cantidadObservaciones / (double) cantidadIntervalos;
             lblFrecuenciaEsperada.Text = freEsperada.ToString();
-            
+
 
             //llamada al metodo para cargar la tabla de frecuencias
             CargarTabla();
-
         }
 
         /// <summary>
@@ -110,15 +111,15 @@ namespace Simulacion
         /// </summary>
         private void CargarTabla()
         {
-           foreach (var t in intervalos)
+            foreach (var t in intervalos)
             {
-                string subint = t.LimiteInferior + " - " + t.LimiteSuperior;
+                string subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
                 double freEsp = lista.Count / cantidadIntervalos;
                 var suma = Math.Pow((t.CantidadObservaciones - freEsp), 2) / freEsp;
 
-                dataGridView1.Rows.Add(subint, 
-                    t.CantidadObservaciones, 
-                    freEsp, 
+                dataGridView1.Rows.Add(subint,
+                    t.CantidadObservaciones,
+                    freEsp,
                     suma);
 
                 //Vamos acumulando chi observado
@@ -136,9 +137,9 @@ namespace Simulacion
         /// <returns></returns>
         public double TruncateFunction(double number, int digits)
         {
-            double stepper = (double)(Math.Pow(10.0, (double)digits));
-            int temp = (int)(stepper * number);
-            return (double)temp / stepper;
+            double stepper = (double) (Math.Pow(10.0, (double) digits));
+            int temp = (int) (stepper * number);
+            return (double) temp / stepper;
         }
 
         /// <summary>
@@ -148,7 +149,7 @@ namespace Simulacion
         /// <param name="e"></param>
         private void btn_compro_Click_1(object sender, EventArgs e)
         {
-            if (chi < double.Parse(txt_chicierto.Text))
+            if (chi <= double.Parse(txt_chicierto.Text))
             {
                 MessageBox.Show("Se acepta la hipotesis nula");
             }
@@ -159,4 +160,3 @@ namespace Simulacion
         }
     }
 }
-
