@@ -56,7 +56,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_normal_cantidad_intervalos = new System.Windows.Forms.TextBox();
-            this.btn_exponencial_generar_grafica = new System.Windows.Forms.Button();
+            this.btn_normal_generar_grafica = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.grilla_normal = new System.Windows.Forms.DataGridView();
             this.btn_normal_reestablecer = new System.Windows.Forms.Button();
@@ -137,6 +137,7 @@
             this.btn_uniforme_grafica.TabIndex = 10;
             this.btn_uniforme_grafica.Text = "Generar grafica";
             this.btn_uniforme_grafica.UseVisualStyleBackColor = true;
+            this.btn_uniforme_grafica.Click += new System.EventHandler(this.btn_uniforme_grafica_Click);
             // 
             // label13
             // 
@@ -163,6 +164,7 @@
             this.btn_uniforme_reestablecer.TabIndex = 7;
             this.btn_uniforme_reestablecer.Text = "Reestablecer";
             this.btn_uniforme_reestablecer.UseVisualStyleBackColor = true;
+            this.btn_uniforme_reestablecer.Click += new System.EventHandler(this.btn_uniforme_reestablecer_Click);
             // 
             // btn_uniforme_generar
             // 
@@ -257,6 +259,7 @@
             this.btn_exponencial_generar_grafico.TabIndex = 17;
             this.btn_exponencial_generar_grafico.Text = "Generar grafica";
             this.btn_exponencial_generar_grafico.UseVisualStyleBackColor = true;
+            this.btn_exponencial_generar_grafico.Click += new System.EventHandler(this.btn_exponencial_generar_grafico_Click);
             // 
             // label14
             // 
@@ -283,6 +286,7 @@
             this.btn_exponencial_reestablecer.TabIndex = 14;
             this.btn_exponencial_reestablecer.Text = "Reestablecer";
             this.btn_exponencial_reestablecer.UseVisualStyleBackColor = true;
+            this.btn_exponencial_reestablecer.Click += new System.EventHandler(this.btn_exponencial_reestablecer_Click);
             // 
             // btn_exponencial_generar_aleatorio
             // 
@@ -330,7 +334,7 @@
             // 
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.txt_normal_cantidad_intervalos);
-            this.tabPage3.Controls.Add(this.btn_exponencial_generar_grafica);
+            this.tabPage3.Controls.Add(this.btn_normal_generar_grafica);
             this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.grilla_normal);
             this.tabPage3.Controls.Add(this.btn_normal_reestablecer);
@@ -364,14 +368,15 @@
             this.txt_normal_cantidad_intervalos.Size = new System.Drawing.Size(100, 20);
             this.txt_normal_cantidad_intervalos.TabIndex = 17;
             // 
-            // btn_exponencial_generar_grafica
+            // btn_normal_generar_grafica
             // 
-            this.btn_exponencial_generar_grafica.Location = new System.Drawing.Point(388, 270);
-            this.btn_exponencial_generar_grafica.Name = "btn_exponencial_generar_grafica";
-            this.btn_exponencial_generar_grafica.Size = new System.Drawing.Size(131, 33);
-            this.btn_exponencial_generar_grafica.TabIndex = 16;
-            this.btn_exponencial_generar_grafica.Text = "Generar grafica";
-            this.btn_exponencial_generar_grafica.UseVisualStyleBackColor = true;
+            this.btn_normal_generar_grafica.Location = new System.Drawing.Point(388, 270);
+            this.btn_normal_generar_grafica.Name = "btn_normal_generar_grafica";
+            this.btn_normal_generar_grafica.Size = new System.Drawing.Size(131, 33);
+            this.btn_normal_generar_grafica.TabIndex = 16;
+            this.btn_normal_generar_grafica.Text = "Generar grafica";
+            this.btn_normal_generar_grafica.UseVisualStyleBackColor = true;
+            this.btn_normal_generar_grafica.Click += new System.EventHandler(this.btn_normal_generar_grafica_Click);
             // 
             // label15
             // 
@@ -398,6 +403,7 @@
             this.btn_normal_reestablecer.TabIndex = 13;
             this.btn_normal_reestablecer.Text = "Reestablecer";
             this.btn_normal_reestablecer.UseVisualStyleBackColor = true;
+            this.btn_normal_reestablecer.Click += new System.EventHandler(this.btn_normal_reestablecer_Click);
             // 
             // btn_exponencial_generar_variables
             // 
@@ -483,6 +489,7 @@
             this.btn_poisson_generar_grafica.TabIndex = 16;
             this.btn_poisson_generar_grafica.Text = "Generar grafica";
             this.btn_poisson_generar_grafica.UseVisualStyleBackColor = true;
+            this.btn_poisson_generar_grafica.Click += new System.EventHandler(this.btn_poisson_generar_grafica_Click);
             // 
             // label16
             // 
@@ -509,6 +516,7 @@
             this.btn_poisson_reestablecer.TabIndex = 13;
             this.btn_poisson_reestablecer.Text = "Reestablecer";
             this.btn_poisson_reestablecer.UseVisualStyleBackColor = true;
+            this.btn_poisson_reestablecer.Click += new System.EventHandler(this.btn_poisson_reestablecer_Click);
             // 
             // btn_poisson_generar_aleatorios
             // 
@@ -616,7 +624,7 @@
         private System.Windows.Forms.Button btn_exponencial_reestablecer;
         private System.Windows.Forms.Button btn_exponencial_generar_aleatorio;
         private System.Windows.Forms.TextBox txt_normal_cantidad_intervalos;
-        private System.Windows.Forms.Button btn_exponencial_generar_grafica;
+        private System.Windows.Forms.Button btn_normal_generar_grafica;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridView grilla_normal;
         private System.Windows.Forms.Button btn_normal_reestablecer;

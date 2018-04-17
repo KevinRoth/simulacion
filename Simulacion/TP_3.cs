@@ -14,9 +14,42 @@ namespace Simulacion
 {
     public partial class TP_3 : Form
     {
+        private List<Generado> ListaUniforme;
+        private List<Generado> ListaExponencial;
+        private List<Generado> ListaNormal;
+        private List<Generado> ListaPoisson;
+
         public TP_3()
         {
             InitializeComponent();
+            InicializarUniforme();
+            InicializarExponencial();
+            InicializarNormal();
+            InicializarPoisson();
+        }
+
+        public void InicializarUniforme()
+        {
+            ListaUniforme = new List<Generado>();
+            grilla_uniforme.DataSource = null;
+        }
+
+        public void InicializarExponencial()
+        {
+            ListaExponencial = new List<Generado>();
+            grilla_exponencial.DataSource = null;
+        }
+
+        public void InicializarNormal()
+        {
+            ListaNormal = new List<Generado>();
+            grilla_normal.DataSource = null;
+        }
+
+        public void InicializarPoisson()
+        {
+            ListaPoisson = new List<Generado>();
+            grilla_poisson.DataSource = null;
         }
 
         /// <summary>
@@ -41,7 +74,6 @@ namespace Simulacion
                 var cantidad = Convert.ToDouble(txt_uniforme_cantidad_variables.Text);
 
                 var uniforme = new Uniforme();
-                var lista = new List<Generado>();
 
                 uniforme.A = a;
                 uniforme.B = b;
@@ -55,19 +87,18 @@ namespace Simulacion
                 for (int i = 0; i < cantidad; i++)
                 {
                     var aleatorio = uniforme.GenerarVariableAleatoria(i + 1);
-                    lista.Add(new Generado()
+                    ListaUniforme.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
                         Iteracion = aleatorio.Iteracion
                     });
                 }
 
-                grilla_uniforme.DataSource = lista;
+                grilla_uniforme.DataSource = ListaUniforme;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Ingrese los valores obligatorios!!");
-           
             }
         }
 
@@ -79,7 +110,6 @@ namespace Simulacion
                 var cantidad = Convert.ToDouble(txt_exponencial_cantidad_variables.Text);
 
                 var exponencial = new Exponencial();
-                var lista = new List<Generado>();
 
                 exponencial.Lambda = lambda;
 
@@ -92,16 +122,16 @@ namespace Simulacion
                 for (int i = 0; i < cantidad; i++)
                 {
                     var aleatorio = exponencial.GenerarVariableAleatoria(i + 1);
-                    lista.Add(new Generado()
+                    ListaExponencial.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
                         Iteracion = aleatorio.Iteracion
                     });
                 }
 
-                grilla_exponencial.DataSource = lista;
+                grilla_exponencial.DataSource = ListaExponencial;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Ingrese los valores obligatorios!!");
             }
@@ -116,7 +146,6 @@ namespace Simulacion
                 var cantidad = Convert.ToInt16(txt_normal_cantidad_variables.Text);
 
                 var normal = new Normal();
-                var lista = new List<Generado>();
 
                 normal.Media = media;
                 normal.DesviacionEstandar = desviacion;
@@ -136,19 +165,18 @@ namespace Simulacion
                 for (int i = 0; i < cantidad; i++)
                 {
                     var aleatorio = normal.GenerarVariableAleatoria(i + 1);
-                    lista.Add(new Generado()
+                    ListaNormal.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
                         Iteracion = aleatorio.Iteracion
                     });
                 }
 
-                grilla_normal.DataSource = lista;
+                grilla_normal.DataSource = ListaNormal;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Ingrese los valores obligatorios!!");
-               
             }
         }
 
@@ -160,10 +188,9 @@ namespace Simulacion
                 var cantidad = Convert.ToInt16(txt_poisson_cantidad_variables.Text);
 
                 var poisson = new Poisson();
-                var lista = new List<Generado>();
 
-                poisson.Lambda= lambda;
-                
+                poisson.Lambda = lambda;
+
                 if (!poisson.VerificarLambda())
                 {
                     MessageBox.Show("Lambda tiene que ser mayor a 0!!!");
@@ -178,22 +205,127 @@ namespace Simulacion
 
                     cantidadGenerados++;
 
-                    lista.Add(new Generado()
+                    ListaPoisson.Add(new Generado()
                     {
                         NumAleatorio = aleatorio.NumAleatorio,
                         Iteracion = cantidadGenerados
                     });
-
                 } while (cantidadGenerados != cantidad);
 
-                   
-                grilla_poisson.DataSource = lista;
+
+                grilla_poisson.DataSource = ListaPoisson;
             }
             catch (Exception)
             {
                 MessageBox.Show("Ingrese los valores obligatorios!!");
-
             }
+        }
+
+        private void btn_uniforme_grafica_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lista = ListaUniforme;
+
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_uniforme_cantidad_intervalos.Text));
+                ventana.Show();
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception);
+                MessageBox.Show(
+                    "Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
+            }
+        }
+
+        private void btn_exponencial_generar_grafico_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lista = ListaExponencial;
+
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_exponencial_cantidad_intervalos.Text));
+                ventana.Show();
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception);
+                MessageBox.Show(
+                    "Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
+            }
+        }
+
+
+        private void btn_poisson_generar_grafica_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lista = ListaPoisson;
+
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_poisson_cantidad_intervalos.Text));
+                ventana.Show();
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception);
+                MessageBox.Show(
+                    "Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
+            }
+        }
+
+        private void btn_normal_generar_grafica_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lista = ListaNormal;
+
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_normal_cantidad_intervalos.Text));
+                ventana.Show();
+            }
+            catch (Exception exception)
+            {
+                Console.Write(exception);
+                MessageBox.Show(
+                    "Ingrese la cantidad de intervalos ó genere la lista de aleatorios a mandar previamente!");
+            }
+        }
+
+        private void btn_uniforme_reestablecer_Click(object sender, EventArgs e)
+        {
+            txt_uniforme_cantidad_intervalos.Text = "";
+            txt_uniforme_a.Text = "";
+            txt_uniforme_b.Text = "";
+            txt_uniforme_cantidad_variables.Text = "";
+
+            InicializarUniforme();
+        }
+
+        private void btn_exponencial_reestablecer_Click(object sender, EventArgs e)
+        {
+            txt_exponencial_cantidad_intervalos.Text = "";
+            txt_exponencial_cantidad_variables.Text = "";
+            txt_exponencial_lambda.Text = "";
+
+            InicializarExponencial();
+        }
+
+        private void btn_normal_reestablecer_Click(object sender, EventArgs e)
+        {
+            txt_normal_cantidad_intervalos.Text = "";
+            txt_normal_cantidad_variables.Text = "";
+            txt_normal_desviacion.Text = "";
+            txt_normal_media.Text = "";
+
+            InicializarNormal();
+        }
+
+        private void btn_poisson_reestablecer_Click(object sender, EventArgs e)
+        {
+            txt_poisson_cantidad_intervalos.Text = "";
+            txt_poisson_cantidad_variables.Text = "";
+            txt_poisson_lambda.Text = "";
+
+            InicializarPoisson();
         }
     }
 }

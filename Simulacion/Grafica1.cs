@@ -33,16 +33,29 @@ namespace Simulacion
             //creo los intervalos del histograma
             intervalos = new Intervalo[cantidadIntervalos];
 
+            var rango = lista.Max(aleatorio => aleatorio.NumAleatorio) - lista.Min(aleatorio => aleatorio.NumAleatorio);
+            var amplitudIntervalo = rango / cantidadIntervalos;
+
             //A partir de la cantidad de cantidadIntervalos, calculamos sus limites
             //Intervalo [a,b)
             for (var i = 0; i < cantidadIntervalos; i++)
             {
+                //para tp1
+                /*  if (i == 0)
+                      intervalos[i] = new Intervalo(0, ((double) 1 / cantidadIntervalos) * (i + 1));
+                  else
+                  {
+                      intervalos[i] = new Intervalo(intervalos[i - 1].LimiteSuperior,
+                          ((double) 1 / cantidadIntervalos) * (i + 1));
+                  }*/
+
+
                 if (i == 0)
-                    intervalos[i] = new Intervalo(0, ((double) 1 / cantidadIntervalos) * (i + 1));
+                    intervalos[i] = new Intervalo(lista.Min(aleatorio => aleatorio.NumAleatorio), lista.Min(aleatorio => aleatorio.NumAleatorio) + amplitudIntervalo);
                 else
                 {
                     intervalos[i] = new Intervalo(intervalos[i - 1].LimiteSuperior,
-                        ((double) 1 / cantidadIntervalos) * (i + 1));
+                        intervalos[i - 1].LimiteSuperior + amplitudIntervalo);
                 }
             }
 
@@ -70,7 +83,7 @@ namespace Simulacion
             histogramaGenerado.Series.Add("Frecuecias Observadas");
             histogramaGenerado.Series["Frecuecias Observadas"].ChartType = SeriesChartType.Column;
             histogramaGenerado.Series["Frecuecias Observadas"].Color = Color.DarkGray;
-
+     
             //cargamos el histograma con la cantidad de observaciones de cada intervalo
             for (int i = 0; i < cantidadIntervalos; i++)
             {
@@ -82,8 +95,9 @@ namespace Simulacion
                 //Agrego los labels de de los intervalos
                 histogramaGenerado.Series[0].Points[i].AxisLabel =
                     "[" + TruncateFunction(intervalos[i].LimiteInferior, 4)
-                        + " - " +
-                        TruncateFunction(intervalos[i].LimiteSuperior, 4) + "]";
+                    + " - " +
+                    TruncateFunction(intervalos[i].LimiteSuperior, 4) + "]";
+
                 //Pongo vertical los label 
                 histogramaGenerado.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
 
