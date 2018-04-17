@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Simulacion.Modelos;
+using Simulacion.Modelos.Distribuciones;
 
 namespace Simulacion
 {
@@ -15,13 +16,15 @@ namespace Simulacion
         private readonly List<Generado> lista;
         double chi;
         private readonly int cantidadIntervalos;
+        private Distribucion Distribucion;
         Intervalo[] intervalos; //vector de subintervalos
 
-        public Grafica1(List<Generado> lista, int cantidadIntervalos)
+        public Grafica1(List<Generado> lista, int cantidadIntervalos, Distribucion distribucion = null)
         {
             InitializeComponent();
             this.lista = lista;
             this.cantidadIntervalos = cantidadIntervalos;
+            Distribucion = distribucion;
             CargarHistograma();
         }
 
@@ -51,7 +54,8 @@ namespace Simulacion
 
 
                 if (i == 0)
-                    intervalos[i] = new Intervalo(lista.Min(aleatorio => aleatorio.NumAleatorio), lista.Min(aleatorio => aleatorio.NumAleatorio) + amplitudIntervalo);
+                    intervalos[i] = new Intervalo(lista.Min(aleatorio => aleatorio.NumAleatorio), 
+                                                  lista.Min(aleatorio => aleatorio.NumAleatorio) + amplitudIntervalo);
                 else
                 {
                     intervalos[i] = new Intervalo(intervalos[i - 1].LimiteSuperior,
@@ -112,9 +116,14 @@ namespace Simulacion
             histogramaGenerado.ChartAreas[0].AxisY.Maximum = listaEnteros.Max();
 
             //Obtenemos la frecuencia esperada de la serie
-            double freEsperada = (double) cantidadObservaciones / (double) cantidadIntervalos;
-            lblFrecuenciaEsperada.Text = freEsperada.ToString();
 
+            //es del tp1
+            if (Distribucion == null)
+            {
+                double freEsperada = (double) cantidadObservaciones / (double) cantidadIntervalos;
+                lblFrecuenciaEsperada.Text = freEsperada.ToString();
+            }
+            
 
             //llamada al metodo para cargar la tabla de frecuencias
             CargarTabla();
@@ -127,8 +136,8 @@ namespace Simulacion
         {
             foreach (var t in intervalos)
             {
-                string subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
-                double freEsp = lista.Count / cantidadIntervalos;
+                var subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
+                var freEsp = CalcularFrecuenciaEsperada(t);
                 var suma = Math.Pow((t.CantidadObservaciones - freEsp), 2) / freEsp;
 
                 dataGridView1.Rows.Add(subint,
@@ -171,6 +180,21 @@ namespace Simulacion
             {
                 MessageBox.Show("Se rechaza la hipotesis nula");
             }
+        }
+
+        private double CalcularFrecuenciaEsperada(Intervalo intervalo)
+        {
+            if (Distribucion.GetType() == typeof(Exponencial))
+            {
+                var exponencial = Distribucion as Exponencial;
+
+                var probabilidadEsperada = (1 - Math.Pow(Math.E, ((-exponencial.Lambda) * intervalo.LimiteSuperior))) - 
+                    (1 - Math.Pow(Math.E, ((-exponencial.Lambda) * intervalo.LimiteInferior)));
+
+                return probabilidadEsperada * lista.Count;
+            }
+
+            return 0;
         }
     }
 }

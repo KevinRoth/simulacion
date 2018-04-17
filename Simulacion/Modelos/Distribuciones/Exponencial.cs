@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulacion.Modelos.Distribuciones
 {
-    public class Exponencial
+    public class Exponencial : Distribucion
     {
         public double Lambda { get; set; }
         public Generado Generado { get; protected set; }

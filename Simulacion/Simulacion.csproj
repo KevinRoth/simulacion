@@ -52,6 +52,7 @@
     <Compile Include="Grafica1.Designer.cs">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Distribuciones\Distribucion.cs" />
     <Compile Include="Modelos\Distribuciones\Exponencial.cs" />
     <Compile Include="Modelos\Distribuciones\Normal.cs" />
     <Compile Include="Modelos\Distribuciones\Poisson.cs" />

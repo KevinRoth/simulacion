@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulacion.Modelos.Distribuciones
 {
-    public class Uniforme
+    public class Uniforme : Distribucion
     {
         public double A { get; set; }
         public double B { get; set; }

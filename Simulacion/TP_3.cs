@@ -18,6 +18,10 @@ namespace Simulacion
         private List<Generado> ListaExponencial;
         private List<Generado> ListaNormal;
         private List<Generado> ListaPoisson;
+        private Normal Normal;
+        private Uniforme Uniforme;
+        private Exponencial Exponencial;
+        private Poisson Poisson;
 
         public TP_3()
         {
@@ -32,24 +36,29 @@ namespace Simulacion
         {
             ListaUniforme = new List<Generado>();
             grilla_uniforme.DataSource = null;
+            Uniforme = new Uniforme();
+
         }
 
         public void InicializarExponencial()
         {
             ListaExponencial = new List<Generado>();
             grilla_exponencial.DataSource = null;
+            Exponencial = new Exponencial();
         }
 
         public void InicializarNormal()
         {
             ListaNormal = new List<Generado>();
             grilla_normal.DataSource = null;
+            Normal = new Normal();
         }
 
         public void InicializarPoisson()
         {
             ListaPoisson = new List<Generado>();
             grilla_poisson.DataSource = null;
+            Poisson = new Poisson();
         }
 
         /// <summary>
@@ -73,12 +82,10 @@ namespace Simulacion
                 var b = Convert.ToDouble(txt_uniforme_b.Text);
                 var cantidad = Convert.ToDouble(txt_uniforme_cantidad_variables.Text);
 
-                var uniforme = new Uniforme();
+                Uniforme.A = a;
+                Uniforme.B = b;
 
-                uniforme.A = a;
-                uniforme.B = b;
-
-                if (!uniforme.CompararAB())
+                if (!Uniforme.CompararAB())
                 {
                     MessageBox.Show("A no puede ser mayor a B");
                     return;
@@ -86,7 +93,7 @@ namespace Simulacion
 
                 for (int i = 0; i < cantidad; i++)
                 {
-                    var aleatorio = uniforme.GenerarVariableAleatoria(i + 1);
+                    var aleatorio = Uniforme.GenerarVariableAleatoria(i + 1);
                     ListaUniforme.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
@@ -109,11 +116,9 @@ namespace Simulacion
                 var lambda = Convert.ToDouble(txt_exponencial_lambda.Text);
                 var cantidad = Convert.ToDouble(txt_exponencial_cantidad_variables.Text);
 
-                var exponencial = new Exponencial();
+                Exponencial.Lambda = lambda;
 
-                exponencial.Lambda = lambda;
-
-                if (!exponencial.VerificarLambda())
+                if (!Exponencial.VerificarLambda())
                 {
                     MessageBox.Show("Lambda no puede ser menor a 0!!");
                     return;
@@ -121,7 +126,7 @@ namespace Simulacion
 
                 for (int i = 0; i < cantidad; i++)
                 {
-                    var aleatorio = exponencial.GenerarVariableAleatoria(i + 1);
+                    var aleatorio = Exponencial.GenerarVariableAleatoria(i + 1);
                     ListaExponencial.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
@@ -145,18 +150,16 @@ namespace Simulacion
                 var desviacion = Convert.ToDouble(txt_normal_desviacion.Text);
                 var cantidad = Convert.ToInt16(txt_normal_cantidad_variables.Text);
 
-                var normal = new Normal();
+                Normal.Media = media;
+                Normal.DesviacionEstandar = desviacion;
 
-                normal.Media = media;
-                normal.DesviacionEstandar = desviacion;
-
-                if (!normal.VerificarDesviacion())
+                if (!Normal.VerificarDesviacion())
                 {
                     MessageBox.Show("La desviacion estandar tiene que ser mayor a 0!!!");
                     return;
                 }
 
-                if (!normal.VerificarMedia())
+                if (!Normal.VerificarMedia())
                 {
                     MessageBox.Show("La media debe ser mayor a 0!!");
                     return;
@@ -164,7 +167,7 @@ namespace Simulacion
 
                 for (int i = 0; i < cantidad; i++)
                 {
-                    var aleatorio = normal.GenerarVariableAleatoria(i + 1);
+                    var aleatorio = Normal.GenerarVariableAleatoria(i + 1);
                     ListaNormal.Add(new Generado()
                     {
                         NumAleatorio = TruncateFunction(aleatorio.NumAleatorio, 4),
@@ -187,11 +190,9 @@ namespace Simulacion
                 var lambda = Convert.ToDouble(txt_poisson_lambda.Text);
                 var cantidad = Convert.ToInt16(txt_poisson_cantidad_variables.Text);
 
-                var poisson = new Poisson();
+                Poisson.Lambda = lambda;
 
-                poisson.Lambda = lambda;
-
-                if (!poisson.VerificarLambda())
+                if (!Poisson.VerificarLambda())
                 {
                     MessageBox.Show("Lambda tiene que ser mayor a 0!!!");
                     return;
@@ -201,7 +202,7 @@ namespace Simulacion
 
                 do
                 {
-                    var aleatorio = poisson.GenerarVariableAleatoria(cantidadGenerados + 1);
+                    var aleatorio = Poisson.GenerarVariableAleatoria(cantidadGenerados + 1);
 
                     cantidadGenerados++;
 
@@ -227,7 +228,7 @@ namespace Simulacion
             {
                 var lista = ListaUniforme;
 
-                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_uniforme_cantidad_intervalos.Text));
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_uniforme_cantidad_intervalos.Text), Uniforme);
                 ventana.Show();
             }
             catch (Exception exception)
@@ -244,7 +245,7 @@ namespace Simulacion
             {
                 var lista = ListaExponencial;
 
-                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_exponencial_cantidad_intervalos.Text));
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_exponencial_cantidad_intervalos.Text), Exponencial);
                 ventana.Show();
             }
             catch (Exception exception)
@@ -262,7 +263,7 @@ namespace Simulacion
             {
                 var lista = ListaPoisson;
 
-                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_poisson_cantidad_intervalos.Text));
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_poisson_cantidad_intervalos.Text), Poisson);
                 ventana.Show();
             }
             catch (Exception exception)
@@ -279,7 +280,7 @@ namespace Simulacion
             {
                 var lista = ListaNormal;
 
-                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_normal_cantidad_intervalos.Text));
+                Grafica1 ventana = new Grafica1(lista, int.Parse(txt_normal_cantidad_intervalos.Text), Normal);
                 ventana.Show();
             }
             catch (Exception exception)

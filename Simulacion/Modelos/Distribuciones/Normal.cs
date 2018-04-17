@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulacion.Modelos.Distribuciones
 {
-    public class Normal
+    public class Normal : Distribucion
     {
         public double Media { get; set; }
         public double DesviacionEstandar { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulacion.Modelos.Distribuciones
 {
-    public class Poisson
+    public class Poisson : Distribucion
     {
         public double Lambda { get; set; }
         public Generado Generado { get; protected set; }
