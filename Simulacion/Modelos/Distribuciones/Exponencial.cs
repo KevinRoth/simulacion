@@ -32,5 +32,13 @@ namespace Simulacion.Modelos.Distribuciones
 
             return Generado;
         }
+
+        public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos)
+        {
+            var probabilidadEsperada = (1 - Math.Pow(Math.E, ((-Lambda) * intervalo.LimiteSuperior))) -
+                                       (1 - Math.Pow(Math.E, ((-Lambda) * intervalo.LimiteInferior)));
+
+            return probabilidadEsperada * tamanioMuestra;
+        }
     }
 }

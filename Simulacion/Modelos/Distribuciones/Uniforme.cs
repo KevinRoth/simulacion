@@ -39,5 +39,12 @@ namespace Simulacion.Modelos.Distribuciones
 
             return Generado;
         }
+
+      
+
+        public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
+        {
+            return tamanioMuestra / cantidadIntervalos;
+        }
     }
 }

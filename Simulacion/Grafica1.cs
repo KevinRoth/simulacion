@@ -137,7 +137,7 @@ namespace Simulacion
             foreach (var t in intervalos)
             {
                 var subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
-                var freEsp = CalcularFrecuenciaEsperada(t);
+                var freEsp = Distribucion.CalcularFrecuenciaEsperadaEnIntervalo(t, lista.Count, intervalos.Length);
                 var suma = Math.Pow((t.CantidadObservaciones - freEsp), 2) / freEsp;
 
                 dataGridView1.Rows.Add(subint,
@@ -180,21 +180,6 @@ namespace Simulacion
             {
                 MessageBox.Show("Se rechaza la hipotesis nula");
             }
-        }
-
-        private double CalcularFrecuenciaEsperada(Intervalo intervalo)
-        {
-            if (Distribucion.GetType() == typeof(Exponencial))
-            {
-                var exponencial = Distribucion as Exponencial;
-
-                var probabilidadEsperada = (1 - Math.Pow(Math.E, ((-exponencial.Lambda) * intervalo.LimiteSuperior))) - 
-                    (1 - Math.Pow(Math.E, ((-exponencial.Lambda) * intervalo.LimiteInferior)));
-
-                return probabilidadEsperada * lista.Count;
-            }
-
-            return 0;
         }
     }
 }
