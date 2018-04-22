@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Meta.Numerics.Statistics.Distributions;
 
 namespace Simulacion.Modelos.Distribuciones
 {
@@ -47,7 +48,12 @@ namespace Simulacion.Modelos.Distribuciones
 
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
         {
-            throw new NotImplementedException();
+            var distribucion = new PoissonDistribution(Lambda);
+
+            var probabilidadEsperada = distribucion.LeftExclusiveProbability((int) intervalo.LimiteSuperior) -
+                                       distribucion.LeftExclusiveProbability((int) intervalo.LimiteInferior);
+
+            return probabilidadEsperada * tamanioMuestra;
         }
     }
 }

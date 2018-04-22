@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Meta.Numerics.Statistics.Distributions;
 
 namespace Simulacion.Modelos.Distribuciones
 {
@@ -25,7 +26,7 @@ namespace Simulacion.Modelos.Distribuciones
 
         public Generado GenerarVariableAleatoria(int i)
         {
-            var x = (-1 / Lambda) * Math.Log10(1 - Generador.GenerarAleatorio(i).NumAleatorio);
+            var x = (-1 / Lambda) * Math.Log(1 - Generador.GenerarAleatorio(i).NumAleatorio);
 
             Generado.NumAleatorio = x;
             Generado.Iteracion = i;
@@ -35,8 +36,10 @@ namespace Simulacion.Modelos.Distribuciones
 
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos)
         {
-            var probabilidadEsperada = (1 - Math.Pow(Math.E, ((-Lambda) * intervalo.LimiteSuperior))) -
-                                       (1 - Math.Pow(Math.E, ((-Lambda) * intervalo.LimiteInferior)));
+            var distribucion = new ExponentialDistribution(1 / Lambda);
+
+            var probabilidadEsperada = distribucion.LeftProbability(intervalo.LimiteSuperior) -
+                                       distribucion.LeftProbability(intervalo.LimiteInferior);
 
             return probabilidadEsperada * tamanioMuestra;
         }

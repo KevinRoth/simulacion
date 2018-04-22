@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Meta.Numerics.Statistics.Distributions;
 
 namespace Simulacion.Modelos.Distribuciones
 {
@@ -53,14 +54,12 @@ namespace Simulacion.Modelos.Distribuciones
 
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
         {
-            var marcaClase = (intervalo.LimiteSuperior + intervalo.LimiteInferior) / 2;
-            var primero = Math.Pow((marcaClase - Media) / DesviacionEstandar, 2);
-            var segundo = DesviacionEstandar * (Math.Sqrt(Math.PI * 2));
-            var calculo1 = Math.Pow(Math.E, -0.5 * primero);
-            var res = calculo1 / segundo;
-            var probEsperada = res * (intervalo.LimiteSuperior - intervalo.LimiteInferior);
+            var distribucion = new NormalDistribution(Media, DesviacionEstandar);
 
-            return probEsperada * tamanioMuestra;
+            var probabilidadEsperada = distribucion.LeftProbability(intervalo.LimiteSuperior) -
+                                       distribucion.LeftProbability(intervalo.LimiteInferior);
+
+            return probabilidadEsperada * tamanioMuestra;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Simulacion
                 }
             }
 
-            //ahora recorremos la lista para calcular las frecuencias.
+            //ahora recorremos la lista para calcular las frecuencias observadas.
             foreach (var t1 in lista)
             {
                 foreach (var t in intervalos)

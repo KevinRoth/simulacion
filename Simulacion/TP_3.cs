@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -80,7 +81,7 @@ namespace Simulacion
             {
                 var a = Convert.ToDouble(txt_uniforme_a.Text);
                 var b = Convert.ToDouble(txt_uniforme_b.Text);
-                var cantidad = Convert.ToDouble(txt_uniforme_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_uniforme_cantidad_variables.Text);
 
                 Uniforme.A = a;
                 Uniforme.B = b;
@@ -114,7 +115,7 @@ namespace Simulacion
             try
             {
                 var lambda = Convert.ToDouble(txt_exponencial_lambda.Text);
-                var cantidad = Convert.ToDouble(txt_exponencial_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_exponencial_cantidad_variables.Text);
 
                 Exponencial.Lambda = lambda;
 
@@ -148,7 +149,7 @@ namespace Simulacion
             {
                 var media = Convert.ToDouble(txt_normal_media.Text);
                 var desviacion = Convert.ToDouble(txt_normal_desviacion.Text);
-                var cantidad = Convert.ToInt16(txt_normal_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_normal_cantidad_variables.Text);
 
                 Normal.Media = media;
                 Normal.DesviacionEstandar = desviacion;
@@ -177,8 +178,9 @@ namespace Simulacion
 
                 grilla_normal.DataSource = ListaNormal;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Write(exception);
                 MessageBox.Show("Ingrese los valores obligatorios!!");
             }
         }
@@ -188,7 +190,7 @@ namespace Simulacion
             try
             {
                 var lambda = Convert.ToDouble(txt_poisson_lambda.Text);
-                var cantidad = Convert.ToInt16(txt_poisson_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_poisson_cantidad_variables.Text);
 
                 Poisson.Lambda = lambda;
 
