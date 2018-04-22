@@ -137,12 +137,12 @@ namespace Simulacion
             foreach (var t in intervalos)
             {
                 var subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
-                var freEsp = Distribucion.CalcularFrecuenciaEsperadaEnIntervalo(t, lista.Count, intervalos.Length);
-                var suma = Math.Pow((t.CantidadObservaciones - freEsp), 2) / freEsp;
+                var frecuenciaEsperadaPorIntervalo = Distribucion.CalcularFrecuenciaEsperadaEnIntervalo(t, lista.Count, intervalos.Length);
+                var suma = Math.Pow((t.CantidadObservaciones - frecuenciaEsperadaPorIntervalo), 2) / frecuenciaEsperadaPorIntervalo;
 
                 dataGridView1.Rows.Add(subint,
                     t.CantidadObservaciones,
-                    freEsp,
+                    frecuenciaEsperadaPorIntervalo,
                     suma);
 
                 //Vamos acumulando chi observado

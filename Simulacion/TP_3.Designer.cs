@@ -60,7 +60,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.grilla_normal = new System.Windows.Forms.DataGridView();
             this.btn_normal_reestablecer = new System.Windows.Forms.Button();
-            this.btn_exponencial_generar_variables = new System.Windows.Forms.Button();
+            this.btn_normal_generar_variables = new System.Windows.Forms.Button();
             this.txt_normal_cantidad_variables = new System.Windows.Forms.TextBox();
             this.txt_normal_desviacion = new System.Windows.Forms.TextBox();
             this.txt_normal_media = new System.Windows.Forms.TextBox();
@@ -150,6 +150,7 @@
             // 
             // grilla_uniforme
             // 
+            this.grilla_uniforme.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grilla_uniforme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grilla_uniforme.Location = new System.Drawing.Point(6, 147);
             this.grilla_uniforme.Name = "grilla_uniforme";
@@ -272,6 +273,7 @@
             // 
             // grilla_exponencial
             // 
+            this.grilla_exponencial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grilla_exponencial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grilla_exponencial.Location = new System.Drawing.Point(3, 158);
             this.grilla_exponencial.Name = "grilla_exponencial";
@@ -338,7 +340,7 @@
             this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.grilla_normal);
             this.tabPage3.Controls.Add(this.btn_normal_reestablecer);
-            this.tabPage3.Controls.Add(this.btn_exponencial_generar_variables);
+            this.tabPage3.Controls.Add(this.btn_normal_generar_variables);
             this.tabPage3.Controls.Add(this.txt_normal_cantidad_variables);
             this.tabPage3.Controls.Add(this.txt_normal_desviacion);
             this.tabPage3.Controls.Add(this.txt_normal_media);
@@ -389,6 +391,8 @@
             // 
             // grilla_normal
             // 
+            this.grilla_normal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grilla_normal.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.grilla_normal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grilla_normal.Location = new System.Drawing.Point(9, 156);
             this.grilla_normal.Name = "grilla_normal";
@@ -405,15 +409,15 @@
             this.btn_normal_reestablecer.UseVisualStyleBackColor = true;
             this.btn_normal_reestablecer.Click += new System.EventHandler(this.btn_normal_reestablecer_Click);
             // 
-            // btn_exponencial_generar_variables
+            // btn_normal_generar_variables
             // 
-            this.btn_exponencial_generar_variables.Location = new System.Drawing.Point(309, 81);
-            this.btn_exponencial_generar_variables.Name = "btn_exponencial_generar_variables";
-            this.btn_exponencial_generar_variables.Size = new System.Drawing.Size(131, 33);
-            this.btn_exponencial_generar_variables.TabIndex = 12;
-            this.btn_exponencial_generar_variables.Text = "Generar";
-            this.btn_exponencial_generar_variables.UseVisualStyleBackColor = true;
-            this.btn_exponencial_generar_variables.Click += new System.EventHandler(this.btn_exponencial_generar_variables_Click);
+            this.btn_normal_generar_variables.Location = new System.Drawing.Point(309, 81);
+            this.btn_normal_generar_variables.Name = "btn_normal_generar_variables";
+            this.btn_normal_generar_variables.Size = new System.Drawing.Size(131, 33);
+            this.btn_normal_generar_variables.TabIndex = 12;
+            this.btn_normal_generar_variables.Text = "Generar";
+            this.btn_normal_generar_variables.UseVisualStyleBackColor = true;
+            this.btn_normal_generar_variables.Click += new System.EventHandler(this.btn_normal_generar_variables_Click);
             // 
             // txt_normal_cantidad_variables
             // 
@@ -502,6 +506,7 @@
             // 
             // grilla_poisson
             // 
+            this.grilla_poisson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grilla_poisson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grilla_poisson.Location = new System.Drawing.Point(12, 144);
             this.grilla_poisson.Name = "grilla_poisson";
@@ -628,7 +633,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridView grilla_normal;
         private System.Windows.Forms.Button btn_normal_reestablecer;
-        private System.Windows.Forms.Button btn_exponencial_generar_variables;
+        private System.Windows.Forms.Button btn_normal_generar_variables;
         private System.Windows.Forms.TextBox txt_poisson_cantidad_intervalos;
         private System.Windows.Forms.Button btn_poisson_generar_grafica;
         private System.Windows.Forms.Label label16;

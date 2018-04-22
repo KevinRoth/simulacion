@@ -24,6 +24,11 @@ namespace Simulacion.Modelos.Distribuciones
             return Lambda > 0;
         }
 
+        /// <summary>
+        /// Genera una variable aleatoria del tipo de distribucion Poisson
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public Generado GenerarVariableAleatoria(int i)
         {
             var x = (-1 / Lambda) * Math.Log(1 - Generador.GenerarAleatorio(i).NumAleatorio);
@@ -34,6 +39,13 @@ namespace Simulacion.Modelos.Distribuciones
             return Generado;
         }
 
+        /// <summary>
+        /// Metodo que calcula la frecuencia esperada en un intervalo
+        /// </summary>
+        /// <param name="intervalo"></param>
+        /// <param name="tamanioMuestra"></param>
+        /// <param name="cantidadIntervalos"></param>
+        /// <returns></returns>
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos)
         {
             var distribucion = new ExponentialDistribution(1 / Lambda);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Meta.Numerics.Statistics.Distributions;
+﻿using Meta.Numerics.Statistics.Distributions;
 
 namespace Simulacion.Modelos.Distribuciones
 {
@@ -29,11 +24,13 @@ namespace Simulacion.Modelos.Distribuciones
         {
             var sumatoriaRandoms = 0.0;
 
+            //Hacemos la sumatoria de randoms
             for (int j = 0; j < 12; j++)
             {
                 sumatoriaRandoms += Generador.GenerarAleatorio(i).NumAleatorio;
             }
 
+            //Aplicamos la formula
             var x = (sumatoriaRandoms - 6) * DesviacionEstandar + Media;
 
             Generado.NumAleatorio = x;
@@ -42,16 +39,31 @@ namespace Simulacion.Modelos.Distribuciones
             return Generado;
         }
 
+        /// <summary>
+        /// Metodo que verifica que la media sea mayor 0
+        /// </summary>
+        /// <returns></returns>
         public bool VerificarMedia()
         {
             return Media > 0;
         }
 
+        /// <summary>
+        /// Metodo que verifica que la Desviacion sea mayor a 0
+        /// </summary>
+        /// <returns></returns>
         public bool VerificarDesviacion()
         {
             return DesviacionEstandar > 0;
         }
 
+        /// <summary>
+        /// Metodo que calcula la frecuencia esperada en un intervalo
+        /// </summary>
+        /// <param name="intervalo"></param>
+        /// <param name="tamanioMuestra"></param>
+        /// <param name="cantidadIntervalos"></param>
+        /// <returns></returns>
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
         {
             var distribucion = new NormalDistribution(Media, DesviacionEstandar);

@@ -19,6 +19,11 @@ namespace Simulacion.Modelos.Distribuciones
             Generador = new GeneradorLenguaje();
         }
 
+        /// <summary>
+        /// Genera una variable aleatoria del tipo de distribucion Poisson
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public Generado GenerarVariableAleatoria(int i)
         {
             var P = 1.0;
@@ -41,11 +46,22 @@ namespace Simulacion.Modelos.Distribuciones
             return Generado;
         }
 
+        /// <summary>
+        /// Metodo que verifica que lambda sea mayor a 0
+        /// </summary>
+        /// <returns></returns>
         public bool VerificarLambda()
         {
             return Lambda > 0;
         }
 
+        /// <summary>
+        /// Metodo que calcula la frecuencia esperada en un intervalo
+        /// </summary>
+        /// <param name="intervalo"></param>
+        /// <param name="tamanioMuestra"></param>
+        /// <param name="cantidadIntervalos"></param>
+        /// <returns></returns>
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
         {
             var distribucion = new PoissonDistribution(Lambda);
