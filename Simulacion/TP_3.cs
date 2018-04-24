@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,9 @@ namespace Simulacion
             InicializarPoisson();
         }
 
+        /// <summary>
+        /// Metodo que inicializa la lista y el objeto uniforme, tambien limpia la grilla
+        /// </summary>
         public void InicializarUniforme()
         {
             ListaUniforme = new List<Generado>();
@@ -40,6 +44,9 @@ namespace Simulacion
 
         }
 
+        /// <summary>
+        /// Metodo que inicializa la lista y el objeto exponencial, tambien limpia la grilla
+        /// </summary>
         public void InicializarExponencial()
         {
             ListaExponencial = new List<Generado>();
@@ -47,6 +54,9 @@ namespace Simulacion
             Exponencial = new Exponencial();
         }
 
+        /// <summary>
+        /// Metodo que inicializa la lista y el objeto normal, tambien limpia la grilla
+        /// </summary>
         public void InicializarNormal()
         {
             ListaNormal = new List<Generado>();
@@ -54,6 +64,9 @@ namespace Simulacion
             Normal = new Normal();
         }
 
+        /// <summary>
+        /// Metodo que inicializa la lista y el objeto poisson, tambien limpia la grilla
+        /// </summary>
         public void InicializarPoisson()
         {
             ListaPoisson = new List<Generado>();
@@ -74,13 +87,18 @@ namespace Simulacion
             return (double) temp / stepper;
         }
 
+        /// <summary>
+        /// Evento que genera variables aleatorias para la distribucion uniforme
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_uniforme_generar_Click(object sender, EventArgs e)
         {
             try
             {
                 var a = Convert.ToDouble(txt_uniforme_a.Text);
                 var b = Convert.ToDouble(txt_uniforme_b.Text);
-                var cantidad = Convert.ToDouble(txt_uniforme_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_uniforme_cantidad_variables.Text);
 
                 Uniforme.A = a;
                 Uniforme.B = b;
@@ -109,12 +127,17 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Evento que genera variables aleatorias para la distribucion exponencial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_exponencial_generar_aleatorio_Click(object sender, EventArgs e)
         {
             try
             {
                 var lambda = Convert.ToDouble(txt_exponencial_lambda.Text);
-                var cantidad = Convert.ToDouble(txt_exponencial_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_exponencial_cantidad_variables.Text);
 
                 Exponencial.Lambda = lambda;
 
@@ -142,13 +165,18 @@ namespace Simulacion
             }
         }
 
-        private void btn_exponencial_generar_variables_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Evento que genera variables aleatorias para la distribucion normal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_normal_generar_variables_Click(object sender, EventArgs e)
         {
             try
             {
                 var media = Convert.ToDouble(txt_normal_media.Text);
                 var desviacion = Convert.ToDouble(txt_normal_desviacion.Text);
-                var cantidad = Convert.ToInt16(txt_normal_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_normal_cantidad_variables.Text);
 
                 Normal.Media = media;
                 Normal.DesviacionEstandar = desviacion;
@@ -177,18 +205,24 @@ namespace Simulacion
 
                 grilla_normal.DataSource = ListaNormal;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Write(exception);
                 MessageBox.Show("Ingrese los valores obligatorios!!");
             }
         }
 
+        /// <summary>
+        /// Evento que genera variables aleatorias para la distribucion poisson
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_poisson_generar_aleatorios_Click(object sender, EventArgs e)
         {
             try
             {
                 var lambda = Convert.ToDouble(txt_poisson_lambda.Text);
-                var cantidad = Convert.ToInt16(txt_poisson_cantidad_variables.Text);
+                var cantidad = Convert.ToInt64(txt_poisson_cantidad_variables.Text);
 
                 Poisson.Lambda = lambda;
 
@@ -222,6 +256,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Evento que genera la grafica para la distribucion uniforme
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_uniforme_grafica_Click(object sender, EventArgs e)
         {
             try
@@ -239,6 +278,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Evento que genera la grafica para la distribucion exponencial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_exponencial_generar_grafico_Click(object sender, EventArgs e)
         {
             try
@@ -256,7 +300,11 @@ namespace Simulacion
             }
         }
 
-
+        /// <summary>
+        /// Evento que genera la grafica para la distribucion poisson
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_poisson_generar_grafica_Click(object sender, EventArgs e)
         {
             try
@@ -274,6 +322,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Evento que genera la grafica para la distribucion normal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_normal_generar_grafica_Click(object sender, EventArgs e)
         {
             try
@@ -291,6 +344,11 @@ namespace Simulacion
             }
         }
 
+        /// <summary>
+        /// Evento que reestablece los campos y objetos de la distribucion uniforme
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_uniforme_reestablecer_Click(object sender, EventArgs e)
         {
             txt_uniforme_cantidad_intervalos.Text = "";
@@ -301,6 +359,11 @@ namespace Simulacion
             InicializarUniforme();
         }
 
+        /// <summary>
+        /// Evento que reestablece los campos y objetos de la distribucion exponencial
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_exponencial_reestablecer_Click(object sender, EventArgs e)
         {
             txt_exponencial_cantidad_intervalos.Text = "";
@@ -310,6 +373,11 @@ namespace Simulacion
             InicializarExponencial();
         }
 
+        /// <summary>
+        /// Evento que reestablece los campos y objetos de la distribucion normal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_normal_reestablecer_Click(object sender, EventArgs e)
         {
             txt_normal_cantidad_intervalos.Text = "";
@@ -320,6 +388,11 @@ namespace Simulacion
             InicializarNormal();
         }
 
+        /// <summary>
+        /// Evento que reestablece los campos y objetos de la distribucion poisson
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_poisson_reestablecer_Click(object sender, EventArgs e)
         {
             txt_poisson_cantidad_intervalos.Text = "";

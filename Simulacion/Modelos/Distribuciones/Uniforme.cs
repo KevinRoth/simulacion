@@ -30,6 +30,11 @@ namespace Simulacion.Modelos.Distribuciones
             return B > A;
         }
 
+        /// <summary>
+        /// Genera una variable aleatoria del tipo de distribucion 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public Generado GenerarVariableAleatoria(int i)
         {
             var x = A + Generador.GenerarAleatorio(i).NumAleatorio * (B - A);
@@ -40,8 +45,13 @@ namespace Simulacion.Modelos.Distribuciones
             return Generado;
         }
 
-      
-
+        /// <summary>
+        /// Metodo que calcula la frecuencia esperada en un intervalo
+        /// </summary>
+        /// <param name="intervalo"></param>
+        /// <param name="tamanioMuestra"></param>
+        /// <param name="cantidadIntervalos"></param>
+        /// <returns></returns>
         public override double CalcularFrecuenciaEsperadaEnIntervalo(Intervalo intervalo, int tamanioMuestra, int cantidadIntervalos = 0)
         {
             return tamanioMuestra / cantidadIntervalos;
