@@ -99,8 +99,8 @@ namespace Simulacion
                 //Agrego los labels de de los intervalos
                 histogramaGenerado.Series[0].Points[i].AxisLabel =
                     "[" + TruncateFunction(_intervalos[i].LimiteInferior, 4)
-                    + " - " +
-                    TruncateFunction(_intervalos[i].LimiteSuperior, 4) + "]";
+                    + " / " +
+                    TruncateFunction(_intervalos[i].LimiteSuperior, 4) + ")";
 
                 //Pongo vertical los label 
                 histogramaGenerado.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
@@ -136,7 +136,7 @@ namespace Simulacion
         {
             foreach (var t in _intervalos)
             {
-                var subint = TruncateFunction(t.LimiteInferior, 4) + " - " + TruncateFunction(t.LimiteSuperior, 4);
+                var subint = TruncateFunction(t.LimiteInferior, 4) + " / " + TruncateFunction(t.LimiteSuperior, 4);
                 var frecuenciaEsperadaPorIntervalo = _distribucion.CalcularFrecuenciaEsperadaEnIntervalo(t, _lista.Count, _intervalos.Length);
                 var suma = Math.Pow((t.CantidadObservaciones - frecuenciaEsperadaPorIntervalo), 2) / frecuenciaEsperadaPorIntervalo;
 

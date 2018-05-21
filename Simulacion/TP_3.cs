@@ -187,12 +187,6 @@ namespace Simulacion
                     return;
                 }
 
-                if (!Normal.VerificarMedia())
-                {
-                    MessageBox.Show("La media debe ser mayor a 0!!");
-                    return;
-                }
-
                 for (int i = 0; i < cantidad; i++)
                 {
                     var aleatorio = Normal.GenerarVariableAleatoria(i + 1);
