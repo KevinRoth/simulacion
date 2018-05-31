@@ -40,15 +40,6 @@ namespace Simulacion.Modelos.Distribuciones
         }
 
         /// <summary>
-        /// Metodo que verifica que la media sea mayor 0
-        /// </summary>
-        /// <returns></returns>
-        public bool VerificarMedia()
-        {
-            return Media > 0;
-        }
-
-        /// <summary>
         /// Metodo que verifica que la Desviacion sea mayor a 0
         /// </summary>
         /// <returns></returns>

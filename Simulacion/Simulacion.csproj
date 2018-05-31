@@ -55,6 +55,8 @@
     <Compile Include="Grafica1.Designer.cs">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos-Montecarlo\DistribucionAleatoria.cs" />
+    <Compile Include="Modelos-Montecarlo\Probabilidad.cs" />
     <Compile Include="Modelos\Distribuciones\Distribucion.cs" />
     <Compile Include="Modelos\Distribuciones\Exponencial.cs" />
     <Compile Include="Modelos\Distribuciones\Normal.cs" />
@@ -79,6 +81,12 @@
     <Compile Include="TP_3.Designer.cs">
       <DependentUpon>TP_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_4.Designer.cs">
+      <DependentUpon>TP_4.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Grafica1.resx">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="TP_3.resx">
       <DependentUpon>TP_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_4.resx">
+      <DependentUpon>TP_4.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
