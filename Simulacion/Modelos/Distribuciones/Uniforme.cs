@@ -20,6 +20,12 @@ namespace Simulacion.Modelos.Distribuciones
 
         }
 
+        public Uniforme(double a, double b)
+        {
+            A = a;
+            B = b;
+        }
+
         /// <summary>
         /// Metodo que permite conocer si B es mayor a A
         /// Devuelve true si B > A
@@ -43,6 +49,11 @@ namespace Simulacion.Modelos.Distribuciones
             Generado.Iteracion = i;
 
             return Generado;
+        }
+
+        public double GenerarVariableAleatoria()
+        {
+            return A + Generador.GenerarAleatorio(0).NumAleatorio * (B - A);
         }
 
         /// <summary>

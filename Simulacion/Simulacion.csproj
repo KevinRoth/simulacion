@@ -55,6 +55,14 @@
     <Compile Include="Grafica1.Designer.cs">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos-Colas\Cliente.cs" />
+    <Compile Include="Modelos-Colas\ColaFifo.cs" />
+    <Compile Include="Modelos-Colas\DateTimeConverter.cs" />
+    <Compile Include="Modelos-Colas\Evento.cs" />
+    <Compile Include="Modelos-Colas\ICola.cs" />
+    <Compile Include="Modelos-Colas\Llegada.cs" />
+    <Compile Include="Modelos-Colas\Servidor.cs" />
+    <Compile Include="Modelos-Colas\Vehiculo.cs" />
     <Compile Include="Modelos-Montecarlo\DistribucionAleatoria.cs" />
     <Compile Include="Modelos-Montecarlo\Probabilidad.cs" />
     <Compile Include="Modelos\Distribuciones\Distribucion.cs" />
@@ -87,6 +95,12 @@
     <Compile Include="TP_4.Designer.cs">
       <DependentUpon>TP_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_5.Designer.cs">
+      <DependentUpon>TP_5.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Grafica1.resx">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_4.resx">
       <DependentUpon>TP_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_5.resx">
+      <DependentUpon>TP_5.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
