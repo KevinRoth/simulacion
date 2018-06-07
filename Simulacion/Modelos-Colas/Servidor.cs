@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Colas.Clientes;
 using Colas.Colas;
@@ -20,6 +21,7 @@ namespace Colas.Servidores
             CantidadMaxima = capacidad;
             CantidadAtendidos = 0;
             Ubicacion = "Continente";
+            VehiculosABordo = new List<Cliente>();
         }
 
         public bool EstaLibre()
@@ -29,7 +31,7 @@ namespace Colas.Servidores
 
         public bool PuedeCruzarAgua()
         {
-           var ultimaCruzada = DateTimeConverter.EnHoras(DateTime.Now) - DateTimeConverter.EnHoras(UltimaCruzadaAgua);
+            var ultimaCruzada = DateTimeConverter.EnHoras(DateTime.Now) - DateTimeConverter.EnHoras(UltimaCruzadaAgua);
 
             if (ultimaCruzada >= 1 && EstaLibre() && Cola.Vacia())
             {
@@ -44,21 +46,25 @@ namespace Colas.Servidores
             return Estado.Equals("Ocupado");
         }
 
-        private void ActualizarFinCarga(DateTime hora, string tipoVehiculo)
+        public void ActualizarFinCarga(DateTime hora, Cliente vehiculo)
         {
-            if (tipoVehiculo == "Auto")
+            var demora = 0.0;
+            if (vehiculo.TipoCliente == "Auto")
             {
-                var demora = DistribucionCargaAuto.GenerarVariableAleatoria();
+                demora = DistribucionCargaAuto.GenerarVariableAleatoria();
                 CantidadAtendidos++;
                 ProximoFinCarga = hora.AddMinutes(demora);
             }
             else //camion
             {
-                var demora = DistribucionCargaCamion.GenerarVariableAleatoria();
+                demora = DistribucionCargaCamion.GenerarVariableAleatoria();
                 CantidadAtendidos += 2;
                 ProximoFinCarga = hora.AddMinutes(demora);
             }
 
+            vehiculo.TiempoCarga = demora;
+
+            VehiculosABordo.Add(vehiculo);
         }
 
         public bool EstaEnMantenimiento()
@@ -72,7 +78,7 @@ namespace Colas.Servidores
             {
                 ClienteActual = cliente;
                 cliente.ComenzarCarga(hora, Nombre);
-                ActualizarFinCarga(hora, cliente.TipoCliente);
+                //  ActualizarFinCarga(hora, cliente.TipoCliente);
             }
             else
             {
@@ -80,11 +86,21 @@ namespace Colas.Servidores
             }
         }
 
+        public bool EstaEnContinente()
+        {
+            return Ubicacion.Equals("Continente");
+        }
+
         public void SetMantenimiento(DateTime hora)
         {
             Estado = "En mantenimiento";
 
             ProximoFinMantenimiento = hora.AddHours(5);
+        }
+
+        public void SetLibre()
+        {
+            Estado = "Libre";
         }
 
         public void SetEnCursoAgua(DateTime hora)
@@ -97,7 +113,6 @@ namespace Colas.Servidores
         public void SetDescargaVehiculos()
         {
             Estado = "En descarga de vehiculos";
-
         }
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
@@ -120,7 +135,7 @@ namespace Colas.Servidores
             {
                 ClienteActual = Cola.ProximoCliente();
                 ClienteActual.ComenzarCarga(ProximoFinCarga.Value, Nombre);
-                ActualizarFinCarga(ProximoFinCarga.Value, ClienteActual.TipoCliente);
+                // ActualizarFinCarga(ProximoFinCarga.Value, ClienteActual.TipoCliente);
             }
 
 
@@ -133,20 +148,21 @@ namespace Colas.Servidores
         }
 
 
-        public Uniforme DistribucionCargaAuto { get; protected set; }
-        public Uniforme DistribucionCargaCamion { get; protected set; }
-        public Uniforme DistribucionCursoAgua { get; protected set; }
-        public string Nombre { get; protected set; }
-        public DateTime? ProximoFinCarga { get; protected set; }
-        public DateTime? ProximoFinMantenimiento { get; protected set; }
-        public DateTime? ProximoFinCursoAgua { get; protected set; }
-        public DateTime? ProximoFinDescarga { get; protected set; }
-        public string Estado { get; protected set; }
-        public ICola Cola { get; protected set; }
-        public Cliente ClienteActual { get; protected set; }
-        public int CantidadAtendidos { get; protected set; }
-        public int CantidadMaxima { get; protected set; }
-        public string Ubicacion { get; protected set; }
-        public DateTime UltimaCruzadaAgua { get; protected set; }
+        public Uniforme DistribucionCargaAuto { get; set; }
+        public Uniforme DistribucionCargaCamion { get; set; }
+        public Uniforme DistribucionCursoAgua { get; set; }
+        public string Nombre { get; set; }
+        public DateTime? ProximoFinCarga { get; set; }
+        public DateTime? ProximoFinMantenimiento { get; set; }
+        public DateTime? ProximoFinCursoAgua { get; set; }
+        public DateTime? ProximoFinDescarga { get; set; }
+        public string Estado { get; set; }
+        public ICola Cola { get; set; }
+        public Cliente ClienteActual { get; set; }
+        public int CantidadAtendidos { get; set; }
+        public int CantidadMaxima { get; set; }
+        public string Ubicacion { get; set; }
+        public DateTime UltimaCruzadaAgua { get; set; }
+        public List<Cliente> VehiculosABordo { get; set; }
     }
 }

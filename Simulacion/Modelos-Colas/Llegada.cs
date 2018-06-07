@@ -21,11 +21,13 @@ namespace Colas.Clientes
             Cierre = _horaFin;
         }
 
+        public void SetDistribucionLlegadas(Uniforme distribucion)
+        {
+            DistribucionLlegadas = distribucion;
+        }
+
         public void ActualizarLlegada()
         {
-            if (!ProximaLlegada.HasValue)
-                return;
-
             var demora = DistribucionLlegadas.GenerarVariableAleatoria();
 
             ProximaLlegada = ProximaLlegada.Value.AddMinutes(demora);

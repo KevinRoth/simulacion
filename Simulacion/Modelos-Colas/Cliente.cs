@@ -11,10 +11,26 @@ namespace Colas.Clientes
             TipoCliente = tipo;
         }
 
-        public void Llegar(DateTime horaLlegada)
+        public string Llegar(DateTime horaLlegada)
         {
             Estado = "Llegando";
             HoraLlegada = horaLlegada;
+
+            return ObtenerTipoVehiculo();
+        }
+
+        public string ObtenerTipoVehiculo()
+        {
+            var random = new Random().NextDouble();
+
+            if (random < 0.5)
+            {
+                return "Auto";
+            }
+            else
+            {
+                return "Camion";
+            }
         }
 
         public void ComenzarCarga(DateTime horaInicioAtencion, string servidor)
@@ -28,7 +44,7 @@ namespace Colas.Clientes
             var inicioAtencion = DateTimeConverter.EnMinutos(HoraInicioCarga);
             var finAtencion = DateTimeConverter.EnMinutos(horaFinAtencion);
 
-            TiempoCarga += finAtencion - inicioAtencion;
+          //  TiempoCarga += finAtencion - inicioAtencion;
         }
 
         public void Salir(DateTime horaSalida)
@@ -47,23 +63,20 @@ namespace Colas.Clientes
             Estado = "Saliendo";
         }
 
-        public decimal TiempoEspera()
-        {
-            return TiempoEnSistema - TiempoCarga;
-        }
+      
 
         public decimal TiempoDescargaVehiculo()
         {
             return TiempoDescarga / 2;
         }
         
-        public string Nombre { get; protected set; }
-        public DateTime HoraLlegada { get; protected set; }
-        public DateTime HoraInicioCarga { get; protected set; }
-        public string Estado { get; protected set; }
-        public decimal TiempoCarga { get; protected set; }
-        public decimal TiempoDescarga { get; protected set; }
-        public decimal TiempoEnSistema { get; protected set; }
-        public string TipoCliente { get; protected set; }
+        public string Nombre { get;  set; }
+        public DateTime HoraLlegada { get; set; }
+        public DateTime HoraInicioCarga { get; set; }
+        public string Estado { get; set; }
+        public double TiempoCarga { get; set; }
+        public decimal TiempoDescarga { get; set; }
+        public decimal TiempoEnSistema { get; set; }
+        public string TipoCliente { get; set; }
     }
 }
