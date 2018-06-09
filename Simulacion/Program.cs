@@ -16,7 +16,7 @@ namespace Simulacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TP_5());
+            Application.Run(new TP_COLAS());
         }
     }
 }

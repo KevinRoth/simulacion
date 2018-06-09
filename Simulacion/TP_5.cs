@@ -38,7 +38,6 @@ namespace Simulacion
             var transbordador2 = new Servidor(distribucionCargaAuto, distribucionCargaCamion, distribucionCursoAgua,
                 colaRecepcion, "Transbordador 2", 20);
 
-            Distribucion distribucionLlegadas;
             Llegada llegadasContinente;
             Llegada llegadasIsla;
 
@@ -149,7 +148,6 @@ namespace Simulacion
                                     {
                                         colaEnContinente.First().TipoCliente = ObtenerTipoVehiculo();
                                         transbordador1.ActualizarFinCarga(relojActual, colaEnContinente.First());
-                                        
                                     }
                                     else
                                     {
@@ -169,6 +167,17 @@ namespace Simulacion
                             {
                                 colaEnContinente.Add(clienteContinente);
                             }
+                        
+                            CargarGrilla(relojActual.ToString("HH:mm:ss"), eventoActual, dia.ToString(),transbordador1.Estado, transbordador2.Estado, 
+                                transbordador1.Ubicacion, transbordador2.Ubicacion, colaEnContinente.First().TipoCliente, (llegadasContinente.ProximaLlegada - relojActual).Value.ToString("HH:mm:ss"),llegadasContinente.ProximaLlegada.Value.ToString("HH:mm:ss"),
+                                colaEnContinente.Count.ToString(), 
+                                (transbordador1.ProximoFinCarga - relojActual).Value.ToString("HH:mm:ss"), transbordador1.ProximoFinCarga.Value.ToString("HH:mm:ss"), 
+                                transbordador1.VehiculosABordo.Where(vehiculo => vehiculo.TipoCliente == "Auto").ToList().Count.ToString(),
+                                transbordador1.VehiculosABordo.Where(vehiculo => vehiculo.TipoCliente == "Camion").ToList().Count.ToString(),
+                                string.Empty,string.Empty,string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, 
+                                string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                                string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, 
+                                string.Empty, string.Empty, string.Empty, string.Empty);
 
                             break;
 
@@ -212,6 +221,8 @@ namespace Simulacion
                         case "Cierre":
                             llegadasContinente.Cerrar();
                             llegadasIsla.Cerrar();
+
+
                             break;
 
                         case "Fin Carga Transbordador 1":
@@ -293,7 +304,8 @@ namespace Simulacion
 
                             if (transbordador1.VehiculosABordo.Count > 0)
                             {
-                                transbordador1.ProximoFinDescarga = new DateTime(long.Parse((transbordador1.VehiculosABordo.First().TiempoCarga / 2).ToString()));
+                                transbordador1.ProximoFinDescarga = new DateTime(
+                                    long.Parse((transbordador1.VehiculosABordo.First().TiempoCarga / 2).ToString()));
                                 transbordador1.VehiculosABordo.RemoveAt(0);
                             }
 
@@ -304,16 +316,19 @@ namespace Simulacion
 
                             if (transbordador2.VehiculosABordo.Count > 0)
                             {
-                                transbordador2.ProximoFinDescarga = new DateTime(long.Parse((transbordador2.VehiculosABordo.First().TiempoCarga / 2).ToString()));
+                                transbordador2.ProximoFinDescarga = new DateTime(
+                                    long.Parse((transbordador2.VehiculosABordo.First().TiempoCarga / 2).ToString()));
                                 transbordador2.VehiculosABordo.RemoveAt(0);
                             }
+
                             break;
 
                         case "Fin Descarga Transbordador 1":
 
                             if (transbordador1.VehiculosABordo.Count > 0)
                             {
-                                transbordador1.ProximoFinDescarga = new DateTime(long.Parse((transbordador1.VehiculosABordo.First().TiempoCarga / 2).ToString()));
+                                transbordador1.ProximoFinDescarga = new DateTime(
+                                    long.Parse((transbordador1.VehiculosABordo.First().TiempoCarga / 2).ToString()));
                                 transbordador1.VehiculosABordo.RemoveAt(0);
                             }
                             else
@@ -326,7 +341,8 @@ namespace Simulacion
                         case "Fin Descarga Transbordador 2":
                             if (transbordador2.VehiculosABordo.Count > 0)
                             {
-                                transbordador2.ProximoFinDescarga = new DateTime(long.Parse((transbordador2.VehiculosABordo.First().TiempoCarga / 2).ToString()));
+                                transbordador2.ProximoFinDescarga = new DateTime(
+                                    long.Parse((transbordador2.VehiculosABordo.First().TiempoCarga / 2).ToString()));
                                 transbordador2.VehiculosABordo.RemoveAt(0);
                             }
                             else
@@ -362,6 +378,30 @@ namespace Simulacion
                     }
                 }
             }
+        }
+
+        public void CargarGrilla(string reloj, string evento, string dia, string estadoT1, string estadoT2,
+            string lugarT1, string lugarT2, string tipoVehiculo, string horaLlegada, string proximaLlegada,
+            string colaEspera, string horaCarga, string proximoFinCarga, string autoSubidoT1, string camionSubidoT1,
+            string autoSubidoT2, string camionSubidoT2, string cruceAguaT1, string llegadaCruceAguaT1,
+            string cruceAguaT2,
+            string llegadaCruceAguaT2, string horaDescargaT1, string finDescargaT1, string horaDescargaT2,
+            string finDescargaT2,
+            string autoSubidoT1Descarga, string camionSubidoT1Descarga, string autoSubidoT2Descarga,
+            string camionSubidoT2Descarga,
+            string mantencionT1, string inicioT1, string finT1, string mantencionT2, string inicioT2, string finT2,
+            string colaMaxima,
+            string sumatoriaAutoT1, string sumatoriaCamionT1, string sumatoriaAutoT2, string sumatoriaCamionT2)
+
+        {
+            dgv_simulacion.Rows.Add(reloj, evento, dia, estadoT1, estadoT2, lugarT1, lugarT2, tipoVehiculo, horaLlegada,
+                proximaLlegada,
+                colaEspera, horaCarga, proximoFinCarga, autoSubidoT1, camionSubidoT1,
+                autoSubidoT2, camionSubidoT2, cruceAguaT1, llegadaCruceAguaT1, cruceAguaT2,
+                llegadaCruceAguaT2, horaDescargaT1, finDescargaT1, horaDescargaT2, finDescargaT2,
+                autoSubidoT1Descarga, camionSubidoT1Descarga, autoSubidoT2Descarga, camionSubidoT2Descarga,
+                mantencionT1, inicioT1, finT1, mantencionT2, inicioT2, finT2, colaMaxima,
+                sumatoriaAutoT1, sumatoriaCamionT1, sumatoriaAutoT2, sumatoriaCamionT2);
         }
 
         public string ObtenerTipoVehiculo()

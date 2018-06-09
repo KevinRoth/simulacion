@@ -41,12 +41,24 @@ namespace Simulacion.Modelos.Distribuciones
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        public Generado GenerarVariableAleatoria(int i)
+        public Generado GenerarVariableAleatoria(int i = 0)
         {
             var x = A + Generador.GenerarAleatorio(i).NumAleatorio * (B - A);
 
             Generado.NumAleatorio = x;
             Generado.Iteracion = i;
+            
+
+            return Generado;
+        }
+        public Generado GenerarVariableAleatoria(double random)
+        {
+            var x = A + random * (B - A);
+            Generado = new Generado();
+
+            Generado.NumAleatorio = x;
+            Generado.Iteracion = 0;
+
 
             return Generado;
         }

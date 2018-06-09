@@ -55,6 +55,9 @@
     <Compile Include="Grafica1.Designer.cs">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos-Colas-2\DateTimeConverter.cs" />
+    <Compile Include="Modelos-Colas-2\Llegada.cs" />
+    <Compile Include="Modelos-Colas-2\Vehiculo.cs" />
     <Compile Include="Modelos-Colas\Cliente.cs" />
     <Compile Include="Modelos-Colas\ColaFifo.cs" />
     <Compile Include="Modelos-Colas\DateTimeConverter.cs" />
@@ -101,6 +104,12 @@
     <Compile Include="TP_5.Designer.cs">
       <DependentUpon>TP_5.cs</DependentUpon>
     </Compile>
+    <Compile Include="TP_COLAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TP_COLAS.Designer.cs">
+      <DependentUpon>TP_COLAS.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Grafica1.resx">
       <DependentUpon>Grafica1.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TP_5.resx">
       <DependentUpon>TP_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TP_COLAS.resx">
+      <DependentUpon>TP_COLAS.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

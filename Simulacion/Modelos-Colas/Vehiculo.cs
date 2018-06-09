@@ -22,14 +22,14 @@ namespace Simulacion.Modelos_Colas
 
         }
 
-        public Vehiculo ObtenerLlegadaVehiculo(double a, double b, DateTime reloj)
+        public void ObtenerLlegadaVehiculo(double a, double b, DateTime reloj)
         {
             var randomTipoVehiculo = new Random();
 
             if (randomTipoVehiculo.NextDouble() > 0.50)//es camion
             {
                 var uniforme = new Uniforme(a, b).GenerarVariableAleatoria();
-                var h = new DateTime(uniforme);
+              //  var h = new DateTime(uniforme);
                 var horaLlegada = DateTimeConverter.DesdeHoras(Decimal.Parse(uniforme.ToString(CultureInfo.InvariantCulture)));
 
                 var proximaLlegada = reloj + horaLlegada;
