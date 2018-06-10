@@ -27,7 +27,7 @@ namespace Simulacion
             var distribucionLlegadaCamionesContinenteAIslaDe11A1930 = new Uniforme(110, 130);
 
             var distribucionLlegadaCamionesIslaAContinenteDe10A18 = new Uniforme(30, 90);
-            var distribucionLlegadaAutosIslaAContinenteDe10A18 = new Uniforme(30, 90);
+            var distribucionLlegadaAutosIslaAContinenteDe10A18 = new Uniforme(7, 17);
 
             var distribucionCargaAuto = new Uniforme(1, 3);
             var distribucionCargaCamion = new Uniforme(3, 5);
@@ -39,9 +39,17 @@ namespace Simulacion
                 distribucionLlegadaAutosIslaAContinenteDe10A18, distribucionLlegadaCamionesContinenteAIslaDe7A11,
                 distribucionLlegadaCamionesIslaAContinenteDe10A18, horaInicio, horaFin);
 
+            var transbordador1 = new Transbordador("Continente", distribucionCargaAuto, distribucionCargaCamion, 10);
+            var transbordador2 = new Transbordador("Continente", distribucionCargaAuto, distribucionCargaCamion, 20);
+
             var dias = int.Parse(txt_dias.Text);
             var desde = int.Parse(txt_desde.Text);
             var hasta = int.Parse(txt_hasta.Text);
+
+            var colaVehiculosContinente = new List<Vehiculo>();
+            var colaVehiculosIsla = new List<Vehiculo>();
+
+            Random random = new Random();
 
             for (var dia = 1; dia <= dias; dia++)
             {
@@ -50,17 +58,51 @@ namespace Simulacion
                 //  while (llegadas.EstaAbierto(reloj) ||
                 //       !llegadas.EstaCerrado(reloj))
                 //{
-                var llegadaAutoC = llegadas.ObtenerLlegadaVehiculo("Auto", "Continente", reloj);
+                llegadas.ObtenerLlegadaVehiculo("Auto", "Continente", reloj, random.NextDouble());
+                var llegadaAutoC = llegadas.LlegadaActual;
+                colaVehiculosContinente.Add(llegadaAutoC.Vehiculo);
 
-                var llegadaCamionC = llegadas.ObtenerLlegadaVehiculo("Camion", "Continente", reloj);
+                llegadas.ObtenerLlegadaVehiculo("Camion", "Continente", reloj, random.NextDouble());
+                var llegadaCamionC = llegadas.LlegadaActual;
+                colaVehiculosContinente.Add(llegadaCamionC.Vehiculo);
 
-                var llegadaAutoI = llegadas.ObtenerLlegadaVehiculo("Auto", "Isla", reloj);
+                llegadas.ObtenerLlegadaVehiculo("Auto", "Isla", reloj, random.NextDouble());
+                var llegadaAutoI = llegadas.LlegadaActual;
+                colaVehiculosIsla.Add(llegadaAutoI.Vehiculo);
 
-                var llegadaCamionI = llegadas.ObtenerLlegadaVehiculo("Camion", "Isla", reloj);
+                llegadas.ObtenerLlegadaVehiculo("Camion", "Isla", reloj, random.NextDouble());
+                var llegadaCamionI = llegadas.LlegadaActual;
+                colaVehiculosIsla.Add(llegadaCamionI.Vehiculo);
 
                 GuardarEnGrilla(dia, reloj, llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI);
 
-                horaInicio.AddHours(14);
+                if (transbordador1.Ubicacion == "Continente")
+                {
+                    if (transbordador1.EstaLibre() && transbordador1.Vehiculos.Count + colaVehiculosContinente.First().Tamanio <= 10)
+                    {
+                        transbordador1.CargarVehiculo(colaVehiculosContinente.First());
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                else
+                {
+
+                }
+            
+                if (transbordador2.Ubicacion == "Continente")
+                {
+
+                }
+                else
+                {
+
+                }
+
+
+
                 // }
             }
         }
@@ -68,14 +110,32 @@ namespace Simulacion
         private void GuardarEnGrilla(int dia, DateTime reloj, Llegada llegadaAutoC, Llegada llegadaCamionC,
             Llegada llegadaAutoI, Llegada llegadaCamionI)
         {
-            dgv_simulaciones.Rows.Add(reloj, dia, llegadaAutoC.ObtenerEvento(), llegadaAutoC.RandomLlegada,
-                llegadaAutoC.TiempoEntreLlegadas, llegadaAutoC.ProximaLlegada,
-                llegadaCamionC.RandomLlegada, llegadaCamionC.TiempoEntreLlegadas, llegadaCamionC.ProximaLlegada,
-                llegadaAutoI.RandomLlegada, llegadaAutoI.TiempoEntreLlegadas, llegadaAutoI.ProximaLlegada,
-                llegadaCamionI.RandomLlegada, llegadaCamionI.TiempoEntreLlegadas, llegadaCamionI.ProximaLlegada
+            dgv_simulaciones.Rows.Add(
+                dia,
+                reloj.ToString("HH:mm:ss"),
+                llegadaAutoC.ObtenerEvento(),
+                TruncateFunction(llegadaAutoC.RandomLlegada, 3),
+                llegadaAutoC.TiempoEntreLlegadas.ToString("HH:mm:ss"),
+                llegadaAutoC.ProximaLlegada.ToString("HH:mm:ss"),
+                TruncateFunction(llegadaCamionC.RandomLlegada, 3),
+                llegadaCamionC.TiempoEntreLlegadas.ToString("HH:mm:ss"),
+                llegadaCamionC.ProximaLlegada.ToString("HH:mm:ss"),
+                TruncateFunction(llegadaAutoI.RandomLlegada, 2),
+                llegadaAutoI.TiempoEntreLlegadas.ToString("HH:mm:ss"),
+                llegadaAutoI.ProximaLlegada.ToString("HH:mm:ss"),
+                TruncateFunction(llegadaCamionI.RandomLlegada, 2),
+                llegadaCamionI.TiempoEntreLlegadas.ToString("HH:mm:ss"),
+                llegadaCamionI.ProximaLlegada.ToString("HH:mm:ss")
             );
 
             Application.DoEvents();
+        }
+
+        public double TruncateFunction(double number, int digits)
+        {
+            double stepper = (double) (Math.Pow(10.0, (double) digits));
+            int temp = (int) (stepper * number);
+            return (double) temp / stepper;
         }
     }
 }

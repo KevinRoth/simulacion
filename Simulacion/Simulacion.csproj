@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Modelos-Colas-2\DateTimeConverter.cs" />
     <Compile Include="Modelos-Colas-2\Llegada.cs" />
+    <Compile Include="Modelos-Colas-2\Transbordador.cs" />
     <Compile Include="Modelos-Colas-2\Vehiculo.cs" />
     <Compile Include="Modelos-Colas\Cliente.cs" />
     <Compile Include="Modelos-Colas\ColaFifo.cs" />
