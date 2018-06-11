@@ -149,6 +149,16 @@ namespace Simulacion.Modelos_Colas_2
             return cola;
         }
 
+        public void SetDistribucionLlegadaAutosContinente(Uniforme distribucion)
+        {
+            DistribucionLlegadasAutosContinente = distribucion;
+        }
+
+        public void SetDistribucionLlegadaCamionesContinente(Uniforme distribucion)
+        {
+            DistribucionLlegadasCamionesContinente = distribucion;
+        }
+
         public Llegada ObtenerLlegada()
         {
             return this;

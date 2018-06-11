@@ -63,6 +63,12 @@ namespace Simulacion.Modelos_Colas_2
                     return colaVehiculos;
                 }
 
+                if (Capacidad == 0)
+                {
+                    Estado = "Para irse a la mocha";
+                    return colaVehiculos;
+                }
+
                 if (ProximaCarga == new DateTime())
                 {
                     Capacidad--;
@@ -90,6 +96,12 @@ namespace Simulacion.Modelos_Colas_2
             {
                 if (reloj < colaVehiculos.First().ProximaLlegada)
                 {
+                    return colaVehiculos;
+                }
+
+                if (Capacidad <= 1)
+                {
+                    Estado = "Para irse a la mocha";
                     return colaVehiculos;
                 }
 

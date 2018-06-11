@@ -49,6 +49,9 @@ namespace Simulacion
 
         int dia = 1;
 
+        private int maximaColaContinente = 0;
+        private int maximaColaIsla = 0;
+
 
         DateTime reloj;
 
@@ -84,13 +87,30 @@ namespace Simulacion
                 llegadaCamionI, colaVehiculosContinente, colaVehiculosIsla);
 
             GuardarEnGrilla(1, reloj, llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI, transbordador1,
-                transbordador2, colaVehiculosContinente,colaVehiculosIsla,"Llegada");
+                transbordador2, colaVehiculosContinente, colaVehiculosIsla, "Llegada", maximaColaContinente, maximaColaIsla);
 
             reloj = reloj.AddMinutes(30);
 
+            var terminarDia = false;
 
-            while (llegadas.EstaCerrado(reloj))
+            do
             {
+                if (reloj >= horaFin)
+                {
+                    break;
+                }
+
+                if (llegadaAutoC.DistribucionLlegadasAutosContinente.HoraFin < reloj)
+                {
+                    llegadaAutoC.SetDistribucionLlegadaAutosContinente(distribucionLlegadaAutosContinenteAIslaDe12A19);
+                }
+
+                if (llegadaCamionC.DistribucionLlegadasCamionesContinente.HoraFin < reloj)
+                {
+                    llegadaCamionC.SetDistribucionLlegadaCamionesContinente(
+                        distribucionLlegadaCamionesContinenteAIslaDe11A1930);
+                }
+
                 ObtenerLlegadas(horaInicio, horaFin, reloj, llegadas, llegadaAutoC, llegadaCamionC, llegadaAutoI,
                     llegadaCamionI, colaVehiculosContinente, colaVehiculosIsla);
 
@@ -104,7 +124,7 @@ namespace Simulacion
                 }
                 else
                 {
-                    if (transbordador1.EstaLibre() && colaVehiculosContinente.Any() &&
+                    if (transbordador1.EstaLibre() && colaVehiculosIsla.Any() &&
                         transbordador1.Vehiculos.Count + colaVehiculosIsla.First().Tamanio <= 10)
                     {
                         colaVehiculosIsla = transbordador1.CargarVehiculo(colaVehiculosIsla, reloj);
@@ -114,19 +134,28 @@ namespace Simulacion
                 if (transbordador2.Ubicacion == "Continente")
                 {
                     if (transbordador2.EstaLibre() && colaVehiculosContinente.Any() &&
-                        transbordador2.Vehiculos.Count + colaVehiculosContinente.First().Tamanio <= 10)
+                        transbordador2.Vehiculos.Count + colaVehiculosContinente.First().Tamanio <= 20)
                     {
                         colaVehiculosContinente = transbordador2.CargarVehiculo(colaVehiculosContinente, reloj);
                     }
                     else
                     {
-                        if (transbordador2.EstaLibre() && colaVehiculosContinente.Any() &&
-                            transbordador2.Vehiculos.Count + colaVehiculosIsla.First().Tamanio <= 10)
+                        if (transbordador2.EstaLibre() && colaVehiculosIsla.Any() &&
+                            transbordador2.Vehiculos.Count + colaVehiculosIsla.First().Tamanio <= 20)
                         {
                             colaVehiculosIsla = transbordador2.CargarVehiculo(colaVehiculosIsla, reloj);
                         }
                     }
                 }
+
+                maximaColaContinente = maximaColaContinente < colaVehiculosContinente.Count
+                    ? maximaColaContinente = colaVehiculosContinente.Count
+                    : maximaColaContinente;
+
+                maximaColaIsla = maximaColaIsla < colaVehiculosIsla.Count
+                    ? maximaColaIsla = colaVehiculosIsla.Count
+                    : maximaColaIsla;
+
 
                 var eventos = new List<Evento>
                 {
@@ -135,8 +164,8 @@ namespace Simulacion
                     new Evento("Llegada Camion Continente", llegadaCamionC.ProximaLlegada),
                     new Evento("Llegada Camion Isla", llegadaCamionI.ProximaLlegada),
                     new Evento("Cierre", horaFin),
-                    new Evento("Carga Vehiculo Transbordador 1", transbordador1.ProximaCarga),
-                    new Evento("Carga Vehiculo Transbordador 2", transbordador2.ProximaCarga),
+                    new Evento("Fin Carga Vehiculo Transbordador 1", transbordador1.ProximaCarga),
+                    new Evento("Fin Carga Vehiculo Transbordador 2", transbordador2.ProximaCarga),
                 };
 
                 // ReSharper disable once PossibleInvalidOperationException
@@ -150,78 +179,107 @@ namespace Simulacion
                 switch (eventoActual)
                 {
                     case "Llegada Auto Continente":
+
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima llegada para generar una nueva llegada
                         llegadaAutoC.ProximaLlegada = new DateTime();
+
                         break;
 
                     case "Llegada Auto Isla":
+
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima llegada para generar una nueva llegada
                         llegadaAutoI.ProximaLlegada = new DateTime();
+
                         break;
 
                     case "Llegada Camion Continente":
+
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima llegada para generar una nueva llegada
-                        llegadaCamionC.ProximaLlegada = new DateTime(); 
+                        llegadaCamionC.ProximaLlegada = new DateTime();
+
                         break;
 
                     case "Llegada Camion Isla":
+
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima llegada para generar una nueva llegada
                         llegadaCamionI.ProximaLlegada = new DateTime();
+
                         break;
 
-                    case "Carga Vehiculo Transbordador 1":
+                    case "Fin Carga Vehiculo Transbordador 1":
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima carga para generar una nueva carga
+                        transbordador1.Estado = "Libre";
                         transbordador1.ProximaCarga = new DateTime();
+
                         break;
 
-                    case "Carga Vehiculo Transbordador 2":
+                    case "Fin Carga Vehiculo Transbordador 2":
+
+
                         GuardarEnGrilla(dia, reloj,
                             llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                             transbordador1, transbordador2,
-                            colaVehiculosContinente, colaVehiculosIsla, eventoActual);
+                            colaVehiculosContinente, colaVehiculosIsla, eventoActual,
+                            maximaColaContinente, maximaColaIsla);
+
                         //Inicializo para que cumpla con la condicion de la clase: 
                         //no tiene que existir una proxima carga para generar una nueva carga
+                        transbordador2.Estado = "Libre";
                         transbordador2.ProximaCarga = new DateTime();
+
                         break;
                 }
 
-                //  GuardarEnGrilla(dia, reloj,
-                //    llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
-                //  transbordador1, transbordador2,
-                // colaVehiculosContinente, colaVehiculosIsla);
+              
                 //  }
-            }
+            } while (reloj <= horaFin);
         }
 
         private void GuardarEnGrilla(int dia, DateTime reloj, Llegada llegadaAutoC, Llegada llegadaCamionC,
             Llegada llegadaAutoI, Llegada llegadaCamionI, Transbordador transbordador1,
             Transbordador transbordador2,
-            List<Vehiculo> colaContinente, List<Vehiculo> colaIsla, string eventoActual)
+            List<Vehiculo> colaContinente, List<Vehiculo> colaIsla, string eventoActual,
+            int maximaColaContinente, int maximaColaIsla)
         {
             dgv_simulaciones.Rows.Add(
                 dia,
@@ -252,9 +310,9 @@ namespace Simulacion
                 transbordador2.ProximaCarga.ToString("HH:mm:ss"),
                 transbordador2.Capacidad,
                 colaContinente.Count,
-                "cola maxima cont",
+                maximaColaContinente,
                 colaIsla.Count,
-                "cola maxima isla"
+                maximaColaIsla
             );
 
             Application.DoEvents();
