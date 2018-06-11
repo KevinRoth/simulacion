@@ -22,6 +22,28 @@ namespace Simulacion.Modelos_Colas_2
         public DateTime HoraFin { get; set; }
         public Llegada LlegadaActual { get; set; }
 
+        public Llegada(Uniforme distribucion, string tipoVehiculo, string ubicacion)
+        {
+            if (tipoVehiculo == "Auto" && ubicacion == "Continente")
+            {
+                DistribucionLlegadasAutosContinente = distribucion;
+            }
+
+            if (tipoVehiculo == "Auto" && ubicacion == "Isla")
+            {
+                DistribucionLlegadasAutosIsla = distribucion;
+            }
+
+            if (tipoVehiculo == "Camion" && ubicacion == "Continente")
+            {
+                DistribucionLlegadasCamionesContinente = distribucion;
+            }
+
+            if (tipoVehiculo == "Camion" && ubicacion == "Isla")
+            {
+                DistribucionLlegadasCamionesIsla = distribucion;
+            }
+        }
 
         public Llegada(Uniforme distribucionLlegadasAutosContinente, Uniforme distribucionLlegadasAutosIsla,
             Uniforme distribucionLlegadasCamionesContinente, Uniforme distribucionLlegadasCamionesIsla, DateTime inicio,
@@ -34,8 +56,8 @@ namespace Simulacion.Modelos_Colas_2
             HoraInicio = inicio;
             HoraFin = fin;
 
-            TiempoEntreLlegadas = new DateTime();
-            ProximaLlegada = new DateTime();
+            TiempoEntreLlegadas = DateTime.Today;
+            ProximaLlegada = DateTime.Today;
         }
 
         public Llegada(double random, DateTime tiempoentrellegadas, DateTime proximallegada, Vehiculo vehiculo)
@@ -46,57 +68,85 @@ namespace Simulacion.Modelos_Colas_2
             Vehiculo = vehiculo;
         }
 
-        public void ObtenerLlegadaVehiculo(string tipoVehiculo, string ubicacion, DateTime reloj, double random)
+        public List<Vehiculo> ObtenerLlegadaVehiculo(string tipoVehiculo, string ubicacion, DateTime reloj,
+            double random, List<Vehiculo> cola)
         {
             if (tipoVehiculo == "Auto" && ubicacion == "Continente")
             {
-                RandomLlegada = random;
-                var generado = DistribucionLlegadasAutosContinente.GenerarVariableAleatoria(RandomLlegada);
-                TiempoEntreLlegadas = new DateTime().AddMinutes(generado.NumAleatorio);
-                var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-                ProximaLlegada = proximaLlegada;
-                Vehiculo = new Vehiculo("Auto");
-                LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                if (ProximaLlegada == new DateTime())
+                {
+                    RandomLlegada = random;
+                    var generado = DistribucionLlegadasAutosContinente.GenerarVariableAleatoria(RandomLlegada);
+                    TiempoEntreLlegadas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaLlegada = proximaLlegada;
+                    Vehiculo = new Vehiculo("Auto", ProximaLlegada);
+                    LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                    cola.Add(Vehiculo);
+                }
+
+                return cola;
             }
 
             if (tipoVehiculo == "Auto" && ubicacion == "Isla")
             {
-                RandomLlegada = random;
-                var generado = DistribucionLlegadasAutosIsla.GenerarVariableAleatoria(RandomLlegada);
+                if (ProximaLlegada == new DateTime())
+                {
+                    RandomLlegada = random;
+                    var generado = DistribucionLlegadasAutosIsla.GenerarVariableAleatoria(RandomLlegada);
 
-                TiempoEntreLlegadas = new DateTime().AddMinutes(generado.NumAleatorio);
-                var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-                ProximaLlegada = proximaLlegada;
-                Vehiculo = new Vehiculo("Auto");
+                    TiempoEntreLlegadas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaLlegada = proximaLlegada;
+                    Vehiculo = new Vehiculo("Auto", ProximaLlegada);
 
-                var llegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                    var llegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
 
-                LlegadaActual = llegadaActual;
+                    LlegadaActual = llegadaActual;
+
+                    cola.Add(Vehiculo);
+                }
+
+                return cola;
             }
 
             if (tipoVehiculo == "Camion" && ubicacion == "Continente")
             {
-                RandomLlegada = random;
-                var generado = DistribucionLlegadasCamionesContinente.GenerarVariableAleatoria(RandomLlegada);
-                TiempoEntreLlegadas = new DateTime().AddMinutes(generado.NumAleatorio);
-                var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-                ProximaLlegada = proximaLlegada;
-                Vehiculo = new Vehiculo("Camion");
+                if (ProximaLlegada == new DateTime())
+                {
+                    RandomLlegada = random;
+                    var generado = DistribucionLlegadasCamionesContinente.GenerarVariableAleatoria(RandomLlegada);
+                    TiempoEntreLlegadas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaLlegada = proximaLlegada;
+                    Vehiculo = new Vehiculo("Camion", ProximaLlegada);
 
-                LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                    LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+
+                    cola.Add(Vehiculo);
+                }
+
+                return cola;
             }
 
             if (tipoVehiculo == "Camion" && ubicacion == "Isla")
             {
-                RandomLlegada = random;
-                var generado = DistribucionLlegadasCamionesIsla.GenerarVariableAleatoria(RandomLlegada);
-                TiempoEntreLlegadas = new DateTime().AddMinutes(generado.NumAleatorio);
-                var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-                ProximaLlegada = proximaLlegada;
-                Vehiculo = new Vehiculo("Camion");
+                if (ProximaLlegada == new DateTime())
+                {
+                    RandomLlegada = random;
+                    var generado = DistribucionLlegadasCamionesIsla.GenerarVariableAleatoria(RandomLlegada);
+                    TiempoEntreLlegadas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaLlegada = TiempoEntreLlegadas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaLlegada = proximaLlegada;
+                    Vehiculo = new Vehiculo("Camion", ProximaLlegada);
 
-                LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                    LlegadaActual = new Llegada(RandomLlegada, TiempoEntreLlegadas, ProximaLlegada, Vehiculo);
+                }
+
+                return cola;
             }
+
+            return cola;
         }
 
         public Llegada ObtenerLlegada()

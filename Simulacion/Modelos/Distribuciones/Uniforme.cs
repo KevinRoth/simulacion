@@ -12,6 +12,8 @@ namespace Simulacion.Modelos.Distribuciones
         public double B { get; set; }
         public Generado Generado { get; protected set; }
         public GeneradorLenguaje Generador { get; protected set; }
+        public DateTime HoraInicio { get; set; }
+        public DateTime HoraFin { get; set; }
 
         public Uniforme()
         {
@@ -24,6 +26,14 @@ namespace Simulacion.Modelos.Distribuciones
         {
             A = a;
             B = b;
+        }
+
+        public Uniforme(double a, double b, double horaInicio, double horaFin)
+        {
+            A = a;
+            B = b;
+            HoraInicio = DateTime.Today.AddMinutes(horaInicio);
+            HoraFin = DateTime.Today.AddMinutes(horaFin);
         }
 
         /// <summary>

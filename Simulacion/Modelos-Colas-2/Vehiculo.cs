@@ -9,6 +9,7 @@ namespace Simulacion.Modelos_Colas_2
     public class Vehiculo
     {
         public string TipoVehiculo { get; set; }
+        public DateTime ProximaLlegada { get; set; }
         public DateTime TiempoCarga { get; set; }
         public string Estado { get; set; }
         public int Tamanio { get; set; }
@@ -17,10 +18,11 @@ namespace Simulacion.Modelos_Colas_2
         {
         }
 
-        public Vehiculo(string tipo)
+        public Vehiculo(string tipo, DateTime proximaLlegada)
         {
             TipoVehiculo = tipo;
             Estado = "En cola";
+            ProximaLlegada = proximaLlegada;
 
             if (TipoVehiculo == "Camion")
             {
@@ -32,19 +34,6 @@ namespace Simulacion.Modelos_Colas_2
             }
         }
 
-        public Vehiculo(string tipo, DateTime tiempoCarga)
-        {
-            TipoVehiculo = tipo;
-            TiempoCarga = tiempoCarga;
-
-            if (TipoVehiculo == "Camion")
-            {
-                Tamanio = 2;
-            }
-            else
-            {
-                Tamanio = 1;
-            }
-        }
+    
     }
 }

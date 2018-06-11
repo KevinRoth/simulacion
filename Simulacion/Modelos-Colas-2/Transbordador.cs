@@ -19,14 +19,15 @@ namespace Simulacion.Modelos_Colas_2
         public DateTime TiempoEntreCargas { get; set; }
         public DateTime ProximaCarga { get; set; }
         public Transbordador TransbordadorActual { get; set; }
+        public Vehiculo VehiculoActual { get; set; }
+        public string Nombre { get; set; }
 
         public Transbordador()
         {
-
         }
 
         public Transbordador(string ubicacion, Uniforme distribucionCargaAutos,
-            Uniforme distribucionCargaCamiones, int capacidad)
+            Uniforme distribucionCargaCamiones, int capacidad, string nombre)
         {
             Ubicacion = ubicacion;
             DistribucionCargaAutos = distribucionCargaAutos;
@@ -34,13 +35,15 @@ namespace Simulacion.Modelos_Colas_2
             Capacidad = capacidad;
             Estado = "Libre";
             Vehiculos = new List<Vehiculo>();
+            Nombre = nombre;
         }
 
-        public Transbordador(double random, DateTime tiempoentrecargas, DateTime proximacarga)
+        public Transbordador(double random, DateTime tiempoentrecargas, DateTime proximacarga, Vehiculo vehiculo)
         {
             RandomCargas = random;
             TiempoEntreCargas = tiempoentrecargas;
             ProximaCarga = proximacarga;
+            VehiculoActual = vehiculo;
         }
 
         public bool EstaLibre()
@@ -48,28 +51,71 @@ namespace Simulacion.Modelos_Colas_2
             return Estado.Equals("Libre");
         }
 
-        public Transbordador CargarVehiculo(Vehiculo vehiculo, DateTime reloj)
+        public List<Vehiculo> CargarVehiculo(List<Vehiculo> colaVehiculos, DateTime reloj)
         {
             Random random = new Random();
+            var vehiculo = colaVehiculos.First();
+
             if (vehiculo.TipoVehiculo == "Auto")
             {
-                Capacidad--;
-                RandomCargas = random.NextDouble();
-                DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
+                if (reloj < colaVehiculos.First().ProximaLlegada)
+                {
+                    return colaVehiculos;
+                }
 
-                var generado = DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
-                TiempoEntreCargas= new DateTime().AddMinutes(generado.NumAleatorio);
-                var proximaCarga = TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-                ProximaCarga = proximaCarga;
-                vehiculo.TiempoCarga = TiempoEntreCargas;
-                TransbordadorActual = new Transbordador(RandomCargas, TiempoEntreCargas, ProximaCarga);
+                if (ProximaCarga == new DateTime())
+                {
+                    Capacidad--;
+                    RandomCargas = random.NextDouble();
+                    DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
+
+                    var generado = DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
+                    TiempoEntreCargas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaCarga = TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaCarga = proximaCarga;
+                    Estado = "Ocupado";
+
+                    vehiculo.TiempoCarga = TiempoEntreCargas;
+                    vehiculo.Estado = $"Cargando en {Nombre}";
+
+                    Vehiculos.Add(vehiculo);
+                    TransbordadorActual = new Transbordador(RandomCargas, TiempoEntreCargas, ProximaCarga, vehiculo);
+
+                    colaVehiculos.Remove(colaVehiculos.First());
+                }
+
+                return colaVehiculos;
             }
             else
             {
+                if (reloj < colaVehiculos.First().ProximaLlegada)
+                {
+                    return colaVehiculos;
+                }
 
+                if (ProximaCarga == new DateTime())
+                {
+                    Capacidad -= 2;
+                    RandomCargas = random.NextDouble();
+                    DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
+
+                    var generado = DistribucionCargaCamiones.GenerarVariableAleatoria(RandomCargas);
+                    TiempoEntreCargas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    var proximaCarga = TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    ProximaCarga = proximaCarga;
+                    Estado = "Ocupado";
+
+                    vehiculo.TiempoCarga = TiempoEntreCargas;
+                    vehiculo.Estado = $"Cargando en {Nombre}";
+
+                    Vehiculos.Add(vehiculo);
+                    TransbordadorActual = new Transbordador(RandomCargas, TiempoEntreCargas, ProximaCarga, vehiculo);
+
+                    colaVehiculos.Remove(colaVehiculos.First());
+                }
+
+                return colaVehiculos;
             }
         }
-
-
     }
 }
