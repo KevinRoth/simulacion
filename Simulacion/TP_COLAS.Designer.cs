@@ -68,6 +68,16 @@
             this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_cantidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_simulaciones)).BeginInit();
             this.SuspendLayout();
@@ -182,7 +192,17 @@
             this.Column28,
             this.Column30,
             this.Column29,
-            this.Column31});
+            this.Column31,
+            this.Column32,
+            this.Column33,
+            this.Column34,
+            this.Column35,
+            this.Column36,
+            this.Column37,
+            this.Column38,
+            this.Column39,
+            this.Column40,
+            this.Column41});
             this.dgv_simulaciones.Location = new System.Drawing.Point(24, 132);
             this.dgv_simulaciones.Name = "dgv_simulaciones";
             this.dgv_simulaciones.Size = new System.Drawing.Size(1258, 461);
@@ -343,6 +363,56 @@
             this.Column31.HeaderText = "Maxima Cola Vehiculos Continente";
             this.Column31.Name = "Column31";
             // 
+            // Column32
+            // 
+            this.Column32.HeaderText = "Random Cruce Agua T1";
+            this.Column32.Name = "Column32";
+            // 
+            // Column33
+            // 
+            this.Column33.HeaderText = "Cruce Agua T1";
+            this.Column33.Name = "Column33";
+            // 
+            // Column34
+            // 
+            this.Column34.HeaderText = "Proxima Llegada Tierra T1";
+            this.Column34.Name = "Column34";
+            // 
+            // Column35
+            // 
+            this.Column35.HeaderText = "Random Cruce Agua T2";
+            this.Column35.Name = "Column35";
+            // 
+            // Column36
+            // 
+            this.Column36.HeaderText = "Cruce Agua T2";
+            this.Column36.Name = "Column36";
+            // 
+            // Column37
+            // 
+            this.Column37.HeaderText = "Proxima Llegada Tierra T2";
+            this.Column37.Name = "Column37";
+            // 
+            // Column38
+            // 
+            this.Column38.HeaderText = "Descarga Vehiculo T1";
+            this.Column38.Name = "Column38";
+            // 
+            // Column39
+            // 
+            this.Column39.HeaderText = "Proxima Descarga Vehiculo T1";
+            this.Column39.Name = "Column39";
+            // 
+            // Column40
+            // 
+            this.Column40.HeaderText = "Descarga Vehiculo T2";
+            this.Column40.Name = "Column40";
+            // 
+            // Column41
+            // 
+            this.Column41.HeaderText = "Proxima Descarga Vehiculo T2";
+            this.Column41.Name = "Column41";
+            // 
             // TP_COLAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,5 +472,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column29;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column38;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column39;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column40;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column41;
     }
 }
