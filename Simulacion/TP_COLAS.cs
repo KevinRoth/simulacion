@@ -98,9 +98,8 @@ namespace Simulacion
             proximaSalidaTransbordador1 = DateTime.Today.AddHours(9);
             proximaSalidaTransbordador2 = DateTime.Today.AddHours(10);
 
-            //  for (int dia = 1; dia <= dias; dia++)
-            //{
-            reloj = horaInicio;
+            
+            
 
             ObtenerLlegadas(horaInicio, horaFin, reloj, llegadas, llegadaAutoC, llegadaCamionC, llegadaAutoI,
                 llegadaCamionI, colaVehiculosContinente, colaVehiculosIsla);
@@ -113,16 +112,25 @@ namespace Simulacion
                 sumatoriaVehiculosNoAtendidosContinentePorDia, sumatoriaVehiculosNoAtendidosIslaPorDia);
 
             reloj = reloj.AddMinutes(30);
-
+            var eventoActual = "Llegada";
             var terminarDia = false;
 
-
-            do
+              for (int dia = 1; dia <= dias; dia++)
             {
-                //Mantenimiento de transbordadores
-                transbordador1.Mantenimiento = transbordador1.Mantenimiento--;
-                transbordador2.Mantenimiento = transbordador2.Mantenimiento--;
+                reloj = horaInicio;
 
+                if(eventoActual == "Cierre")
+                {
+                    reloj = horaInicio.AddDays(1);
+                    horaFin = horaFin.AddDays(1);
+                }
+
+                //Mantenimiento de transbordadores
+                transbordador1.Mantenimiento = transbordador1.Mantenimiento - 1;
+                transbordador2.Mantenimiento = transbordador2.Mantenimiento - 1;
+
+                do
+                {
 
                 if (transbordador1.EstaParaMantenimiento())
                 {
@@ -136,7 +144,11 @@ namespace Simulacion
                     transbordador2.ProximoFinMantenimiento = inicioAtencionTransbordadores.AddHours(5);
                 }
 
-                if (reloj >= horaFin)
+                if (reloj >= horaFin 
+                        && transbordador1.EstaLibre()
+                        && transbordador2.EstaLibre()
+                        && transbordador1.Ubicacion == "Continente"
+                        && transbordador2.Ubicacion == "Continente")
                 {
                     break;
                 }
@@ -213,6 +225,23 @@ namespace Simulacion
                                                              && transbordador1.EstaLibre())
                     {
                         transbordador1.ObtenerCruceAgua(reloj);
+
+                        if (transbordador1.Ubicacion == "Isla")
+                        {
+                            sumatoriaAutosTrasladadosDeIslaPorDia += transbordador1.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Auto").ToList().Count;
+
+                            sumatoriaCamionesTrasladadosDeIslaPorDia += transbordador1.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Camion").ToList().Count;
+                        }
+                        else
+                        {
+                            sumatoriaAutosTrasladadosDelContinentePorDia += transbordador1.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Auto").ToList().Count;
+
+                            sumatoriaCamionesTrasladadosDelContinentePorDia += transbordador1.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Camion").ToList().Count;
+                        }
                     }
                     else if (proximaSalidaTransbordador1 < reloj && colaVehiculosIsla.Any()
                                                                  && !transbordador1.EstaCruzandoAgua()
@@ -257,7 +286,7 @@ namespace Simulacion
                                 .Where(vehiculo => vehiculo.TipoVehiculo == "Camion").ToList().Count;
                         }
                     }
-                    else if (proximaSalidaTransbordador2 < reloj && colaVehiculosContinente.Any()
+                    else if (proximaSalidaTransbordador2 > reloj && colaVehiculosContinente.Any()
                                                                  && !transbordador2.EstaCruzandoAgua()
                                                                  && !transbordador2.EstaDescargando()
                                                                  && !transbordador2.EstaOcupado()
@@ -279,8 +308,25 @@ namespace Simulacion
                                                              && transbordador2.EstaLibre())
                     {
                         transbordador2.ObtenerCruceAgua(reloj);
+
+                        if (transbordador2.Ubicacion == "Isla")
+                        {
+                            sumatoriaAutosTrasladadosDeIslaPorDia += transbordador2.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Auto").ToList().Count;
+
+                            sumatoriaCamionesTrasladadosDeIslaPorDia += transbordador2.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Camion").ToList().Count;
+                        }
+                        else
+                        {
+                            sumatoriaAutosTrasladadosDelContinentePorDia += transbordador2.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Auto").ToList().Count;
+
+                            sumatoriaCamionesTrasladadosDelContinentePorDia += transbordador2.Vehiculos
+                                .Where(vehiculo => vehiculo.TipoVehiculo == "Camion").ToList().Count;
+                        }
                     }
-                    else if (proximaSalidaTransbordador2 < reloj && colaVehiculosIsla.Any()
+                    else if (proximaSalidaTransbordador2 > reloj && colaVehiculosIsla.Any()
                                                                  && !transbordador2.EstaCruzandoAgua()
                                                                  && !transbordador2.EstaDescargando()
                                                                  && !transbordador2.EstaOcupado()
@@ -331,7 +377,7 @@ namespace Simulacion
                 var relojActual = eventos.Where(ev => ev.Hora.HasValue && ev.Hora != new DateTime())
                     .Min(ev => ev.Hora)
                     .Value;
-                var eventoActual = eventos.First(ev => ev.Hora.Equals(relojActual)).Nombre;
+                eventoActual = eventos.First(ev => ev.Hora.Equals(relojActual)).Nombre;
 
                 reloj = relojActual;
 
@@ -553,20 +599,70 @@ namespace Simulacion
 
                         break;
 
-                    /*     case "Cierre":
+                    case "Cierre":
  
+                       if (reloj <= horaFin &&
+                                 transbordador1.Ubicacion == "Continente" && transbordador1.EstaLibre()
+                                 && transbordador2.Ubicacion == "Continente" && transbordador2.EstaLibre())
+                       {
+                                break;
+                       }
+                       else
+                       {
+                                if (transbordador1.EstaDescargando())
+                                {
+
+                                    if(transbordador1.ProximaDescarga != new DateTime())
+                                    {
+                                        transbordador1.DescargarVehiculo(reloj);
+                                    }
+                                }
+
+                                if (transbordador1.EstaCruzandoAgua() || transbordador1.Ubicacion == "Isla")
+                                {
+                                    if(transbordador1.ProximaLlegadaTierra != new DateTime())
+                                    {
+                                        transbordador1.ObtenerCruceAgua(reloj);
+                                    }
+                                }
+
+                                if (transbordador2.EstaDescargando())
+                                {
+
+                                    if (transbordador2.ProximaDescarga != new DateTime())
+                                    {
+                                        transbordador2.DescargarVehiculo(reloj);
+                                    }
+                                }
+
+                                if (transbordador2.EstaCruzandoAgua() || transbordador2.Ubicacion == "Isla")
+                                {
+                                    if (transbordador2.ProximaLlegadaTierra != new DateTime())
+                                    {
+                                        transbordador2.ObtenerCruceAgua(reloj);
+                                    }
+                                }
+
+                            }
  
-                             if (reloj <= horaFin &&
-                                 transbordador1.Ubicacion == "Continente" && transbordador2.Ubicacion == "Continente")
-                             {
- 
-                             }
- 
-                             break;*/
+                        break;
                 }
             } while (reloj <= horaFin);
 
-            //}
+                sumatoriaVehiculosNoAtendidosContinentePorDia += colaVehiculosContinente.Count;
+                sumatoriaVehiculosNoAtendidosIslaPorDia += colaVehiculosIsla.Count;
+
+                GuardarEnGrilla(dia, reloj,
+                           llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
+                           transbordador1, transbordador2,
+                           colaVehiculosContinente, colaVehiculosIsla, "Cierre dia",
+                           maximaColaContinente, maximaColaIsla, sumatoriaAutosTrasladadosDelContinentePorDia,
+                           sumatoriaCamionesTrasladadosDelContinentePorDia,
+                           sumatoriaAutosTrasladadosDeIslaPorDia, sumatoriaCamionesTrasladadosDeIslaPorDia,
+                           sumatoriaVehiculosNoAtendidosContinentePorDia, sumatoriaVehiculosNoAtendidosIslaPorDia);
+
+               
+            }
         }
 
         private void GuardarEnGrilla(int dia, DateTime reloj, Llegada llegadaAutoC, Llegada llegadaCamionC,
