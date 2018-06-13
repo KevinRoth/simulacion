@@ -78,6 +78,16 @@
             this.Column39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column51 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_cantidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_simulaciones)).BeginInit();
             this.SuspendLayout();
@@ -202,7 +212,17 @@
             this.Column38,
             this.Column39,
             this.Column40,
-            this.Column41});
+            this.Column41,
+            this.Column42,
+            this.Column43,
+            this.Column44,
+            this.Column45,
+            this.Column46,
+            this.Column47,
+            this.Column48,
+            this.Column49,
+            this.Column50,
+            this.Column51});
             this.dgv_simulaciones.Location = new System.Drawing.Point(24, 132);
             this.dgv_simulaciones.Name = "dgv_simulaciones";
             this.dgv_simulaciones.Size = new System.Drawing.Size(1258, 461);
@@ -413,6 +433,56 @@
             this.Column41.HeaderText = "Proxima Descarga Vehiculo T2";
             this.Column41.Name = "Column41";
             // 
+            // Column42
+            // 
+            this.Column42.HeaderText = "Mantenimiento T1";
+            this.Column42.Name = "Column42";
+            // 
+            // Column43
+            // 
+            this.Column43.HeaderText = "Proximo Fin Mantenimiento T1";
+            this.Column43.Name = "Column43";
+            // 
+            // Column44
+            // 
+            this.Column44.HeaderText = "Mantenimiento T2";
+            this.Column44.Name = "Column44";
+            // 
+            // Column45
+            // 
+            this.Column45.HeaderText = "Proximo Fin Mantenimiento T2";
+            this.Column45.Name = "Column45";
+            // 
+            // Column46
+            // 
+            this.Column46.HeaderText = "Promedio autos trasladados de continente a isla";
+            this.Column46.Name = "Column46";
+            // 
+            // Column47
+            // 
+            this.Column47.HeaderText = "Promedio camiones trasladados de continente a isla";
+            this.Column47.Name = "Column47";
+            // 
+            // Column48
+            // 
+            this.Column48.HeaderText = "Promedio autos trasladados de isla a continente";
+            this.Column48.Name = "Column48";
+            // 
+            // Column49
+            // 
+            this.Column49.HeaderText = "Promedio camiones trasladados de isla a continente";
+            this.Column49.Name = "Column49";
+            // 
+            // Column50
+            // 
+            this.Column50.HeaderText = "Promedio Vehiculos que esperan hasta el otro dia en Continente";
+            this.Column50.Name = "Column50";
+            // 
+            // Column51
+            // 
+            this.Column51.HeaderText = "Promedio Vehiculos que esperan hasta el otro dia en Isla";
+            this.Column51.Name = "Column51";
+            // 
             // TP_COLAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,5 +552,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column39;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column40;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column41;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column42;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column43;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column44;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column45;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column46;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column47;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column48;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column49;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column50;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column51;
     }
 }

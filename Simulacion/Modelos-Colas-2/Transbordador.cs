@@ -35,7 +35,8 @@ namespace Simulacion.Modelos_Colas_2
         }
 
         public Transbordador(string ubicacion, Uniforme distribucionCargaAutos,
-            Uniforme distribucionCargaCamiones, int capacidad, string nombre, Uniforme distribucionCruceAgua, int mantenimiento)
+            Uniforme distribucionCargaCamiones, int capacidad, string nombre, Uniforme distribucionCruceAgua,
+            int mantenimiento)
         {
             Ubicacion = ubicacion;
             DistribucionCargaAutos = distribucionCargaAutos;
@@ -66,6 +67,16 @@ namespace Simulacion.Modelos_Colas_2
             return Estado.Equals("Descargando");
         }
 
+        public bool EstaOcupado()
+        {
+            return Estado.Equals("Ocupado");
+        }
+
+        public bool EstaCruzandoAgua()
+        {
+            return Estado.Equals("Cruzando agua");
+        }
+
         public bool EstaParaMantenimiento()
         {
             return Mantenimiento == 0;
@@ -80,14 +91,7 @@ namespace Simulacion.Modelos_Colas_2
             TiempoCruce = DateTime.Today.AddMinutes(generado.NumAleatorio);
             ProximaLlegadaTierra = TiempoCruce.AddMinutes(DateTimeConverter.EnMinutos(reloj));
 
-            if (Ubicacion == "Continente")
-            {
-                Estado = "Cruzando agua";
-            }
-            else
-            {
-                Estado = "Cruzando agua";
-            }
+            Estado = "Cruzando agua";
         }
 
         public void DescargarVehiculo(DateTime reloj)
@@ -98,9 +102,25 @@ namespace Simulacion.Modelos_Colas_2
             }
             else
             {
-                var tiempoDescarga = DateTimeConverter.EnMinutos(Vehiculos.First().TiempoCarga) / 2.0;
-                Descarga = DateTime.Today.AddMinutes(tiempoDescarga);
-                ProximaDescarga = Descarga.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                if (ProximaDescarga == new DateTime())
+                {
+                    var vehiculo = Vehiculos.First();
+
+                    if (vehiculo.TipoVehiculo == "Auto")
+                    {
+                        Capacidad++;
+                    }
+                    else
+                    {
+                        Capacidad += 2;
+                    }
+
+                    var tiempoDescarga = DateTimeConverter.EnMinutos(vehiculo.TiempoCarga) / 2.0;
+                    Descarga = DateTime.Today.AddMinutes(tiempoDescarga);
+                    ProximaDescarga = Descarga.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+
+                    Vehiculos.Remove(vehiculo);
+                }
             }
         }
 
@@ -153,7 +173,6 @@ namespace Simulacion.Modelos_Colas_2
 
                 if (Capacidad <= 1)
                 {
-                    Estado = "Para irse a la mocha";
                     return colaVehiculos;
                 }
 
