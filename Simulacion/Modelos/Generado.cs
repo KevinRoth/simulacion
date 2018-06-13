@@ -10,6 +10,7 @@ namespace Simulacion.Modelos
     {
         public int Iteracion { get; set; }
         public double NumAleatorio { set; get; }
+        public GeneradorLenguaje Generador { get; set; }
 
         public Generado(double a)
         {

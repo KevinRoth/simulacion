@@ -86,35 +86,35 @@ namespace Simulacion
                 var randomTipoAuto1 = cantidadVendida1 != 0 ? random.NextDouble() : 0;
                 var tipoAuto1 = cantidadVendida1 != 0 ? ObtenerTiposAutoVendido(randomTipoAuto1) : 0;
                 var randomComision1 = cantidadVendida1 != 0 ? random.NextDouble() : 0;
-                var comisionAuto1 = cantidadVendida1 != 0 ? ObtenerComisionDeAutos(randomComision1, tipoAuto1) : 0;
+                var comisionAuto1 = cantidadVendida1 != 0 ? ObtenerComisionDeAutos(randomComision1, tipoAuto1, cantidadVendida1) : 0;
 
                 var randomCantidadVendida2 = random.NextDouble();
                 var cantidadVendida2 = ObtenerCantidadVendidaPorSemana(randomCantidadVendida2);
                 var randomTipoAuto2 = cantidadVendida2 != 0 ? random.NextDouble() : 0;
                 var tipoAuto2 = cantidadVendida2 != 0 ? ObtenerTiposAutoVendido(randomTipoAuto2) : 0;
                 var randomComision2 = cantidadVendida2 != 0 ? random.NextDouble() : 0;
-                var comisionAuto2 = cantidadVendida2 != 0 ? ObtenerComisionDeAutos(randomComision2, tipoAuto2) : 0;
+                var comisionAuto2 = cantidadVendida2 != 0 ? ObtenerComisionDeAutos(randomComision2, tipoAuto2, cantidadVendida2) : 0;
 
                 var randomCantidadVendida3 = random.NextDouble();
                 var cantidadVendida3 = ObtenerCantidadVendidaPorSemana(randomCantidadVendida3);
                 var randomTipoAuto3 = cantidadVendida3 != 0 ? random.NextDouble() : 0;
                 var tipoAuto3 = cantidadVendida3 != 0 ? ObtenerTiposAutoVendido(randomTipoAuto3) : 0;
                 var randomComision3 = cantidadVendida3 != 0 ? random.NextDouble() : 0;
-                var comisionAuto3 = cantidadVendida3 != 0 ? ObtenerComisionDeAutos(randomComision3, tipoAuto3) : 0;
+                var comisionAuto3 = cantidadVendida3 != 0 ? ObtenerComisionDeAutos(randomComision3, tipoAuto3, cantidadVendida3) : 0;
 
                 var randomCantidadVendida4 = random.NextDouble();
                 var cantidadVendida4 = ObtenerCantidadVendidaPorSemana(randomCantidadVendida4);
                 var randomTipoAuto4 = cantidadVendida4 != 0 ? random.NextDouble() : 0;
                 var tipoAuto4 = cantidadVendida4 != 0 ? ObtenerTiposAutoVendido(randomTipoAuto4) : 0;
                 var randomComision4 = cantidadVendida4 != 0 ? random.NextDouble() : 0;
-                var comisionAuto4 = cantidadVendida4 != 0 ? ObtenerComisionDeAutos(randomComision4, tipoAuto4) : 0;
+                var comisionAuto4 = cantidadVendida4 != 0 ? ObtenerComisionDeAutos(randomComision4, tipoAuto4, cantidadVendida4) : 0;
 
                 var randomCantidadVendida5 = random.NextDouble();
                 var cantidadVendida5 = ObtenerCantidadVendidaPorSemana(randomCantidadVendida5);
                 var randomTipoAuto5 = cantidadVendida5 != 0 ? random.NextDouble() : 0;
                 var tipoAuto5 = cantidadVendida5 != 0 ? ObtenerTiposAutoVendido(randomTipoAuto5) : 0;
                 var randomComision5 = cantidadVendida5 != 0 ? random.NextDouble() : 0;
-                var comisionAuto5 = cantidadVendida5 != 0 ? ObtenerComisionDeAutos(randomComision5, tipoAuto5) : 0;
+                var comisionAuto5 = cantidadVendida5 != 0 ? ObtenerComisionDeAutos(randomComision5, tipoAuto5, cantidadVendida5) : 0;
 
                 var promedioComisionPorSemana = (comisionAuto1 + comisionAuto2 + comisionAuto3 + comisionAuto4 + comisionAuto5) / 5;
                 
@@ -202,18 +202,18 @@ namespace Simulacion
             return "L";
         }
 
-        private double ObtenerComisionDeAutos(double randomComision, double tipoAuto)
+        private double ObtenerComisionDeAutos(double randomComision, double tipoAuto, double cantidadAutosVendidos)
         {
             if(tipoAuto == 1) //compacto
             {
-                return _comisionCompacto.ObtenerValor(randomComision);
+                return _comisionCompacto.ObtenerValor(randomComision) * cantidadAutosVendidos;
             }
             if(tipoAuto == 2)//mediano
             {
-                return _comisionMediano.ObtenerValor(randomComision);
+                return _comisionMediano.ObtenerValor(randomComision) * cantidadAutosVendidos;
             }
             //lujo
-            return _comisionLujo.ObtenerValor(randomComision);
+            return _comisionLujo.ObtenerValor(randomComision) * cantidadAutosVendidos;
 
         }
 

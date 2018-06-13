@@ -12,12 +12,28 @@ namespace Simulacion.Modelos.Distribuciones
         public double B { get; set; }
         public Generado Generado { get; protected set; }
         public GeneradorLenguaje Generador { get; protected set; }
+        public DateTime HoraInicio { get; set; }
+        public DateTime HoraFin { get; set; }
 
         public Uniforme()
         {
             Generado = new Generado();
             Generador = new GeneradorLenguaje();
 
+        }
+
+        public Uniforme(double a, double b)
+        {
+            A = a;
+            B = b;
+        }
+
+        public Uniforme(double a, double b, double horaInicio, double horaFin)
+        {
+            A = a;
+            B = b;
+            HoraInicio = DateTime.Today.AddMinutes(horaInicio);
+            HoraFin = DateTime.Today.AddMinutes(horaFin);
         }
 
         /// <summary>
@@ -35,14 +51,31 @@ namespace Simulacion.Modelos.Distribuciones
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        public Generado GenerarVariableAleatoria(int i)
+        public Generado GenerarVariableAleatoria(int i = 0)
         {
             var x = A + Generador.GenerarAleatorio(i).NumAleatorio * (B - A);
 
             Generado.NumAleatorio = x;
             Generado.Iteracion = i;
+            
 
             return Generado;
+        }
+        public Generado GenerarVariableAleatoria(double random)
+        {
+            var x = A + random * (B - A);
+            Generado = new Generado();
+
+            Generado.NumAleatorio = x;
+            Generado.Iteracion = 0;
+
+
+            return Generado;
+        }
+
+        public double GenerarVariableAleatoria()
+        {
+            return A + Generador.GenerarAleatorio(0).NumAleatorio * (B - A);
         }
 
         /// <summary>
