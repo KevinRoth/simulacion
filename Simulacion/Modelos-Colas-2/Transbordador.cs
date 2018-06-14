@@ -57,6 +57,7 @@ namespace Simulacion.Modelos_Colas_2
             VehiculoActual = vehiculo;
         }
 
+
         public bool EstaLibre()
         {
             return Estado.Equals("Libre");
@@ -84,21 +85,25 @@ namespace Simulacion.Modelos_Colas_2
 
         public void ObtenerCruceAgua(DateTime reloj)
         {
-            Random random = new Random();
-            RandomCruceAgua = random.NextDouble();
+            if (ProximaLlegadaTierra == new DateTime())
+            {
+                Random random = new Random();
+                RandomCruceAgua = random.NextDouble();
 
-            var generado = DistribucionCruceAgua.GenerarVariableAleatoria(RandomCruceAgua);
-            TiempoCruce = DateTime.Today.AddMinutes(generado.NumAleatorio);
-            ProximaLlegadaTierra = TiempoCruce.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                var generado = DistribucionCruceAgua.GenerarVariableAleatoria(RandomCruceAgua);
+                TiempoCruce = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                ProximaLlegadaTierra = TiempoCruce.AddMinutes(DateTimeConverter.EnMinutos(reloj));
 
-            Estado = "Cruzando agua";
+                Estado = "Cruzando agua";
+            }
         }
 
-        public void DescargarVehiculo(DateTime reloj)
+        public DateTime? DescargarVehiculo(DateTime reloj)
         {
             if (Vehiculos.Count == 0)
             {
                 Estado = "Libre";
+                return reloj.AddHours(1);
             }
             else
             {
@@ -121,6 +126,8 @@ namespace Simulacion.Modelos_Colas_2
 
                     Vehiculos.Remove(vehiculo);
                 }
+
+                return null;
             }
         }
 
@@ -131,10 +138,7 @@ namespace Simulacion.Modelos_Colas_2
 
             if (vehiculo.TipoVehiculo == "Auto")
             {
-                if (reloj < colaVehiculos.First().ProximaLlegada)
-                {
-                    return colaVehiculos;
-                }
+              
 
                 if (Capacidad == 0)
                 {
@@ -166,10 +170,7 @@ namespace Simulacion.Modelos_Colas_2
             }
             else
             {
-                if (reloj < colaVehiculos.First().ProximaLlegada)
-                {
-                    return colaVehiculos;
-                }
+               
 
                 if (Capacidad <= 1)
                 {
