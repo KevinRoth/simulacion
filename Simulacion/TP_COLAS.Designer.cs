@@ -37,6 +37,7 @@
             this.lbl_hasta = new System.Windows.Forms.Label();
             this.lbl_desde = new System.Windows.Forms.Label();
             this.dgv_simulaciones = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +59,10 @@
             this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,7 +93,6 @@
             this.Column49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column51 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.gb_cantidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_simulaciones)).BeginInit();
             this.SuspendLayout();
@@ -194,6 +198,10 @@
             this.Column20,
             this.Column21,
             this.Column26,
+            this.Column52,
+            this.Column53,
+            this.Column54,
+            this.Column55,
             this.Column5,
             this.Column22,
             this.Column23,
@@ -228,6 +236,16 @@
             this.dgv_simulaciones.Name = "dgv_simulaciones";
             this.dgv_simulaciones.Size = new System.Drawing.Size(1258, 461);
             this.dgv_simulaciones.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(255, 86);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(126, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Reestablecer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Column2
             // 
@@ -333,6 +351,26 @@
             // 
             this.Column26.HeaderText = "Capacidad T1";
             this.Column26.Name = "Column26";
+            // 
+            // Column52
+            // 
+            this.Column52.HeaderText = "RND Interrupcion";
+            this.Column52.Name = "Column52";
+            // 
+            // Column53
+            // 
+            this.Column53.HeaderText = "Se Interrumpe T1?";
+            this.Column53.Name = "Column53";
+            // 
+            // Column54
+            // 
+            this.Column54.HeaderText = "Tiempo Interrupcion T1";
+            this.Column54.Name = "Column54";
+            // 
+            // Column55
+            // 
+            this.Column55.HeaderText = "Fin Interrupcion T1";
+            this.Column55.Name = "Column55";
             // 
             // Column5
             // 
@@ -484,16 +522,6 @@
             this.Column51.HeaderText = "Promedio Vehiculos que esperan hasta el otro dia en Isla";
             this.Column51.Name = "Column51";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(255, 86);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Reestablecer";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // TP_COLAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,6 +551,7 @@
         private System.Windows.Forms.Label lbl_hasta;
         private System.Windows.Forms.Label lbl_desde;
         private System.Windows.Forms.DataGridView dgv_simulaciones;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -544,6 +573,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column52;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column53;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column54;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column55;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
@@ -574,6 +607,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column49;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column50;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column51;
-        private System.Windows.Forms.Button button1;
     }
 }

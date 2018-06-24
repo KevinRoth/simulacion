@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Montecarlo.TablaDistribucion;
 using Simulacion.Modelos.Distribuciones;
 
 namespace Simulacion.Modelos_Colas_2
@@ -29,6 +30,12 @@ namespace Simulacion.Modelos_Colas_2
         public DateTime ProximaDescarga { get; set; }
         public int Mantenimiento { get; set; }
         public DateTime ProximoFinMantenimiento { get; set; }
+        public double RandomInterrupcion { get; set; }
+        public DateTime TiempoInterrupcion { get; set; }
+        public DateTime ProximoFinInterrupcion { get; set; }
+        public DistribucionAleatoria DistribucionInterrupciones50 { get; set; }
+        public DistribucionAleatoria DistribucionInterrupciones70 { get; set; }
+        public DistribucionAleatoria DistribucionInterrupciones100 { get; set; }
 
         public Transbordador()
         {
@@ -47,6 +54,24 @@ namespace Simulacion.Modelos_Colas_2
             Nombre = nombre;
             DistribucionCruceAgua = distribucionCruceAgua;
             Mantenimiento = mantenimiento;
+
+            DistribucionInterrupciones50 = new DistribucionAleatoria(new List<Probabilidad>()
+            {
+                new Probabilidad(273, 0.20),
+                new Probabilidad(0, 0.80)
+            });
+
+            DistribucionInterrupciones70 = new DistribucionAleatoria(new List<Probabilidad>()
+            {
+                new Probabilidad(312, 0.30),
+                new Probabilidad(0, 0.70)
+            });
+
+            DistribucionInterrupciones100 = new DistribucionAleatoria(new List<Probabilidad>()
+            {
+                new Probabilidad(364, 0.50),
+                new Probabilidad(0, 0.50)
+            });
         }
 
         public Transbordador(double random, DateTime tiempoentrecargas, DateTime proximacarga, Vehiculo vehiculo)
@@ -57,6 +82,37 @@ namespace Simulacion.Modelos_Colas_2
             VehiculoActual = vehiculo;
         }
 
+        public void ObtenerInterrupcion(DateTime reloj, int numero, int dias)
+        {
+            Random random = new Random();
+            RandomInterrupcion = random.NextDouble();
+
+            if (numero == 50)
+            {
+                var tiempoInterrupcion = DistribucionInterrupciones50.ObtenerValor(RandomInterrupcion);
+                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias -1 ).AddMinutes(tiempoInterrupcion) :
+                    DateTime.Today.AddMinutes(tiempoInterrupcion);
+
+                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+            }
+            else if (numero == 70)
+            {
+                var tiempoInterrupcion = DistribucionInterrupciones70.ObtenerValor(RandomInterrupcion);
+                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
+                    DateTime.Today.AddMinutes(tiempoInterrupcion);
+
+                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+            }
+            else if (numero == 100)
+            {
+                var tiempoInterrupcion = DistribucionInterrupciones100.ObtenerValor(RandomInterrupcion);
+                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
+                    DateTime.Today.AddMinutes(tiempoInterrupcion);
+
+                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+            }
+          
+        }
 
         public bool EstaLibre()
         {
