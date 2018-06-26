@@ -912,7 +912,7 @@ namespace Simulacion
                     transbordador1.ProximaCarga.ToString("HH:mm:ss"),
                     transbordador1.Capacidad,
                     transbordador1.RandomInterrupcion,
-                    "se interrumpio",
+                    transbordador1.T,
                     transbordador1.TiempoInterrupcion.ToString("HH:mm:ss"),
                     transbordador1.ProximoFinInterrupcion.ToString("HH:mm:ss"),
                     transbordador2.Ubicacion,

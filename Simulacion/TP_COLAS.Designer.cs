@@ -359,7 +359,7 @@
             // 
             // Column53
             // 
-            this.Column53.HeaderText = "Se Interrumpe T1?";
+            this.Column53.HeaderText = "Tamaño de archivos de logs";
             this.Column53.Name = "Column53";
             // 
             // Column54

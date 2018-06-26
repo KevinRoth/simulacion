@@ -36,6 +36,7 @@ namespace Simulacion.Modelos_Colas_2
         public DistribucionAleatoria DistribucionInterrupciones50 { get; set; }
         public DistribucionAleatoria DistribucionInterrupciones70 { get; set; }
         public DistribucionAleatoria DistribucionInterrupciones100 { get; set; }
+        public string T { get; set; }
 
         public Transbordador()
         {
@@ -92,6 +93,7 @@ namespace Simulacion.Modelos_Colas_2
                 var tiempoInterrupcion = DistribucionInterrupciones50.ObtenerValor(RandomInterrupcion);
                 TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias -1 ).AddMinutes(tiempoInterrupcion) :
                     DateTime.Today.AddMinutes(tiempoInterrupcion);
+                T = "50";
 
                 ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
             }
@@ -100,6 +102,7 @@ namespace Simulacion.Modelos_Colas_2
                 var tiempoInterrupcion = DistribucionInterrupciones70.ObtenerValor(RandomInterrupcion);
                 TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
                     DateTime.Today.AddMinutes(tiempoInterrupcion);
+                T = "70";
 
                 ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
             }
@@ -108,6 +111,7 @@ namespace Simulacion.Modelos_Colas_2
                 var tiempoInterrupcion = DistribucionInterrupciones100.ObtenerValor(RandomInterrupcion);
                 TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
                     DateTime.Today.AddMinutes(tiempoInterrupcion);
+                T = "100";
 
                 ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
             }
