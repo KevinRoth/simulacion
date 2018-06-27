@@ -214,7 +214,9 @@ namespace Simulacion
                     if (transbordador1.EstaParaMantenimiento())
                     {
                         transbordador1.Estado = "En mantenimiento";
-                        transbordador1.ProximoFinMantenimiento = inicioAtencionTransbordadores.AddHours(5);
+                        
+                        transbordador1.ProximoFinMantenimiento = transbordador1.ProximoFinInterrupcion == new DateTime() ?
+                            inicioAtencionTransbordadores.AddHours(5) : transbordador1.ProximoFinInterrupcion.AddHours(5);
                     }
 
                     if (transbordador2.EstaParaMantenimiento())
@@ -246,14 +248,14 @@ namespace Simulacion
                     {
                         if (transbordador1.EstaLibre() && colaVehiculosContinente.Any())
                         {
-                            colaVehiculosContinente = transbordador1.CargarVehiculo(colaVehiculosContinente, reloj);
+                            colaVehiculosContinente = transbordador1.CargarVehiculo(colaVehiculosContinente, reloj, dia);
                         }
 
                         if (proximaSalidaTransbordador1 <= reloj && (transbordador1.Capacidad == 0 ||
                                                                      !colaVehiculosContinente.Any())
                                                                  && transbordador1.EstaLibre())
                         {
-                            transbordador1.ObtenerCruceAgua(reloj);
+                            transbordador1.ObtenerCruceAgua(reloj, dia);
 
                             if (transbordador1.Ubicacion == "Isla")
                             {
@@ -286,7 +288,7 @@ namespace Simulacion
                     {
                         if (transbordador1.EstaLibre() && colaVehiculosIsla.Any())
                         {
-                            colaVehiculosIsla = transbordador1.CargarVehiculo(colaVehiculosIsla, reloj);
+                            colaVehiculosIsla = transbordador1.CargarVehiculo(colaVehiculosIsla, reloj, dia);
                         }
 
                         if (proximaSalidaTransbordador1 <= reloj && (transbordador1.Capacidad == 0 ||
@@ -295,7 +297,7 @@ namespace Simulacion
                                                                  && proximaSalidaTransbordador1 >
                                                                  DateTime.Today.AddHours(8))
                         {
-                            transbordador1.ObtenerCruceAgua(reloj);
+                            transbordador1.ObtenerCruceAgua(reloj, dia);
 
                             if (transbordador1.Ubicacion == "Isla")
                             {
@@ -330,14 +332,14 @@ namespace Simulacion
                     {
                         if (transbordador2.EstaLibre() && colaVehiculosContinente.Any())
                         {
-                            colaVehiculosContinente = transbordador2.CargarVehiculo(colaVehiculosContinente, reloj);
+                            colaVehiculosContinente = transbordador2.CargarVehiculo(colaVehiculosContinente, reloj, dia);
                         }
 
                         if (proximaSalidaTransbordador2 <= reloj && (transbordador2.Capacidad == 0 ||
                                                                      !colaVehiculosContinente.Any())
                                                                  && transbordador2.EstaLibre())
                         {
-                            transbordador2.ObtenerCruceAgua(reloj);
+                            transbordador2.ObtenerCruceAgua(reloj, dia);
 
                             if (transbordador2.Ubicacion == "Isla")
                             {
@@ -370,14 +372,14 @@ namespace Simulacion
                     {
                         if (transbordador2.EstaLibre() && colaVehiculosIsla.Any())
                         {
-                            colaVehiculosIsla = transbordador2.CargarVehiculo(colaVehiculosIsla, reloj);
+                            colaVehiculosIsla = transbordador2.CargarVehiculo(colaVehiculosIsla, reloj, dia);
                         }
 
                         if (proximaSalidaTransbordador2 <= reloj && (transbordador2.Capacidad == 0 ||
                                                                      !colaVehiculosIsla.Any())
                                                                  && transbordador2.EstaLibre())
                         {
-                            transbordador2.ObtenerCruceAgua(reloj);
+                            transbordador2.ObtenerCruceAgua(reloj, dia);
 
                             if (transbordador2.Ubicacion == "Isla")
                             {
@@ -410,15 +412,15 @@ namespace Simulacion
                     //Descarga de vehiculos
                     if (transbordador1.EstaDescargando())
                     {
-                        proximaSalidaTransbordador1 = transbordador1.DescargarVehiculo(reloj) != null
-                            ? transbordador1.DescargarVehiculo(reloj).Value
+                        proximaSalidaTransbordador1 = transbordador1.DescargarVehiculo(reloj, dia) != null
+                            ? transbordador1.DescargarVehiculo(reloj, dia).Value
                             : proximaSalidaTransbordador1;
                     }
 
                     if (transbordador2.EstaDescargando())
                     {
-                        proximaSalidaTransbordador2 = transbordador2.DescargarVehiculo(reloj) != null
-                            ? transbordador2.DescargarVehiculo(reloj).Value
+                        proximaSalidaTransbordador2 = transbordador2.DescargarVehiculo(reloj, dia) != null
+                            ? transbordador2.DescargarVehiculo(reloj, dia).Value
                             : proximaSalidaTransbordador2;
                     }
 
@@ -434,7 +436,7 @@ namespace Simulacion
 
                     var eventos = new List<Evento>
                     {
-                        new Evento("Interrupcion", transbordador1.ProximoFinInterrupcion),
+                        new Evento("Fin Interrupcion", transbordador1.ProximoFinInterrupcion),
                         new Evento("Llegada Auto Continente", llegadaAutoC.ProximaLlegada),
                         new Evento("Llegada Auto Isla", llegadaAutoI.ProximaLlegada),
                         new Evento("Llegada Camion Continente", llegadaCamionC.ProximaLlegada),
@@ -461,7 +463,7 @@ namespace Simulacion
 
                     switch (eventoActual)
                     {
-                        case "Interrupcion":
+                        case "Fin Interrupcion":
                             GuardarEnGrilla(dia, reloj,
                                 llegadaAutoC, llegadaCamionC, llegadaAutoI, llegadaCamionI,
                                 transbordador1, transbordador2,
@@ -476,6 +478,8 @@ namespace Simulacion
                             hora50 = hora50.AddMinutes(273);
                             hora70 = hora70.AddMinutes(312);
                             hora100 = hora100.AddMinutes(364);
+
+                            transbordador1.Estado = transbordador1.EstadoAnterior;
 
                             break;
 
@@ -778,7 +782,7 @@ namespace Simulacion
 
                             if (transbordador1.EstaDescargando())
                             {
-                                transbordador1.DescargarVehiculo(reloj);
+                                transbordador1.DescargarVehiculo(reloj, dia);
                                 horaCierre = transbordador1.ProximaDescarga;
                                 transbordador1.Estado = "Descargando";
 
@@ -792,11 +796,13 @@ namespace Simulacion
                                     sumatoriaVehiculosNoAtendidosContinentePorDia,
                                     sumatoriaVehiculosNoAtendidosIslaPorDia,
                                     desde, hasta, simulacionesGeneradas);
+
+
                             }
 
                             if (transbordador1.EstaCruzandoAgua() || transbordador1.Ubicacion == "Isla")
                             {
-                                transbordador1.ObtenerCruceAgua(reloj);
+                                transbordador1.ObtenerCruceAgua(reloj, dia);
                                 horaCierre = transbordador1.ProximaLlegadaTierra;
                                 transbordador1.Ubicacion = "Continente";
 
@@ -817,7 +823,7 @@ namespace Simulacion
 
                             if (transbordador2.EstaDescargando())
                             {
-                                transbordador2.DescargarVehiculo(reloj);
+                                transbordador2.DescargarVehiculo(reloj, dia);
                                 horaCierre = transbordador2.ProximaDescarga;
                                 transbordador2.Estado = "Descargando";
 
@@ -835,7 +841,7 @@ namespace Simulacion
 
                             if (transbordador2.EstaCruzandoAgua() || transbordador2.Ubicacion == "Isla")
                             {
-                                transbordador2.ObtenerCruceAgua(reloj);
+                                transbordador2.ObtenerCruceAgua(reloj, dia);
                                 horaCierre = transbordador2.ProximaLlegadaTierra;
                                 transbordador2.Ubicacion = "Continente";
 

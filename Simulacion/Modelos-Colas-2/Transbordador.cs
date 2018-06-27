@@ -37,6 +37,7 @@ namespace Simulacion.Modelos_Colas_2
         public DistribucionAleatoria DistribucionInterrupciones70 { get; set; }
         public DistribucionAleatoria DistribucionInterrupciones100 { get; set; }
         public string T { get; set; }
+        public string EstadoAnterior { get; set; }
 
         public Transbordador()
         {
@@ -87,33 +88,91 @@ namespace Simulacion.Modelos_Colas_2
         {
             Random random = new Random();
             RandomInterrupcion = random.NextDouble();
-
-            if (numero == 50)
+            if (ProximoFinInterrupcion == new DateTime())
             {
-                var tiempoInterrupcion = DistribucionInterrupciones50.ObtenerValor(RandomInterrupcion);
-                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias -1 ).AddMinutes(tiempoInterrupcion) :
-                    DateTime.Today.AddMinutes(tiempoInterrupcion);
-                T = "50";
 
-                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-            }
-            else if (numero == 70)
-            {
-                var tiempoInterrupcion = DistribucionInterrupciones70.ObtenerValor(RandomInterrupcion);
-                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
-                    DateTime.Today.AddMinutes(tiempoInterrupcion);
-                T = "70";
+                if (numero == 50)
+                {
+                    var tiempoInterrupcion = DistribucionInterrupciones50.ObtenerValor(RandomInterrupcion);
+                    if (tiempoInterrupcion > 0)
+                    {
 
-                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
-            }
-            else if (numero == 100)
-            {
-                var tiempoInterrupcion = DistribucionInterrupciones100.ObtenerValor(RandomInterrupcion);
-                TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
-                    DateTime.Today.AddMinutes(tiempoInterrupcion);
-                T = "100";
+                        TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
+                            DateTime.Today.AddMinutes(tiempoInterrupcion);
+                        T = "50";
+                        EstadoAnterior = Estado;
+                        Estado = "Interrumpido";
 
-                ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                        ProximaCarga = ProximaCarga != new DateTime() ?
+                            ProximaCarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaDescarga = ProximaDescarga != new DateTime() ?
+                            ProximaDescarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaLlegadaTierra = ProximaLlegadaTierra != new DateTime() ?
+                            ProximaLlegadaTierra.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+
+                        ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    }
+                }
+                else if (numero == 70)
+                {
+                    var tiempoInterrupcion = DistribucionInterrupciones70.ObtenerValor(RandomInterrupcion);
+                    if (tiempoInterrupcion > 0)
+                    {
+                        TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
+                            DateTime.Today.AddMinutes(tiempoInterrupcion);
+                        T = "70";
+                        EstadoAnterior = Estado;
+                        Estado = "Interrumpido";
+
+
+                        ProximaCarga = ProximaCarga != new DateTime() ?
+                            ProximaCarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaDescarga = ProximaDescarga != new DateTime() ?
+                            ProximaDescarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaLlegadaTierra = ProximaLlegadaTierra != new DateTime() ?
+                            ProximaLlegadaTierra.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    }
+                }
+                else if (numero == 100)
+                {
+                    var tiempoInterrupcion = DistribucionInterrupciones100.ObtenerValor(RandomInterrupcion);
+                    if (tiempoInterrupcion > 0)
+                    {
+                        TiempoInterrupcion = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(tiempoInterrupcion) :
+                            DateTime.Today.AddMinutes(tiempoInterrupcion);
+                        T = "100";
+                        EstadoAnterior = Estado;
+                        Estado = "Interrumpido";
+
+
+                        ProximaCarga = ProximaCarga != new DateTime() ?
+                            ProximaCarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaDescarga = ProximaDescarga != new DateTime() ?
+                            ProximaDescarga.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximaLlegadaTierra = ProximaLlegadaTierra != new DateTime() ?
+                            ProximaLlegadaTierra.AddMinutes(DateTimeConverter.EnMinutos(TiempoInterrupcion)) :
+                            new DateTime();
+
+                        ProximoFinInterrupcion = TiempoInterrupcion.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    }
+                }
             }
           
         }
@@ -143,7 +202,7 @@ namespace Simulacion.Modelos_Colas_2
             return Mantenimiento == 0;
         }
 
-        public void ObtenerCruceAgua(DateTime reloj)
+        public void ObtenerCruceAgua(DateTime reloj, int dias)
         {
             if (ProximaLlegadaTierra == new DateTime())
             {
@@ -151,14 +210,15 @@ namespace Simulacion.Modelos_Colas_2
                 RandomCruceAgua = random.NextDouble();
 
                 var generado = DistribucionCruceAgua.GenerarVariableAleatoria(RandomCruceAgua);
-                TiempoCruce = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                TiempoCruce = dias > 1 ? DateTime.Today.AddDays(dias - 1).AddMinutes(generado.NumAleatorio) :
+                    DateTime.Today.AddMinutes(generado.NumAleatorio);
                 ProximaLlegadaTierra = TiempoCruce.AddMinutes(DateTimeConverter.EnMinutos(reloj));
 
                 Estado = "Cruzando agua";
             }
         }
 
-        public DateTime? DescargarVehiculo(DateTime reloj)
+        public DateTime? DescargarVehiculo(DateTime reloj, int dias)
         {
             if (Vehiculos.Count == 0)
             {
@@ -181,8 +241,10 @@ namespace Simulacion.Modelos_Colas_2
                     }
 
                     var tiempoDescarga = DateTimeConverter.EnMinutos(vehiculo.TiempoCarga) / 2.0;
-                    Descarga = DateTime.Today.AddMinutes(tiempoDescarga);
-                    ProximaDescarga = Descarga.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    Descarga = dias > 1? 
+                        DateTime.Today.AddDays(dias - 1 ).AddMinutes(tiempoDescarga) :
+                        DateTime.Today.AddMinutes(tiempoDescarga);
+                    ProximaDescarga =  Descarga.AddMinutes(DateTimeConverter.EnMinutos(reloj));
 
                     Vehiculos.Remove(vehiculo);
                 }
@@ -191,7 +253,7 @@ namespace Simulacion.Modelos_Colas_2
             }
         }
 
-        public List<Vehiculo> CargarVehiculo(List<Vehiculo> colaVehiculos, DateTime reloj)
+        public List<Vehiculo> CargarVehiculo(List<Vehiculo> colaVehiculos, DateTime reloj, int dias)
         {
             Random random = new Random();
             var vehiculo = colaVehiculos.First();
@@ -213,7 +275,9 @@ namespace Simulacion.Modelos_Colas_2
 
                     var generado = DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
                     TiempoEntreCargas = DateTime.Today.AddMinutes(generado.NumAleatorio);
-                    var proximaCarga = TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
+                    var proximaCarga = dias > 1 ? 
+                        TiempoEntreCargas.AddDays(dias - 1).AddMinutes(DateTimeConverter.EnMinutos(reloj)) :
+                        TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
                     ProximaCarga = proximaCarga;
                     Estado = "Ocupado";
 
@@ -244,7 +308,8 @@ namespace Simulacion.Modelos_Colas_2
                     DistribucionCargaAutos.GenerarVariableAleatoria(RandomCargas);
 
                     var generado = DistribucionCargaCamiones.GenerarVariableAleatoria(RandomCargas);
-                    TiempoEntreCargas = DateTime.Today.AddMinutes(generado.NumAleatorio);
+                    TiempoEntreCargas = dias > 1 ? DateTime.Today.AddDays(dias -1 ).AddMinutes(generado.NumAleatorio) :
+                        DateTime.Today.AddMinutes(generado.NumAleatorio);
                     var proximaCarga = TiempoEntreCargas.AddMinutes(DateTimeConverter.EnMinutos(reloj));
                     ProximaCarga = proximaCarga;
                     Estado = "Ocupado";
